@@ -2,19 +2,20 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>
 html,body{margin:0;height:100%;background:#4a7bff;overflow:hidden}
+canvas{display:block;touch-action:none}
+p{position:fixed;left:0;right:0;margin:0;bottom:16px;text-align:center;color:#fff;font:15px system-ui,sans-serif;opacity:.85}
 </style>
 </head>
 <body>
+<p>Arrastrá para girar el personaje</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x4a7bff);
-
 const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-
 const R = new THREE.WebGLRenderer({ antialias: true });
 R.setPixelRatio(Math.min(devicePixelRatio, 2));
 document.body.appendChild(R.domElement);
@@ -24,26 +25,12 @@ const sun = new THREE.DirectionalLight(0xffffff, 0.8);
 sun.position.set(3, 5, 4);
 scene.add(sun);
 
-function resize() {
-  const w = innerWidth, h = innerHeight;
-  R.setSize(w, h);
-  camera.aspect = w / h;
-  const d = w / h < 0.8 ? 11 : 8;
-  camera.position.set(0, 1.6, d);
-  camera.lookAt(0, 1.4, 0);
-  camera.updateProjectionMatrix();
-  R.render(scene, camera);
-}
-addEventListener('resize', resize);
-
 const mat = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.7 });
-
 const box = (w, h, d, c, x = 0, y = 0, z = 0) => {
   const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(c));
   m.position.set(x, y, z);
   return m;
 };
-
 const ball = (r, c, x = 0, y = 0, z = 0) => {
   const m = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), mat(c));
   m.position.set(x, y, z);
@@ -54,17 +41,26 @@ const P = new THREE.Group();
 scene.add(P);
 const SKIN = 0xf0c8a0;
 
+// Sombra en el piso
+const shadow = new THREE.Mesh(
+  new THREE.CircleGeometry(1.1, 32),
+  new THREE.MeshBasicMaterial({ color: 0x3357c4 })
+);
+shadow.rotation.x = -Math.PI / 2;
+shadow.position.y = 0.01;
+scene.add(shadow);
+
+// Cuerpo
 P.add(box(0.8, 1, 0.45, 0xb8b0a8, 0, 1.6, 0));
 P.add(box(0.5, 0.12, 0.3, 0xffffff, 0, 2.12, 0.02));
 P.add(ball(0.32, SKIN, 0, 2.55, 0));
-
 const hair = ball(0.35, 0xe8a83c, 0, 2.66, -0.04);
 hair.scale.set(1, 0.75, 1);
 P.add(hair);
-
 P.add(ball(0.05, 0x222222, -0.11, 2.55, 0.3));
 P.add(ball(0.05, 0x222222, 0.11, 2.55, 0.3));
 
+// Piernas
 function leg(x) {
   const g = new THREE.Group();
   g.position.set(x, 1.1, 0);
@@ -75,6 +71,7 @@ function leg(x) {
 }
 const legL = leg(-0.2), legR = leg(0.2);
 
+// Brazos
 function arm(x) {
   const g = new THREE.Group();
   g.position.set(x, 2.05, 0);
@@ -85,9 +82,50 @@ function arm(x) {
 }
 const armL = arm(-0.55), armR = arm(0.55);
 
+// Maletín
+const bag = new THREE.Group();
+bag.position.set(0, -1.28, 0);
+bag.add(box(0.7, 0.5, 0.18, 0x8b4a22, 0, 0, 0));
+bag.add(box(0.2, 0.12, 0.2, 0x5e2f12, 0, 0.31, 0));
+bag.add(box(0.08, 0.08, 0.2, 0xd9a441, 0, 0.05, 0));
+armR.add(bag);
+
 P.rotation.y = 0.6;
 
+// Girar con el dedo
+let drag = false, lastX = 0, offset = 0;
+const cv = R.domElement;
+cv.addEventListener('pointerdown', e => { drag = true; lastX = e.clientX; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => { if (drag) { offset += (e.clientX - lastX) * 0.01; lastX = e.clientX; } });
+cv.addEventListener('pointerup', () => drag = false);
+
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  R.setSize(w, h);
+  camera.aspect = w / h;
+  const d = w / h < 0.8 ? 11 : 8;
+  camera.position.set(0, 1.6, d);
+  camera.lookAt(0, 1.4, 0);
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
 resize();
+
+// Animación de caminata
+const clock = new THREE.Clock();
+(function loop() {
+  requestAnimationFrame(loop);
+  const t = clock.getElapsedTime();
+  const s = Math.sin(t * 4);
+  legL.rotation.x = s * 0.6;
+  legR.rotation.x = -s * 0.6;
+  armL.rotation.x = -s * 0.5;
+  armR.rotation.x = s * 0.12;
+  bag.rotation.z = s * 0.06;
+  P.position.y = Math.abs(Math.cos(t * 4)) * 0.06;
+  P.rotation.y = 0.6 + offset + Math.sin(t * 0.5) * 0.15;
+  R.render(scene, camera);
+})();
 </script>
 </body>
 </html>
