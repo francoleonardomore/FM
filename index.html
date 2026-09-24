@@ -3,129 +3,269 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LM Web | Páginas web y edición de videos</title>
 <style>
-html,body{margin:0;height:100%;background:#4a7bff;overflow:hidden}
-canvas{display:block;touch-action:none}
-p{position:fixed;left:0;right:0;margin:0;bottom:16px;text-align:center;color:#fff;font:15px system-ui,sans-serif;opacity:.85}
+:root{--bg:#000;--panel:#0d1220;--blue:#2f6bff;--blue2:#5b8cff;--fg:#fff;--mut:#a9b4cc;--line:#1c2a4d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.screen{display:none;min-height:100vh}.screen.on{display:block}
+h1,h2,h3{line-height:1.15;margin:0 0 .5em}
+a{color:inherit}svg{display:block;width:100%;height:auto}
+.btn{display:inline-block;border:0;border-radius:10px;padding:13px 22px;background:var(--blue);color:#fff;font:600 16px system-ui,sans-serif;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;border:1.5px solid var(--blue2);color:var(--blue2)}
+.btn:focus-visible,input:focus-visible,.tab:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
+.brand{font-weight:800}.brand b{color:var(--blue2)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+/* Inicio: personaje 3D + sesión */
+.auth{display:grid;gap:26px;max-width:980px;margin:0 auto;padding:24px 20px;align-items:center;min-height:100vh}
+.stage{height:46vh;min-height:300px;border-radius:14px;overflow:hidden;background:#3d6bff;box-shadow:0 0 60px rgba(47,107,255,.55)}
+.stage canvas{display:block;width:100%;height:100%;touch-action:pan-y}
+.box h1{font-size:2rem}.box p.sub{color:var(--mut);margin:0 0 20px}
+.tabs{display:flex;border-bottom:1.5px solid var(--line);margin-bottom:18px}
+.tab{flex:1;background:none;border:0;color:var(--mut);padding:12px;font:600 16px system-ui,sans-serif;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1.5px}
+.tab[aria-selected=true]{color:#fff;border-color:var(--blue)}
+label{display:block;font-size:.9rem;color:var(--mut);margin:14px 0 6px}
+input{width:100%;padding:13px;border-radius:10px;border:1.5px solid var(--line);background:var(--panel);color:#fff;font:16px system-ui,sans-serif}
+.err{color:#ff8a8a;min-height:1.4em;margin:12px 0 0;font-size:.95rem}
+form .btn{width:100%;margin-top:8px}
+@media(min-width:820px){.auth{grid-template-columns:1.1fr 1fr}.stage{height:68vh}}
+
+/* Sitio */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(0,0,0,.94);border-bottom:1px solid var(--line)}
+header .in{display:flex;justify-content:space-between;align-items:center;gap:14px;max-width:1000px;margin:0 auto;padding:13px 20px}
+nav{display:none;gap:24px;color:var(--mut)}nav a{text-decoration:none}nav a:hover{color:#fff}
+@media(min-width:760px){nav{display:flex}}
+.who{display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--mut)}
+.out{background:none;border:1.5px solid var(--line);color:#fff;border-radius:8px;padding:7px 12px;font:14px system-ui,sans-serif;cursor:pointer}
+.hero{display:grid;gap:32px;align-items:center;padding:56px 0 40px}
+.hero h1{font-size:clamp(2.4rem,8vw,3.8rem)}
+.hero p{color:var(--mut);font-size:1.1rem;max-width:44ch;margin:0 0 26px}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+@media(min-width:820px){.hero{grid-template-columns:1fr 1.1fr}}
+.stats{display:flex;flex-wrap:wrap;gap:12px 32px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut)}
+.stats b{color:#fff}
+.sec{padding:56px 0 8px}.sec>h2{font-size:1.9rem}.sec>p.lead{color:var(--mut);max-width:52ch;margin:0 0 28px}
+.s{display:grid;gap:22px;align-items:center;padding:24px;border-radius:16px;margin-bottom:18px}
+.s.web{background:var(--blue)}.s.vid{background:var(--panel);border:1.5px solid var(--blue)}
+.s h3{font-size:1.5rem}.s ul{margin:0;padding-left:20px}.s li{margin:6px 0}
+.s.web li{color:#eaf0ff}.s.vid li{color:var(--mut)}
+@media(min-width:820px){.s{grid-template-columns:1fr 1fr;padding:32px}.s.vid .ill{order:-1}}
+.steps{display:grid;gap:16px;padding:0;margin:0;list-style:none;counter-reset:p}
+.steps li{counter-increment:p;padding:20px 20px 20px 64px;position:relative;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.steps li::before{content:counter(p);position:absolute;left:18px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--blue);display:grid;place-items:center;font-weight:700}
+.steps b{display:block}.steps span{color:var(--mut)}
+@media(min-width:820px){.steps{grid-template-columns:repeat(3,1fr)}}
+.contact{margin:56px 0 64px;padding:44px 24px;border-radius:16px;text-align:center;background:linear-gradient(135deg,#1d4fd8,#2f6bff)}
+.contact h2{font-size:1.8rem}.contact p{margin:0 0 22px;color:#eaf0ff}
+.contact .btn{background:#fff;color:#0a2a80}
+footer{padding:22px;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
-<p>Arrastrá para girar el personaje</p>
+
+<section id="auth" class="screen">
+  <div class="auth">
+    <div class="stage" id="stage" aria-label="Personaje 3D caminando"></div>
+    <div class="box">
+      <div class="brand">LM <b>Web</b></div>
+      <h1>Tu negocio en internet</h1>
+      <p class="sub">Creá tu sesión para conocer mis servicios de páginas web y edición de videos.</p>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tabReg" aria-selected="true">Crear sesión</button>
+        <button class="tab" role="tab" id="tabLog" aria-selected="false">Iniciar sesión</button>
+      </div>
+      <form id="fReg">
+        <label for="rn">Nombre</label><input id="rn" required autocomplete="name">
+        <label for="re">Correo</label><input id="re" type="email" required autocomplete="email">
+        <label for="rp">Contraseña (mínimo 6 caracteres)</label><input id="rp" type="password" minlength="6" required autocomplete="new-password">
+        <p class="err" id="eReg" role="alert"></p>
+        <button class="btn" type="submit">Crear sesión</button>
+      </form>
+      <form id="fLog" hidden>
+        <label for="le">Correo</label><input id="le" type="email" required autocomplete="email">
+        <label for="lp">Contraseña</label><input id="lp" type="password" required autocomplete="current-password">
+        <p class="err" id="eLog" role="alert"></p>
+        <button class="btn" type="submit">Entrar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="site" class="screen">
+  <header><div class="in">
+    <div class="brand">LM <b>Web</b></div>
+    <nav><a href="#servicios">Servicios</a><a href="#proceso">Cómo trabajo</a><a href="#contacto">Contacto</a></nav>
+    <div class="who"><span id="who"></span><button class="out" id="out">Cerrar sesión</button></div>
+  </div></header>
+  <main class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Tu negocio en internet</h1>
+        <p>Creo páginas web y edito tus videos para que tu marca se vea profesional en el celular y en la computadora.</p>
+        <div class="row"><a class="btn" href="#contacto">Pedir presupuesto</a><a class="btn ghost" href="#servicios">Ver servicios</a></div>
+      </div>
+      <svg viewBox="0 0 440 320" role="img" aria-label="Página web en computadora y celular">
+        <rect x="10" y="20" width="330" height="240" rx="14" fill="#0d1220" stroke="#2f6bff" stroke-width="2"/>
+        <path d="M10 34a14 14 0 0 1 14-14h302a14 14 0 0 1 14 14v22H10z" fill="#1c2a4d"/>
+        <circle cx="30" cy="38" r="5" fill="#ff6b6b"/><circle cx="48" cy="38" r="5" fill="#ffd166"/><circle cx="66" cy="38" r="5" fill="#5ee6a0"/>
+        <rect x="90" y="30" width="200" height="16" rx="8" fill="#0d1220"/>
+        <rect x="28" y="72" width="190" height="20" rx="4" fill="#fff"/><rect x="28" y="100" width="130" height="20" rx="4" fill="#5b8cff"/>
+        <rect x="28" y="136" width="240" height="8" rx="4" fill="#3a4a75"/><rect x="28" y="152" width="200" height="8" rx="4" fill="#3a4a75"/>
+        <rect x="28" y="176" width="92" height="30" rx="8" fill="#2f6bff"/>
+        <rect x="230" y="176" width="90" height="62" rx="8" fill="#1c2a4d"/><path d="M230 226l28-24 20 16 14-10 28 18v10a8 8 0 0 1-8 8h-74a8 8 0 0 1-8-8z" fill="#2f6bff"/>
+        <rect x="260" y="130" width="160" height="182" rx="20" fill="#000" stroke="#5b8cff" stroke-width="3"/>
+        <rect x="272" y="152" width="136" height="70" rx="8" fill="#2f6bff"/>
+        <rect x="272" y="234" width="90" height="10" rx="5" fill="#fff"/><rect x="272" y="252" width="120" height="8" rx="4" fill="#3a4a75"/><rect x="272" y="268" width="100" height="8" rx="4" fill="#3a4a75"/>
+        <rect x="272" y="284" width="136" height="16" rx="8" fill="#5b8cff"/>
+      </svg>
+    </div>
+    <div class="stats"><span><b>Diseño a medida</b> para cada negocio</span><span><b>Optimizado</b> para celular</span><span><b>Publicado</b> en internet</span></div>
+
+    <div class="sec" id="servicios">
+      <h2>Servicios</h2>
+      <p class="lead">Todo lo que tu negocio necesita para mostrarse en internet, en un solo lugar.</p>
+      <div class="s web">
+        <div>
+          <h3>Creación de páginas web</h3>
+          <ul><li>Diseño a medida para tu negocio</li><li>Se ven bien en el celular</li><li>Publicadas en internet, listas para compartir</li><li>Botón de WhatsApp para que te consulten directo</li></ul>
+        </div>
+        <div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Código de una página web">
+          <rect width="320" height="200" rx="12" fill="#0a2a80"/>
+          <circle cx="20" cy="18" r="5" fill="#ff6b6b"/><circle cx="36" cy="18" r="5" fill="#ffd166"/><circle cx="52" cy="18" r="5" fill="#5ee6a0"/>
+          <rect x="24" y="44" width="70" height="9" rx="4" fill="#ff9ecb"/><rect x="102" y="44" width="110" height="9" rx="4" fill="#9ec5ff"/>
+          <rect x="44" y="66" width="120" height="9" rx="4" fill="#fff"/><rect x="172" y="66" width="70" height="9" rx="4" fill="#ffd166"/>
+          <rect x="44" y="88" width="90" height="9" rx="4" fill="#5ee6a0"/><rect x="142" y="88" width="100" height="9" rx="4" fill="#fff"/>
+          <rect x="44" y="110" width="150" height="9" rx="4" fill="#9ec5ff"/>
+          <rect x="24" y="132" width="60" height="9" rx="4" fill="#ff9ecb"/><rect x="24" y="160" width="100" height="22" rx="6" fill="#2f6bff"/>
+        </svg></div>
+      </div>
+      <div class="s vid">
+        <div>
+          <h3>Edición de videos</h3>
+          <ul><li>Cortes, ritmo y transiciones</li><li>Subtítulos y música</li><li>Formato para Reels, TikTok y YouTube</li><li>Videos de promoción para tu marca</li></ul>
+        </div>
+        <div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Línea de tiempo de edición de video">
+          <rect width="320" height="200" rx="12" fill="#000" stroke="#1c2a4d"/>
+          <rect x="16" y="16" width="288" height="100" rx="8" fill="#1c2a4d"/><circle cx="160" cy="66" r="24" fill="#2f6bff"/><path d="M152 54l22 12-22 12z" fill="#fff"/>
+          <rect x="16" y="130" width="90" height="18" rx="4" fill="#2f6bff"/><rect x="110" y="130" width="70" height="18" rx="4" fill="#5b8cff"/><rect x="184" y="130" width="120" height="18" rx="4" fill="#2f6bff"/>
+          <rect x="16" y="154" width="150" height="14" rx="4" fill="#3a4a75"/><rect x="170" y="154" width="134" height="14" rx="4" fill="#3a4a75"/>
+          <rect x="16" y="174" width="288" height="10" rx="4" fill="#1c2a4d"/><rect x="132" y="122" width="3" height="66" fill="#fff"/>
+        </svg></div>
+      </div>
+    </div>
+
+    <div class="sec" id="proceso">
+      <h2>Cómo trabajo</h2>
+      <p class="lead">Un proceso simple, de la primera consulta a tu página publicada.</p>
+      <ol class="steps">
+        <li><b>Me contás qué necesitás</b><span>Hablamos por WhatsApp sobre tu negocio y tus objetivos.</span></li>
+        <li><b>Diseño y edición</b><span>Preparo tu página o tu video y te muestro un avance.</span></li>
+        <li><b>Publicación</b><span>Ajustamos detalles y lo dejo en línea, listo para usar.</span></li>
+      </ol>
+    </div>
+
+    <div class="contact" id="contacto">
+      <h2>Contame qué necesitás</h2>
+      <p>Escribime por WhatsApp y te respondo con una propuesta.</p>
+      <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    </div>
+  </main>
+  <footer>LM Web · Tu negocio en internet</footer>
+</section>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x4a7bff);
-const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-const R = new THREE.WebGLRenderer({ antialias: true });
-R.setPixelRatio(Math.min(devicePixelRatio, 2));
-document.body.appendChild(R.domElement);
-
-scene.add(new THREE.AmbientLight(0xffffff, 0.75));
-const sun = new THREE.DirectionalLight(0xffffff, 0.8);
-sun.position.set(3, 5, 4);
-scene.add(sun);
-
-const mat = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.7 });
-const box = (w, h, d, c, x = 0, y = 0, z = 0) => {
-  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(c));
-  m.position.set(x, y, z);
-  return m;
+const WA='5492614701888'; // 54 (Argentina) + 9 + 261 + número
+const $=s=>document.querySelector(s);
+$('#wa').href='https://wa.me/'+WA+'?text='+encodeURIComponent('Hola, vi tu página y quiero consultar por un servicio.');
+const store={
+  get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del(k){try{localStorage.removeItem(k)}catch(e){}}
 };
-const ball = (r, c, x = 0, y = 0, z = 0) => {
-  const m = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), mat(c));
-  m.position.set(x, y, z);
-  return m;
+let users=Object.assign(Object.create(null),store.get('fmw_users')||{});
+async function hash(s){
+  try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+    return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return s}
+}
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));
+  scrollTo(0,0);running=(id==='auth');
+  if(running){if(!inited){inited=true;try{init();loop()}catch(e){R=null;$('#stage').style.display='none'}}size()}
+}
+function tab(reg){
+  $('#tabReg').setAttribute('aria-selected',reg);$('#tabLog').setAttribute('aria-selected',!reg);
+  $('#fReg').hidden=!reg;$('#fLog').hidden=reg;
+}
+$('#tabReg').onclick=()=>tab(true);$('#tabLog').onclick=()=>tab(false);
+function enter(email){
+  store.set('fmw_session',email);
+  $('#who').textContent=users[email].name;show('site');
+}
+$('#fReg').onsubmit=async e=>{
+  e.preventDefault();
+  const email=$('#re').value.trim().toLowerCase();
+  if(users[email]){$('#eReg').textContent='Ese correo ya tiene una sesión. Tocá "Iniciar sesión".';return}
+  users[email]={name:$('#rn').value.trim(),pass:await hash($('#rp').value)};
+  store.set('fmw_users',users);$('#eReg').textContent='';enter(email);
 };
+$('#fLog').onsubmit=async e=>{
+  e.preventDefault();
+  const email=$('#le').value.trim().toLowerCase(),u=users[email];
+  if(!u||u.pass!==await hash($('#lp').value)){$('#eLog').textContent='Correo o contraseña incorrectos.';return}
+  $('#eLog').textContent='';enter(email);
+};
+$('#out').onclick=()=>{store.del('fmw_session');show('auth')};
 
-const P = new THREE.Group();
-scene.add(P);
-const SKIN = 0xf0c8a0;
-
-// Sombra en el piso
-const shadow = new THREE.Mesh(
-  new THREE.CircleGeometry(1.1, 32),
-  new THREE.MeshBasicMaterial({ color: 0x3357c4 })
-);
-shadow.rotation.x = -Math.PI / 2;
-shadow.position.y = 0.01;
-scene.add(shadow);
-
-// Cuerpo
-P.add(box(0.8, 1, 0.45, 0xb8b0a8, 0, 1.6, 0));
-P.add(box(0.5, 0.12, 0.3, 0xffffff, 0, 2.12, 0.02));
-P.add(ball(0.32, SKIN, 0, 2.55, 0));
-const hair = ball(0.35, 0xe8a83c, 0, 2.66, -0.04);
-hair.scale.set(1, 0.75, 1);
-P.add(hair);
-P.add(ball(0.05, 0x222222, -0.11, 2.55, 0.3));
-P.add(ball(0.05, 0x222222, 0.11, 2.55, 0.3));
-
-// Piernas
-function leg(x) {
-  const g = new THREE.Group();
-  g.position.set(x, 1.1, 0);
-  g.add(box(0.3, 1, 0.3, 0x222222, 0, -0.5, 0));
-  g.add(box(0.32, 0.15, 0.5, 0xffffff, 0, -1.02, 0.08));
-  P.add(g);
-  return g;
+/* Personaje 3D */
+let inited=false,running=false,R,scene,camera,P,legL,legR,armL,armR,bag,offset=0;
+const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clock=new THREE.Clock();
+function init(){
+  const st=$('#stage');
+  scene=new THREE.Scene();scene.background=new THREE.Color(0x3d6bff);
+  camera=new THREE.PerspectiveCamera(40,1,.1,100);
+  R=new THREE.WebGLRenderer({antialias:true});
+  R.setPixelRatio(Math.min(devicePixelRatio,2));st.appendChild(R.domElement);
+  scene.add(new THREE.AmbientLight(0xffffff,.75));
+  const sun=new THREE.DirectionalLight(0xffffff,.8);sun.position.set(3,5,4);scene.add(sun);
+  const mat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.7});
+  const box=(w,h,d,c,x=0,y=0,z=0)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(c));m.position.set(x,y,z);return m};
+  const ball=(r,c,x=0,y=0,z=0)=>{const m=new THREE.Mesh(new THREE.SphereGeometry(r,24,16),mat(c));m.position.set(x,y,z);return m};
+  P=new THREE.Group();scene.add(P);const SKIN=0xf0c8a0;
+  const sh=new THREE.Mesh(new THREE.CircleGeometry(1.1,32),new THREE.MeshBasicMaterial({color:0x2a52c4}));
+  sh.rotation.x=-Math.PI/2;sh.position.y=.01;scene.add(sh);
+  P.add(box(.8,1,.45,0xb8b0a8,0,1.6,0));P.add(box(.5,.12,.3,0xffffff,0,2.12,.02));P.add(ball(.32,SKIN,0,2.55,0));
+  const hair=ball(.35,0xe8a83c,0,2.66,-.04);hair.scale.set(1,.75,1);P.add(hair);
+  P.add(ball(.05,0x222222,-.11,2.55,.3));P.add(ball(.05,0x222222,.11,2.55,.3));
+  const leg=x=>{const g=new THREE.Group();g.position.set(x,1.1,0);g.add(box(.3,1,.3,0x222222,0,-.5,0));g.add(box(.32,.15,.5,0xffffff,0,-1.02,.08));P.add(g);return g};
+  legL=leg(-.2);legR=leg(.2);
+  const arm=x=>{const g=new THREE.Group();g.position.set(x,2.05,0);g.add(box(.22,.9,.22,0xb8b0a8,0,-.45,0));g.add(ball(.13,SKIN,0,-.98,0));P.add(g);return g};
+  armL=arm(-.55);armR=arm(.55);
+  bag=new THREE.Group();bag.position.set(0,-1.28,0);
+  bag.add(box(.7,.5,.18,0x8b4a22,0,0,0));bag.add(box(.2,.12,.2,0x5e2f12,0,.31,0));bag.add(box(.08,.08,.2,0xd9a441,0,.05,0));
+  armR.add(bag);P.rotation.y=.6;
+  let drag=false,lx=0;const cv=R.domElement;
+  cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;cv.setPointerCapture(e.pointerId)});
+  cv.addEventListener('pointermove',e=>{if(drag){offset+=(e.clientX-lx)*.01;lx=e.clientX}});
+  cv.addEventListener('pointerup',()=>drag=false);cv.addEventListener('pointercancel',()=>drag=false);
+  addEventListener('resize',size);
 }
-const legL = leg(-0.2), legR = leg(0.2);
-
-// Brazos
-function arm(x) {
-  const g = new THREE.Group();
-  g.position.set(x, 2.05, 0);
-  g.add(box(0.22, 0.9, 0.22, 0xb8b0a8, 0, -0.45, 0));
-  g.add(ball(0.13, SKIN, 0, -0.98, 0));
-  P.add(g);
-  return g;
+function size(){
+  if(!R)return;const st=$('#stage'),w=st.clientWidth,h=st.clientHeight;if(!w||!h)return;
+  R.setSize(w,h);camera.aspect=w/h;camera.position.set(0,1.6,w/h<.8?11:8);camera.lookAt(0,1.4,0);camera.updateProjectionMatrix();
 }
-const armL = arm(-0.55), armR = arm(0.55);
-
-// Maletín
-const bag = new THREE.Group();
-bag.position.set(0, -1.28, 0);
-bag.add(box(0.7, 0.5, 0.18, 0x8b4a22, 0, 0, 0));
-bag.add(box(0.2, 0.12, 0.2, 0x5e2f12, 0, 0.31, 0));
-bag.add(box(0.08, 0.08, 0.2, 0xd9a441, 0, 0.05, 0));
-armR.add(bag);
-
-P.rotation.y = 0.6;
-
-// Girar con el dedo
-let drag = false, lastX = 0, offset = 0;
-const cv = R.domElement;
-cv.addEventListener('pointerdown', e => { drag = true; lastX = e.clientX; cv.setPointerCapture(e.pointerId); });
-cv.addEventListener('pointermove', e => { if (drag) { offset += (e.clientX - lastX) * 0.01; lastX = e.clientX; } });
-cv.addEventListener('pointerup', () => drag = false);
-
-function resize() {
-  const w = innerWidth, h = innerHeight;
-  R.setSize(w, h);
-  camera.aspect = w / h;
-  const d = w / h < 0.8 ? 11 : 8;
-  camera.position.set(0, 1.6, d);
-  camera.lookAt(0, 1.4, 0);
-  camera.updateProjectionMatrix();
+function loop(){
+  requestAnimationFrame(loop);if(!running)return;
+  const t=still?0:clock.getElapsedTime(),s=Math.sin(t*4);
+  legL.rotation.x=s*.6;legR.rotation.x=-s*.6;armL.rotation.x=-s*.5;armR.rotation.x=s*.12;bag.rotation.z=s*.06;
+  P.position.y=Math.abs(Math.cos(t*4))*.06;P.rotation.y=.6+offset+Math.sin(t*.5)*.15;
+  R.render(scene,camera);
 }
-addEventListener('resize', resize);
-resize();
-
-// Animación de caminata
-const clock = new THREE.Clock();
-(function loop() {
-  requestAnimationFrame(loop);
-  const t = clock.getElapsedTime();
-  const s = Math.sin(t * 4);
-  legL.rotation.x = s * 0.6;
-  legR.rotation.x = -s * 0.6;
-  armL.rotation.x = -s * 0.5;
-  armR.rotation.x = s * 0.12;
-  bag.rotation.z = s * 0.06;
-  P.position.y = Math.abs(Math.cos(t * 4)) * 0.06;
-  P.rotation.y = 0.6 + offset + Math.sin(t * 0.5) * 0.15;
-  R.render(scene, camera);
-})();
+const saved=store.get('fmw_session');
+if(saved&&users[saved]){$('#who').textContent=users[saved].name;show('site')}else show('auth');
 </script>
 </body>
 </html>
