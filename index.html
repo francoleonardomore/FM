@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Card</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #121212;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Contenedor principal estilo tarjeta */
+    .card-container {
+      width: 320px;
+      background: #1e1e1e;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Sección de la imagen 3D */
+    .hero-banner {
+      width: 100%;
+      height: 200px;
+      background-color: #1f4cb5;
+      overflow: hidden;
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Estilos del formulario HTML/CSS original */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 24px;
+      color: #ffffff;
+    }
+
+    .login-form h2 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .login-form input,
+    .login-form button {
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .login-form input {
+      background-color: #2b2b2b;
+      color: #ffffff;
+    }
+
+    .login-form input::placeholder {
+      color: #888888;
+    }
+
+    .login-form button {
+      background-color: #007bff;
+      color: #ffffff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .login-form button:hover {
+      background-color: #0056b3;
+    }
+
+    .signup {
+      font-size: 13px;
+      color: #aaaaaa;
+      margin-top: 4px;
+    }
+
+    .signup a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .signup a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-container">
+    <!-- Banner de la imagen 3D -->
+    <div class="hero-banner">
+      <img src="https://lh3.googleusercontent.com/pw/AP1GczODWJqXyI6x1XqVv1U1O4d5qX3k4_8v3" alt="Personaje 3D Banner">
+    </div>
+
+    <!-- Formulario -->
+    <form class="login-form">
+      <h2>Login</h2>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <p class="signup">
+        Don't have an account? <a href="#">Sign up</a>
+      </p>
+    </form>
+  </div>
+
+</body>
+</html>
