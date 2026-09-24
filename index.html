@@ -52,6 +52,11 @@ nav{display:none;gap:24px;color:var(--mut)}nav a{text-decoration:none}nav a:hove
 .s h3{font-size:1.5rem}.s ul{margin:0;padding-left:20px}.s li{margin:6px 0}
 .s.web li{color:#eaf0ff}.s.vid li{color:var(--mut)}
 @media(min-width:820px){.s{grid-template-columns:1fr 1fr;padding:32px}.s.vid .ill{order:-1}}
+.works{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;max-width:640px;margin:0 auto}
+.works figure{margin:0}
+.tilt{border-radius:16px;overflow:hidden;border:2px solid var(--blue);box-shadow:0 0 30px rgba(47,107,255,.35);transition:transform .2s ease;will-change:transform;touch-action:pan-y}
+.tilt img{display:block;width:100%;height:auto}
+.works figcaption{margin-top:10px;text-align:center;color:var(--mut);font-size:.9rem}
 .steps{display:grid;gap:16px;padding:0;margin:0;list-style:none;counter-reset:p}
 .steps li{counter-increment:p;padding:20px 20px 20px 64px;position:relative;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
 .steps li::before{content:counter(p);position:absolute;left:18px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--blue);display:grid;place-items:center;font-weight:700}
@@ -96,7 +101,7 @@ footer{padding:22px;text-align:center;color:var(--mut);font-size:.85rem;border-t
 <section id="site" class="screen">
   <header><div class="in">
     <div class="brand">LM <b>Web</b></div>
-    <nav><a href="#servicios">Servicios</a><a href="#proceso">Cómo trabajo</a><a href="#contacto">Contacto</a></nav>
+    <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#proceso">Cómo trabajo</a><a href="#contacto">Contacto</a></nav>
     <div class="who"><span id="who"></span><button class="out" id="out">Cerrar sesión</button></div>
   </div></header>
   <main class="wrap">
@@ -153,6 +158,15 @@ footer{padding:22px;text-align:center;color:var(--mut);font-size:.85rem;border-t
           <rect x="16" y="154" width="150" height="14" rx="4" fill="#3a4a75"/><rect x="170" y="154" width="134" height="14" rx="4" fill="#3a4a75"/>
           <rect x="16" y="174" width="288" height="10" rx="4" fill="#1c2a4d"/><rect x="132" y="122" width="3" height="66" fill="#fff"/>
         </svg></div>
+      </div>
+    </div>
+
+    <div class="sec" id="trabajos">
+      <h2>Mis trabajos</h2>
+      <p class="lead">Un ejemplo real: la página de pedidos online de Mordisco, una hamburguesería de Mendoza, con carrito y opción de retiro o delivery.</p>
+      <div class="works">
+        <figure><div class="tilt"><img src="mordisco-1.jpg" alt="Página de inicio de Mordisco con el título Sabor real en cada Mordisco" loading="lazy"></div><figcaption>Página de inicio</figcaption></figure>
+        <figure><div class="tilt"><img src="mordisco-2.jpg" alt="Carrito de pedidos de Mordisco con retiro en local, delivery y métodos de pago" loading="lazy"></div><figcaption>Carrito de pedidos</figcaption></figure>
       </div>
     </div>
 
@@ -264,6 +278,15 @@ function loop(){
   P.position.y=Math.abs(Math.cos(t*4))*.06;P.rotation.y=.6+offset+Math.sin(t*.5)*.15;
   R.render(scene,camera);
 }
+
+/* Imágenes que se mueven al pasar el cursor o el dedo */
+if(!still)document.querySelectorAll('.tilt').forEach(el=>{
+  el.addEventListener('pointermove',e=>{
+    const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    el.style.transform='perspective(800px) rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg) scale(1.03)';
+  });
+  ['pointerleave','pointerup','pointercancel'].forEach(t=>el.addEventListener(t,()=>{el.style.transform=''}));
+});
 const saved=store.get('fmw_session');
 if(saved&&users[saved]){$('#who').textContent=users[saved].name;show('site')}else show('auth');
 </script>
