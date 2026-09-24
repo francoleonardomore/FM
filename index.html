@@ -10,39 +10,84 @@ html,body{margin:0;height:100%;background:#4a7bff;overflow:hidden}
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// Escena y fondo azul
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x4a7bff);
 
-// Cámara
 const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
 
-// Renderizador (dibuja todo en pantalla)
 const R = new THREE.WebGLRenderer({ antialias: true });
 R.setPixelRatio(Math.min(devicePixelRatio, 2));
 document.body.appendChild(R.domElement);
 
-// Luces
 scene.add(new THREE.AmbientLight(0xffffff, 0.75));
 const sun = new THREE.DirectionalLight(0xffffff, 0.8);
 sun.position.set(3, 5, 4);
 scene.add(sun);
 
-// Ajustar tamaño a la pantalla
 function resize() {
   const w = innerWidth, h = innerHeight;
   R.setSize(w, h);
   camera.aspect = w / h;
-  const d = w / h < 0.8 ? 11 : 8; // más lejos en celular
+  const d = w / h < 0.8 ? 11 : 8;
   camera.position.set(0, 1.6, d);
   camera.lookAt(0, 1.4, 0);
   camera.updateProjectionMatrix();
+  R.render(scene, camera);
 }
 addEventListener('resize', resize);
-resize();
 
-// Dibujar un cuadro
-R.render(scene, camera);
+const mat = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.7 });
+
+const box = (w, h, d, c, x = 0, y = 0, z = 0) => {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(c));
+  m.position.set(x, y, z);
+  return m;
+};
+
+const ball = (r, c, x = 0, y = 0, z = 0) => {
+  const m = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), mat(c));
+  m.position.set(x, y, z);
+  return m;
+};
+
+const P = new THREE.Group();
+scene.add(P);
+const SKIN = 0xf0c8a0;
+
+P.add(box(0.8, 1, 0.45, 0xb8b0a8, 0, 1.6, 0));
+P.add(box(0.5, 0.12, 0.3, 0xffffff, 0, 2.12, 0.02));
+P.add(ball(0.32, SKIN, 0, 2.55, 0));
+
+const hair = ball(0.35, 0xe8a83c, 0, 2.66, -0.04);
+hair.scale.set(1, 0.75, 1);
+P.add(hair);
+
+P.add(ball(0.05, 0x222222, -0.11, 2.55, 0.3));
+P.add(ball(0.05, 0x222222, 0.11, 2.55, 0.3));
+
+function leg(x) {
+  const g = new THREE.Group();
+  g.position.set(x, 1.1, 0);
+  g.add(box(0.3, 1, 0.3, 0x222222, 0, -0.5, 0));
+  g.add(box(0.32, 0.15, 0.5, 0xffffff, 0, -1.02, 0.08));
+  P.add(g);
+  return g;
+}
+const legL = leg(-0.2), legR = leg(0.2);
+
+function arm(x) {
+  const g = new THREE.Group();
+  g.position.set(x, 2.05, 0);
+  g.add(box(0.22, 0.9, 0.22, 0xb8b0a8, 0, -0.45, 0));
+  g.add(ball(0.13, SKIN, 0, -0.98, 0));
+  P.add(g);
+  return g;
+}
+const armL = arm(-0.55), armR = arm(0.55);
+
+P.rotation.y = 0.6;
+
+resize();
 </script>
 </body>
 </html>
