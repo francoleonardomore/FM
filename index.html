@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
-<title>LM Web | Diseño y desarrollo de páginas web</title>
-<meta name="description" content="LM Web crea páginas web profesionales, tiendas online y soluciones digitales para negocios.">
+<title>Mystogan Web | Diseño y desarrollo de páginas web</title>
+<meta name="description" content="Mystogan Web crea páginas web profesionales, tiendas online y soluciones digitales para negocios.">
 <meta name="theme-color" content="#05070d">
 
 <style>
@@ -42,14 +42,14 @@ body{
   min-height:100vh;
 }
 
-/* ===== FONDO LUFFY (se mantiene) ===== */
+/* ===== FONDO ===== */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:
     linear-gradient(to bottom,rgba(0,0,0,.58) 0%,rgba(0,0,0,.78) 100%),
-    url('luffy-fondo.jpg') center center / cover no-repeat;
+    url('1790369174294.jpg') center center / cover no-repeat;
   z-index:-2;
   pointer-events:none;
 }
@@ -68,44 +68,28 @@ body::after{
   z-index:-1;
 }
 
-/* ===== LOGO ESTÁTICO (sin animación) ===== */
+/* ===== LOGO Mystogan Web ===== */
 .logo-container{
   display:flex;
   justify-content:center;
   align-items:center;
   font-family:'Arial Black','Impact',sans-serif;
   font-weight:900;
-  font-size:2.8rem; /* más grande */
+  font-size:2.6rem;
   user-select:none;
   margin-bottom:8px;
+  color:var(--blue2);
 }
 
 .logo-container.brand-nav{
-  font-size:2.1rem; /* más grande también en el nav */
+  font-size:1.9rem;
   margin-bottom:0;
-}
-
-.logo-container .letter{
-  display:inline-block;
-  position:relative;
-  background-image:repeating-linear-gradient(
-    45deg,
-    #000000,
-    #000000 4px,
-    #ff0000 4px,
-    #ff0000 7px
-  );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  -webkit-text-fill-color:transparent;
 }
 
 .logo-text{
   font-weight:900;
   letter-spacing:-.5px;
-  font-size:1.35rem;
-  margin-left:8px;
+  color:var(--blue2);
 }
 
 .logo-text b{
@@ -223,7 +207,7 @@ button,input{
   z-index:2;
 }
 
-/* ===== LUFFY ===== */
+/* ===== PERSONAJE ===== */
 .stage img{
   width:100%;
   height:100%;
@@ -255,7 +239,7 @@ button,input{
   box-shadow:0 25px 60px rgba(0,0,0,.35);
   position:relative;
   z-index:3;
-  text-align:center; /* centra el logo */
+  text-align:center;
 }
 
 .box h1{
@@ -745,7 +729,6 @@ footer{
   }
 }
 
-/* ===== REDUCIR ANIMACIONES SI EL DISPOSITIVO LO SOLICITA ===== */
 @media (prefers-reduced-motion:reduce){
   *,
   *::before,
@@ -764,17 +747,15 @@ footer{
 <section id="auth" class="screen">
   <div class="auth">
 
-    <div class="stage" id="stage" aria-label="Luffy">
-      <img src="luffy.png" alt="Monkey D. Luffy">
+    <div class="stage" id="stage" aria-label="Zoro">
+      <img src="zoro.png" alt="Roronoa Zoro">
     </div>
 
     <div class="box">
 
-      <!-- LOGO ESTÁTICO Y MÁS GRANDE / CENTRADO -->
+      <!-- LOGO Mystogan Web -->
       <div class="logo-container">
-        <span class="letter letter-l">L</span>
-        <span class="letter letter-m">M</span>
-        <span class="logo-text"><b>Web</b></span>
+        <span class="logo-text"><b>Mystogan</b> Web</span>
       </div>
 
       <h1>Tu negocio merece una web profesional.</h1>
@@ -881,11 +862,9 @@ footer{
 
     <div class="wrap nav-inner">
 
-      <!-- LOGO ESTÁTICO -->
+      <!-- LOGO Mystogan Web -->
       <div class="logo-container brand-nav">
-        <span class="letter letter-l">L</span>
-        <span class="letter letter-m">M</span>
-        <span class="logo-text"><b>Web</b></span>
+        <span class="logo-text"><b>Mystogan</b> Web</span>
       </div>
 
       <button
@@ -1257,7 +1236,7 @@ footer{
   <footer>
 
     <div class="wrap">
-      LM Web — Diseño y desarrollo de páginas web
+      Mystogan Web — Diseño y desarrollo de páginas web
     </div>
 
   </footer>
@@ -1272,7 +1251,7 @@ footer{
 const WA = '5492614701888';
 
 const waMsg = encodeURIComponent(
-  'Hola, vi la página de LM Web y quiero consultar por una página web para mi negocio.'
+  'Hola, vi la página de Mystogan Web y quiero consultar por una página web para mi negocio.'
 );
 
 const waButton = document.getElementById('wa');
