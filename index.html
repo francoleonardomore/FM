@@ -248,6 +248,7 @@ button,input{font:inherit}
   z-index:2;
 }
 
+/* ===== LUFFY: movimiento adelante-atrás rebotando ===== */
 .stage img{
   width:100%;
   height:100%;
@@ -255,14 +256,16 @@ button,input{font:inherit}
   object-position:center top;
   display:block;
   border-radius:22px;
-  animation: zoroFloat 4s ease-in-out infinite;
+  animation: luffyBounce 2.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   transform-origin:center center;
 }
-@keyframes zoroFloat{
-  0%, 100%{ transform:translateY(0) rotate(-1.5deg) scale(1); }
-  25%{ transform:translateY(-12px) rotate(1deg) scale(1.02); }
-  50%{ transform:translateY(-6px) rotate(-0.5deg) scale(1.01); }
-  75%{ transform:translateY(-14px) rotate(1.2deg) scale(1.025); }
+@keyframes luffyBounce{
+  0%   { transform: scale(0.88); }
+  20%  { transform: scale(1.08); }
+  40%  { transform: scale(0.94); }
+  60%  { transform: scale(1.05); }
+  80%  { transform: scale(0.97); }
+  100% { transform: scale(0.88); }
 }
 
 .eye-glow{
@@ -291,7 +294,7 @@ button,input{font:inherit}
   padding:28px 24px;
   border:1px solid rgba(255,255,255,.12);
   border-radius:22px;
-  background:rgba(11,16,32,.42);          /* más transparente */
+  background:rgba(11,16,32,.42);
   backdrop-filter:blur(20px);
   -webkit-backdrop-filter:blur(20px);
   box-shadow:0 25px 60px rgba(0,0,0,.35);
@@ -683,8 +686,8 @@ footer{
 
 <section id="auth" class="screen">
   <div class="auth">
-    <div class="stage" id="stage" aria-label="Zoro">
-      <img src="zoro.jpg" alt="Roronoa Zoro">
+    <div class="stage" id="stage" aria-label="Luffy">
+      <img src="luffy.png" alt="Monkey D. Luffy">
       <div class="eye-glow left"></div>
       <div class="eye-glow right"></div>
     </div>
