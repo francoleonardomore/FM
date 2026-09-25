@@ -3,330 +3,1993 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LM Web | Páginas web y edición de videos</title>
+
+<title>LM Web | Diseño y desarrollo de páginas web</title>
+
+<meta name="description" content="LM Web crea páginas web profesionales, tiendas online y soluciones digitales para negocios.">
+
 <style>
-:root{--bg:#000;--panel:#0d1220;--blue:#2f6bff;--blue2:#5b8cff;--fg:#fff;--mut:#a9b4cc;--line:#1c2a4d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box}
-html{scroll-padding-top:70px;scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.screen{display:none;min-height:100vh}.screen.on{display:block}
-h1,h2,h3{line-height:1.15;margin:0 0 .5em}
-a{color:inherit}svg{display:block;width:100%;height:auto}
-.btn{display:inline-block;border:0;border-radius:10px;padding:13px 22px;background:var(--blue);color:#fff;font:600 16px system-ui,sans-serif;cursor:pointer;text-decoration:none}
-.btn.ghost{background:transparent;border:1.5px solid var(--blue2);color:var(--blue2)}
-.btn:focus-visible,input:focus-visible,.tab:focus-visible{outline:3px solid var(--blue2);outline-offset:2px}
-#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:none}
-#site{position:relative;z-index:1}
-.btn{box-shadow:0 5px 0 #1a45c2,0 12px 22px rgba(47,107,255,.35);transition:transform .1s,box-shadow .1s}
-.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #1a45c2,0 4px 10px rgba(47,107,255,.35)}
-.btn.ghost{box-shadow:0 5px 0 #1c2a4d}
-.hero h1,.box h1{text-shadow:1px 1px 0 #1d4fd8,2px 2px 0 #1d4fd8,3px 3px 0 #163fb0,4px 4px 0 #163fb0,0 14px 28px rgba(47,107,255,.5)}
-.d3{transition:transform .2s ease;will-change:transform}
-.s,.steps li,.contact{box-shadow:0 18px 40px rgba(0,0,0,.5),0 0 0 1px rgba(91,140,255,.15)}
-.brand{font-weight:800}.brand b{color:var(--blue2)}
-.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+:root{
+  --bg:#05070d;
+  --panel:#0b1020;
+  --panel2:#10182b;
+  --blue:#2f6bff;
+  --blue2:#6d96ff;
+  --cyan:#52d6ff;
+  --fg:#fff;
+  --mut:#aab5cf;
+  --line:#1b2948;
+  --success:#5ee6a0;
+}
 
-/* Inicio: personaje 3D + sesión */
-.auth{display:grid;gap:26px;max-width:980px;margin:0 auto;padding:24px 20px;align-items:center;min-height:100vh}
-.stage{height:46vh;min-height:300px;border-radius:14px;overflow:hidden;background:#3d6bff;box-shadow:0 0 60px rgba(47,107,255,.55)}
-.stage canvas{display:block;width:100%;height:100%;touch-action:pan-y}
-.box h1{font-size:2rem}.box p.sub{color:var(--mut);margin:0 0 20px}
-.tabs{display:flex;border-bottom:1.5px solid var(--line);margin-bottom:18px}
-.tab{flex:1;background:none;border:0;color:var(--mut);padding:12px;font:600 16px system-ui,sans-serif;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1.5px}
-.tab[aria-selected=true]{color:#fff;border-color:var(--blue)}
-label{display:block;font-size:.9rem;color:var(--mut);margin:14px 0 6px}
-input{width:100%;padding:13px;border-radius:10px;border:1.5px solid var(--line);background:var(--panel);color:#fff;font:16px system-ui,sans-serif}
-.err{color:#ff8a8a;min-height:1.4em;margin:12px 0 0;font-size:.95rem}
-form .btn{width:100%;margin-top:8px}
-@media(min-width:820px){.auth{grid-template-columns:1.1fr 1fr}.stage{height:68vh}}
+*{
+  box-sizing:border-box;
+}
 
-/* Sitio */
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(0,0,0,.94);border-bottom:1px solid var(--line)}
-header .in{display:flex;justify-content:space-between;align-items:center;gap:14px;max-width:1000px;margin:0 auto;padding:13px 20px}
-nav{display:none;gap:24px;color:var(--mut)}nav a{text-decoration:none}nav a:hover{color:#fff}
-@media(min-width:760px){nav{display:flex}}
-.who{display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--mut)}
-.out{background:none;border:1.5px solid var(--line);color:#fff;border-radius:8px;padding:7px 12px;font:14px system-ui,sans-serif;cursor:pointer}
-.hero{display:grid;gap:32px;align-items:center;padding:56px 0 40px}
-.hero h1{font-size:clamp(2.4rem,8vw,3.8rem)}
-.hero p{color:var(--mut);font-size:1.1rem;max-width:44ch;margin:0 0 26px}
-.row{display:flex;flex-wrap:wrap;gap:12px}
-@media(min-width:820px){.hero{grid-template-columns:1fr 1.1fr}}
-.stats{display:flex;flex-wrap:wrap;gap:12px 32px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--mut)}
-.stats b{color:#fff}
-.sec{padding:56px 0 8px}.sec>h2{font-size:1.9rem}.sec>p.lead{color:var(--mut);max-width:52ch;margin:0 0 28px}
-.s{display:grid;gap:22px;align-items:center;padding:24px;border-radius:16px;margin-bottom:18px}
-.s.web{background:var(--blue)}.s.vid{background:var(--panel);border:1.5px solid var(--blue)}
-.s h3{font-size:1.5rem}.s ul{margin:0;padding-left:20px}.s li{margin:6px 0}
-.s.web li{color:#eaf0ff}.s.vid li{color:var(--mut)}
-@media(min-width:820px){.s{grid-template-columns:1fr 1fr;padding:32px}.s.vid .ill{order:-1}}
-.works{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;max-width:640px;margin:0 auto}
-.works figure{margin:0}
-.tilt{border-radius:16px;overflow:hidden;border:2px solid var(--blue);box-shadow:0 0 30px rgba(47,107,255,.35);transition:transform .2s ease;will-change:transform;touch-action:pan-y}
-.tilt img{display:block;width:100%;height:auto}
-.works figcaption{margin-top:10px;text-align:center;color:var(--mut);font-size:.9rem}
-.steps{display:grid;gap:16px;padding:0;margin:0;list-style:none;counter-reset:p}
-.steps li{counter-increment:p;padding:20px 20px 20px 64px;position:relative;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
-.steps li::before{content:counter(p);position:absolute;left:18px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--blue);display:grid;place-items:center;font-weight:700}
-.steps b{display:block}.steps span{color:var(--mut)}
-@media(min-width:820px){.steps{grid-template-columns:repeat(3,1fr)}}
-.contact{margin:56px 0 64px;padding:44px 24px;border-radius:16px;text-align:center;background:linear-gradient(135deg,#1d4fd8,#2f6bff)}
-.contact h2{font-size:1.8rem}.contact p{margin:0 0 22px;color:#eaf0ff}
-.contact .btn{background:#fff;color:#0a2a80;box-shadow:0 5px 0 #a9bcff,0 12px 22px rgba(0,0,0,.3)}
-footer{padding:22px;text-align:center;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+html{
+  scroll-behavior:smooth;
+  scroll-padding-top:80px;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 15% 10%,rgba(47,107,255,.16),transparent 30%),
+    radial-gradient(circle at 85% 25%,rgba(82,214,255,.08),transparent 25%),
+    var(--bg);
+  color:var(--fg);
+  font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:45px 45px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+}
+
+.screen.on{
+  display:block;
+}
+
+h1,h2,h3{
+  line-height:1.12;
+  margin:0 0 .55em;
+}
+
+a{
+  color:inherit;
+}
+
+button,input{
+  font:inherit;
+}
+
+.wrap{
+  width:min(1120px,calc(100% - 40px));
+  margin:auto;
+}
+
+.brand{
+  font-weight:900;
+  letter-spacing:-.5px;
+  white-space:nowrap;
+}
+
+.brand b{
+  color:var(--blue2);
+}
+
+/* BOTONES */
+
+.btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  border:0;
+  border-radius:12px;
+  padding:14px 22px;
+  background:linear-gradient(135deg,var(--blue),#1747d4);
+  color:#fff;
+  font-weight:750;
+  cursor:pointer;
+  text-decoration:none;
+  box-shadow:
+    0 8px 25px rgba(47,107,255,.3),
+    inset 0 1px rgba(255,255,255,.2);
+  transition:.2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:
+    0 12px 32px rgba(47,107,255,.42),
+    inset 0 1px rgba(255,255,255,.2);
+}
+
+.btn.ghost{
+  background:rgba(255,255,255,.025);
+  border:1px solid #4268bd;
+  color:#dce6ff;
+  box-shadow:none;
+}
+
+.btn.ghost:hover{
+  background:rgba(47,107,255,.12);
+}
+
+.btn.large{
+  padding:16px 27px;
+}
+
+/* AUTENTICACIÓN */
+
+.auth{
+  width:min(1050px,calc(100% - 40px));
+  min-height:100vh;
+  margin:auto;
+  display:grid;
+  gap:35px;
+  align-items:center;
+  padding:30px 0;
+}
+
+.stage{
+  height:480px;
+  border-radius:25px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 30%,#628cff,#3158d8 55%,#182c76);
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.55),
+    0 0 80px rgba(47,107,255,.28);
+}
+
+.stage canvas{
+  display:block;
+  width:100%;
+  height:100%;
+  touch-action:pan-y;
+}
+
+.box{
+  padding:34px;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:rgba(11,16,32,.88);
+  backdrop-filter:blur(15px);
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
+}
+
+.box h1{
+  font-size:clamp(2rem,6vw,3rem);
+  margin-top:18px;
+  letter-spacing:-1px;
+}
+
+.box p.sub{
+  color:var(--mut);
+  margin:0 0 25px;
+}
+
+.tabs{
+  display:flex;
+  border-bottom:1px solid var(--line);
+  margin-bottom:18px;
+}
+
+.tab{
+  flex:1;
+  background:none;
+  border:0;
+  color:var(--mut);
+  padding:12px;
+  cursor:pointer;
+  border-bottom:3px solid transparent;
+}
+
+.tab[aria-selected="true"]{
+  color:white;
+  border-color:var(--blue);
+}
+
+label{
+  display:block;
+  font-size:.9rem;
+  color:var(--mut);
+  margin:14px 0 6px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#070b15;
+  color:#fff;
+  outline:none;
+}
+
+input:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(47,107,255,.12);
+}
+
+.err{
+  color:#ff8a8a;
+  min-height:1.4em;
+  margin:12px 0 0;
+  font-size:.9rem;
+}
+
+form .btn{
+  width:100%;
+  margin-top:8px;
+}
+
+@media(min-width:850px){
+  .auth{
+    grid-template-columns:1.08fr .92fr;
+  }
+
+  .stage{
+    height:620px;
+  }
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(5,7,13,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+header .in{
+  width:min(1120px,calc(100% - 40px));
+  min-height:72px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+nav{
+  display:none;
+  gap:25px;
+  color:var(--mut);
+}
+
+nav a{
+  text-decoration:none;
+  font-size:.95rem;
+  transition:.2s;
+}
+
+nav a:hover{
+  color:#fff;
+}
+
+.who{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--mut);
+  font-size:.9rem;
+}
+
+.out{
+  background:transparent;
+  border:1px solid var(--line);
+  color:#fff;
+  border-radius:9px;
+  padding:7px 11px;
+  cursor:pointer;
+}
+
+@media(min-width:850px){
+  nav{
+    display:flex;
+  }
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  display:grid;
+  gap:45px;
+  align-items:center;
+  padding:90px 0 65px;
+}
+
+.hero-copy{
+  position:relative;
+  z-index:2;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 12px;
+  margin-bottom:20px;
+  border:1px solid rgba(109,150,255,.35);
+  border-radius:999px;
+  background:rgba(47,107,255,.08);
+  color:#bcd0ff;
+  font-size:.85rem;
+}
+
+.badge span{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#5ee6a0;
+  box-shadow:0 0 12px #5ee6a0;
+}
+
+.hero h1{
+  font-size:clamp(2.8rem,8vw,5.4rem);
+  letter-spacing:-3px;
+  max-width:850px;
+  background:linear-gradient(120deg,#fff 20%,#9db8ff 70%,#52d6ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero h1 strong{
+  color:var(--blue2);
+}
+
+.hero p{
+  max-width:650px;
+  color:var(--mut);
+  font-size:1.12rem;
+  margin:0 0 28px;
+}
+
+.row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.hero-card{
+  min-height:390px;
+  border-radius:28px;
+  border:1px solid rgba(109,150,255,.25);
+  background:
+    radial-gradient(circle at 50% 20%,rgba(47,107,255,.35),transparent 42%),
+    linear-gradient(145deg,#0d1630,#070a13);
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.55),
+    inset 0 1px rgba(255,255,255,.08);
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+}
+
+.hero-card:after{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  border:1px solid rgba(109,150,255,.25);
+  box-shadow:
+    0 0 0 35px rgba(109,150,255,.04),
+    0 0 0 70px rgba(109,150,255,.025);
+}
+
+.browser{
+  width:78%;
+  max-width:470px;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid #38538c;
+  background:#090e1c;
+  box-shadow:0 25px 60px rgba(0,0,0,.65);
+  transform:perspective(900px) rotateY(-8deg) rotateX(4deg);
+  position:relative;
+  z-index:2;
+}
+
+.browser-top{
+  height:35px;
+  background:#151f35;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:0 12px;
+}
+
+.browser-top i{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#7180a0;
+}
+
+.browser-body{
+  padding:18px;
+}
+
+.browser-title{
+  width:70%;
+  height:18px;
+  background:#fff;
+  border-radius:5px;
+  margin-bottom:12px;
+}
+
+.browser-line{
+  width:90%;
+  height:7px;
+  background:#32476f;
+  border-radius:5px;
+  margin:8px 0;
+}
+
+.browser-button{
+  width:90px;
+  height:28px;
+  background:var(--blue);
+  border-radius:7px;
+  margin-top:18px;
+}
+
+.browser-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:22px;
+}
+
+.browser-cards div{
+  height:65px;
+  border-radius:7px;
+  background:#14213e;
+  border:1px solid #263d69;
+}
+
+@media(min-width:850px){
+  .hero{
+    grid-template-columns:1.05fr .95fr;
+  }
+}
+
+/* ESTADÍSTICAS */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.stat{
+  padding:24px 15px;
+  text-align:center;
+  border-right:1px solid var(--line);
+}
+
+.stat:last-child{
+  border-right:0;
+}
+
+.stat strong{
+  display:block;
+  font-size:1.05rem;
+}
+
+.stat span{
+  color:var(--mut);
+  font-size:.86rem;
+}
+
+/* SECCIONES */
+
+.sec{
+  padding:90px 0 10px;
+}
+
+.section-head{
+  max-width:700px;
+  margin-bottom:35px;
+}
+
+.section-head h2{
+  font-size:clamp(2rem,5vw,3rem);
+  letter-spacing:-1px;
+}
+
+.lead{
+  color:var(--mut);
+  max-width:650px;
+}
+
+/* SERVICIOS */
+
+.services{
+  display:grid;
+  gap:18px;
+}
+
+.service{
+  padding:28px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:linear-gradient(145deg,#0d1425,#080b14);
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
+}
+
+.service:hover{
+  transform:translateY(-5px);
+  border-color:#315fc4;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+.service.featured{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(47,107,255,.25),transparent 40%),
+    linear-gradient(145deg,#0f1b3b,#080c17);
+  border-color:#315fc4;
+}
+
+.icon{
+  width:52px;
+  height:52px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:rgba(47,107,255,.14);
+  border:1px solid rgba(109,150,255,.25);
+  color:#8eaeff;
+  font-size:1.4rem;
+  margin-bottom:20px;
+}
+
+.service h3{
+  font-size:1.35rem;
+}
+
+.service p{
+  color:var(--mut);
+  margin:0;
+}
+
+.service ul{
+  color:var(--mut);
+  padding-left:20px;
+}
+
+.service li{
+  margin:7px 0;
+}
+
+@media(min-width:760px){
+  .services{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* BENEFICIOS */
+
+.benefits{
+  display:grid;
+  gap:15px;
+}
+
+.benefit{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(11,16,32,.7);
+}
+
+.benefit strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.benefit span{
+  color:var(--mut);
+  font-size:.93rem;
+}
+
+@media(min-width:760px){
+  .benefits{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* TRABAJOS */
+
+.works{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  max-width:800px;
+  margin:auto;
+}
+
+.works figure{
+  margin:0;
+}
+
+.tilt{
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid #315fc4;
+  background:#080c16;
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+.tilt img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.works figcaption{
+  margin-top:10px;
+  text-align:center;
+  color:var(--mut);
+  font-size:.9rem;
+}
+
+/* PROCESO */
+
+.steps{
+  display:grid;
+  gap:16px;
+  padding:0;
+  margin:0;
+  list-style:none;
+  counter-reset:p;
+}
+
+.steps li{
+  counter-increment:p;
+  position:relative;
+  padding:25px 25px 25px 72px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#0b1020;
+}
+
+.steps li:before{
+  content:counter(p);
+  position:absolute;
+  left:22px;
+  top:22px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--blue);
+  font-weight:800;
+  box-shadow:0 0 25px rgba(47,107,255,.35);
+}
+
+.steps b{
+  display:block;
+  font-size:1.05rem;
+}
+
+.steps span{
+  color:var(--mut);
+}
+
+@media(min-width:760px){
+  .steps{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .steps li{
+    padding:25px;
+  }
+
+  .steps li:before{
+    position:relative;
+    left:auto;
+    top:auto;
+    margin-bottom:20px;
+  }
+}
+
+/* CTA */
+
+.contact{
+  margin:90px 0 70px;
+  padding:65px 25px;
+  text-align:center;
+  border-radius:25px;
+  border:1px solid rgba(109,150,255,.35);
+  background:
+    radial-gradient(circle at 50% 0%,rgba(82,214,255,.18),transparent 35%),
+    linear-gradient(135deg,#132d76,#173fae 55%,#0c246c);
+  box-shadow:0 30px 70px rgba(0,0,0,.45);
+}
+
+.contact h2{
+  font-size:clamp(2rem,5vw,3rem);
+}
+
+.contact p{
+  color:#dbe5ff;
+  margin:0 auto 25px;
+  max-width:550px;
+}
+
+.contact .btn{
+  background:#fff;
+  color:#0c2d89;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:30px 20px;
+  text-align:center;
+  color:var(--mut);
+  font-size:.85rem;
+}
+
+/* ANIMACIONES */
+
+.fade{
+  animation:fade .7s ease both;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+@media(max-width:600px){
+  .wrap{
+    width:min(100% - 28px,1120px);
+  }
+
+  header .in{
+    width:calc(100% - 28px);
+  }
+
+  .who span{
+    display:none;
+  }
+
+  .hero{
+    padding-top:55px;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .hero-card{
+    min-height:300px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .stat{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+
+  .stat:last-child{
+    border-bottom:0;
+  }
+
+  .works{
+    grid-template-columns:1fr;
+  }
+
+  .box{
+    padding:25px;
+  }
+}
 </style>
 </head>
+
 <body>
-<canvas id="bg" aria-hidden="true"></canvas>
 
 <section id="auth" class="screen">
-  <div class="auth">
-    <div class="stage" id="stage" aria-label="Personaje 3D caminando"></div>
-    <div class="box">
-      <div class="brand">LM <b>Web</b></div>
-      <h1>Tu negocio en internet</h1>
-      <p class="sub">Creá tu sesión para conocer mis servicios de páginas web y edición de videos.</p>
-      <div class="tabs" role="tablist">
-        <button class="tab" role="tab" id="tabReg" aria-selected="true">Crear sesión</button>
-        <button class="tab" role="tab" id="tabLog" aria-selected="false">Iniciar sesión</button>
-      </div>
-      <form id="fReg">
-        <label for="rn">Nombre</label><input id="rn" required autocomplete="name">
-        <label for="re">Correo</label><input id="re" type="email" required autocomplete="email">
-        <label for="rp">Contraseña (mínimo 6 caracteres)</label><input id="rp" type="password" minlength="6" required autocomplete="new-password">
-        <p class="err" id="eReg" role="alert"></p>
-        <button class="btn" type="submit">Crear sesión</button>
-      </form>
-      <form id="fLog" hidden>
-        <label for="le">Correo</label><input id="le" type="email" required autocomplete="email">
-        <label for="lp">Contraseña</label><input id="lp" type="password" required autocomplete="current-password">
-        <p class="err" id="eLog" role="alert"></p>
-        <button class="btn" type="submit">Entrar</button>
-      </form>
+
+<div class="auth">
+
+  <div class="stage" id="stage" aria-label="Personaje 3D"></div>
+
+  <div class="box fade">
+
+    <div class="brand">LM <b>Web</b></div>
+
+    <h1>Tu negocio merece una web profesional.</h1>
+
+    <p class="sub">
+      Creá tu sesión para conocer mis servicios de diseño,
+      desarrollo y soluciones web.
+    </p>
+
+    <div class="tabs" role="tablist">
+
+      <button
+        class="tab"
+        role="tab"
+        id="tabReg"
+        aria-selected="true">
+        Crear sesión
+      </button>
+
+      <button
+        class="tab"
+        role="tab"
+        id="tabLog"
+        aria-selected="false">
+        Iniciar sesión
+      </button>
+
     </div>
+
+    <form id="fReg">
+
+      <label for="rn">Nombre</label>
+      <input id="rn" required autocomplete="name">
+
+      <label for="re">Correo</label>
+      <input id="re" type="email" required autocomplete="email">
+
+      <label for="rp">
+        Contraseña (mínimo 6 caracteres)
+      </label>
+
+      <input
+        id="rp"
+        type="password"
+        minlength="6"
+        required
+        autocomplete="new-password">
+
+      <p class="err" id="eReg"></p>
+
+      <button class="btn" type="submit">
+        Crear sesión
+      </button>
+
+    </form>
+
+    <form id="fLog" hidden>
+
+      <label for="le">Correo</label>
+      <input id="le" type="email" required>
+
+      <label for="lp">Contraseña</label>
+      <input id="lp" type="password" required>
+
+      <p class="err" id="eLog"></p>
+
+      <button class="btn" type="submit">
+        Entrar
+      </button>
+
+    </form>
+
   </div>
+
+</div>
+
 </section>
+
 
 <section id="site" class="screen">
-  <header><div class="in">
-    <div class="brand">LM <b>Web</b></div>
-    <nav><a href="#servicios">Servicios</a><a href="#trabajos">Trabajos</a><a href="#proceso">Cómo trabajo</a><a href="#contacto">Contacto</a></nav>
-    <div class="who"><span id="who"></span><button class="out" id="out">Cerrar sesión</button></div>
-  </div></header>
-  <main class="wrap">
-    <div class="hero">
-      <div>
-        <h1>Tu negocio en internet</h1>
-        <p>Creo páginas web y edito tus videos para que tu marca se vea profesional en el celular y en la computadora.</p>
-        <div class="row"><a class="btn" href="#contacto">Pedir presupuesto</a><a class="btn ghost" href="#servicios">Ver servicios</a></div>
-      </div>
-      <svg class="d3" viewBox="0 0 440 320" role="img" aria-label="Página web en computadora y celular">
-        <rect x="10" y="20" width="330" height="240" rx="14" fill="#0d1220" stroke="#2f6bff" stroke-width="2"/>
-        <path d="M10 34a14 14 0 0 1 14-14h302a14 14 0 0 1 14 14v22H10z" fill="#1c2a4d"/>
-        <circle cx="30" cy="38" r="5" fill="#ff6b6b"/><circle cx="48" cy="38" r="5" fill="#ffd166"/><circle cx="66" cy="38" r="5" fill="#5ee6a0"/>
-        <rect x="90" y="30" width="200" height="16" rx="8" fill="#0d1220"/>
-        <rect x="28" y="72" width="190" height="20" rx="4" fill="#fff"/><rect x="28" y="100" width="130" height="20" rx="4" fill="#5b8cff"/>
-        <rect x="28" y="136" width="240" height="8" rx="4" fill="#3a4a75"/><rect x="28" y="152" width="200" height="8" rx="4" fill="#3a4a75"/>
-        <rect x="28" y="176" width="92" height="30" rx="8" fill="#2f6bff"/>
-        <rect x="230" y="176" width="90" height="62" rx="8" fill="#1c2a4d"/><path d="M230 226l28-24 20 16 14-10 28 18v10a8 8 0 0 1-8 8h-74a8 8 0 0 1-8-8z" fill="#2f6bff"/>
-        <rect x="260" y="130" width="160" height="182" rx="20" fill="#000" stroke="#5b8cff" stroke-width="3"/>
-        <rect x="272" y="152" width="136" height="70" rx="8" fill="#2f6bff"/>
-        <rect x="272" y="234" width="90" height="10" rx="5" fill="#fff"/><rect x="272" y="252" width="120" height="8" rx="4" fill="#3a4a75"/><rect x="272" y="268" width="100" height="8" rx="4" fill="#3a4a75"/>
-        <rect x="272" y="284" width="136" height="16" rx="8" fill="#5b8cff"/>
-      </svg>
-    </div>
-    <div class="stats"><span><b>Diseño a medida</b> para cada negocio</span><span><b>Optimizado</b> para celular</span><span><b>Publicado</b> en internet</span></div>
 
-    <div class="sec" id="servicios">
-      <h2>Servicios</h2>
-      <p class="lead">Todo lo que tu negocio necesita para mostrarse en internet, en un solo lugar.</p>
-      <div class="s web d3">
-        <div>
-          <h3>Creación de páginas web</h3>
-          <ul><li>Diseño a medida para tu negocio</li><li>Se ven bien en el celular</li><li>Publicadas en internet, listas para compartir</li><li>Botón de WhatsApp para que te consulten directo</li></ul>
-        </div>
-        <div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Código de una página web">
-          <rect width="320" height="200" rx="12" fill="#0a2a80"/>
-          <circle cx="20" cy="18" r="5" fill="#ff6b6b"/><circle cx="36" cy="18" r="5" fill="#ffd166"/><circle cx="52" cy="18" r="5" fill="#5ee6a0"/>
-          <rect x="24" y="44" width="70" height="9" rx="4" fill="#ff9ecb"/><rect x="102" y="44" width="110" height="9" rx="4" fill="#9ec5ff"/>
-          <rect x="44" y="66" width="120" height="9" rx="4" fill="#fff"/><rect x="172" y="66" width="70" height="9" rx="4" fill="#ffd166"/>
-          <rect x="44" y="88" width="90" height="9" rx="4" fill="#5ee6a0"/><rect x="142" y="88" width="100" height="9" rx="4" fill="#fff"/>
-          <rect x="44" y="110" width="150" height="9" rx="4" fill="#9ec5ff"/>
-          <rect x="24" y="132" width="60" height="9" rx="4" fill="#ff9ecb"/><rect x="24" y="160" width="100" height="22" rx="6" fill="#2f6bff"/>
-        </svg></div>
-      </div>
-      <div class="s vid d3">
-        <div>
-          <h3>Edición de videos</h3>
-          <ul><li>Cortes, ritmo y transiciones</li><li>Subtítulos y música</li><li>Formato para Reels, TikTok y YouTube</li><li>Videos de promoción para tu marca</li></ul>
-        </div>
-        <div class="ill"><svg viewBox="0 0 320 200" role="img" aria-label="Línea de tiempo de edición de video">
-          <rect width="320" height="200" rx="12" fill="#000" stroke="#1c2a4d"/>
-          <rect x="16" y="16" width="288" height="100" rx="8" fill="#1c2a4d"/><circle cx="160" cy="66" r="24" fill="#2f6bff"/><path d="M152 54l22 12-22 12z" fill="#fff"/>
-          <rect x="16" y="130" width="90" height="18" rx="4" fill="#2f6bff"/><rect x="110" y="130" width="70" height="18" rx="4" fill="#5b8cff"/><rect x="184" y="130" width="120" height="18" rx="4" fill="#2f6bff"/>
-          <rect x="16" y="154" width="150" height="14" rx="4" fill="#3a4a75"/><rect x="170" y="154" width="134" height="14" rx="4" fill="#3a4a75"/>
-          <rect x="16" y="174" width="288" height="10" rx="4" fill="#1c2a4d"/><rect x="132" y="122" width="3" height="66" fill="#fff"/>
-        </svg></div>
-      </div>
+<header>
+
+<div class="in">
+
+  <div class="brand">
+    LM <b>Web</b>
+  </div>
+
+  <nav>
+    <a href="#servicios">Servicios</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#trabajos">Trabajos</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <div class="who">
+
+    <span id="who"></span>
+
+    <button class="out" id="out">
+      Cerrar sesión
+    </button>
+
+  </div>
+
+</div>
+
+</header>
+
+
+<main class="wrap">
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-copy fade">
+
+  <div class="badge">
+    <span></span>
+    Desarrollo web para negocios
+  </div>
+
+  <h1>
+    Tu negocio,
+    <strong>online.</strong>
+  </h1>
+
+  <p>
+    Diseño y desarrollo páginas web modernas,
+    rápidas y adaptadas a celulares y computadoras
+    para que tu negocio tenga presencia profesional
+    en internet.
+  </p>
+
+  <div class="row">
+
+    <a class="btn large" href="#contacto">
+      Solicitar presupuesto
+    </a>
+
+    <a class="btn ghost" href="#servicios">
+      Ver servicios
+    </a>
+
+  </div>
+
+</div>
+
+
+<div class="hero-card">
+
+  <div class="browser">
+
+    <div class="browser-top">
+      <i></i>
+      <i></i>
+      <i></i>
     </div>
 
-    <div class="sec" id="trabajos">
-      <h2>Mis trabajos</h2>
-      <p class="lead">Un ejemplo real: la página de pedidos online de Mordisco, una hamburguesería de Mendoza, con carrito y opción de retiro o delivery.</p>
-      <div class="works">
-        <figure><div class="tilt"><img src="mordisco-1.jpg" alt="Página de inicio de Mordisco con el título Sabor real en cada Mordisco" loading="lazy"></div><figcaption>Página de inicio</figcaption></figure>
-        <figure><div class="tilt"><img src="mordisco-2.jpg" alt="Carrito de pedidos de Mordisco con retiro en local, delivery y métodos de pago" loading="lazy"></div><figcaption>Carrito de pedidos</figcaption></figure>
+    <div class="browser-body">
+
+      <div class="browser-title"></div>
+
+      <div class="browser-line"></div>
+      <div class="browser-line"></div>
+
+      <div class="browser-button"></div>
+
+      <div class="browser-cards">
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
+
     </div>
 
-    <div class="sec" id="proceso">
-      <h2>Cómo trabajo</h2>
-      <p class="lead">Un proceso simple, de la primera consulta a tu página publicada.</p>
-      <ol class="steps">
-        <li class="d3"><b>Me contás qué necesitás</b><span>Hablamos por WhatsApp sobre tu negocio y tus objetivos.</span></li>
-        <li class="d3"><b>Diseño y edición</b><span>Preparo tu página o tu video y te muestro un avance.</span></li>
-        <li class="d3"><b>Publicación</b><span>Ajustamos detalles y lo dejo en línea, listo para usar.</span></li>
-      </ol>
-    </div>
+  </div>
 
-    <div class="contact d3" id="contacto">
-      <h2>Contame qué necesitás</h2>
-      <p>Escribime por WhatsApp y te respondo con una propuesta.</p>
-      <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-    </div>
-  </main>
-  <footer>LM Web · Tu negocio en internet</footer>
+</div>
+
 </section>
 
+
+<!-- ESTADÍSTICAS -->
+
+<div class="stats">
+
+  <div class="stat">
+    <strong>Diseño personalizado</strong>
+    <span>Adaptado a tu negocio</span>
+  </div>
+
+  <div class="stat">
+    <strong>100% responsive</strong>
+    <span>Celular, tablet y PC</span>
+  </div>
+
+  <div class="stat">
+    <strong>Listo para publicar</strong>
+    <span>Tu web disponible online</span>
+  </div>
+
+</div>
+
+
+<!-- SERVICIOS -->
+
+<section class="sec" id="servicios">
+
+<div class="section-head">
+
+  <h2>Soluciones web</h2>
+
+  <p class="lead">
+    Creo herramientas digitales pensadas para que
+    tu negocio pueda mostrarse, recibir consultas
+    y vender por internet.
+  </p>
+
+</div>
+
+
+<div class="services">
+
+
+<div class="service featured">
+
+  <div class="icon">◈</div>
+
+  <h3>Diseño de páginas web</h3>
+
+  <p>
+    Páginas modernas y profesionales creadas
+    específicamente para tu negocio.
+  </p>
+
+  <ul>
+    <li>Diseño personalizado</li>
+    <li>Adaptación para celular</li>
+    <li>Secciones informativas</li>
+    <li>Botones de contacto</li>
+  </ul>
+
+</div>
+
+
+<div class="service">
+
+  <div class="icon">▣</div>
+
+  <h3>Tiendas online</h3>
+
+  <p>
+    Sitios preparados para mostrar productos
+    y facilitar las ventas por internet.
+  </p>
+
+  <ul>
+    <li>Catálogo de productos</li>
+    <li>Carrito de compras</li>
+    <li>Pedidos online</li>
+    <li>Opciones de contacto</li>
+  </ul>
+
+</div>
+
+
+<div class="service">
+
+  <div class="icon">⌁</div>
+
+  <h3>Pedidos y formularios online</h3>
+
+  <p>
+    Soluciones para que tus clientes puedan
+    enviar pedidos, consultas o reservas.
+  </p>
+
+  <ul>
+    <li>Formularios personalizados</li>
+    <li>Pedidos por WhatsApp</li>
+    <li>Datos del cliente</li>
+    <li>Experiencia simple</li>
+  </ul>
+
+</div>
+
+
+<div class="service">
+
+  <div class="icon">↗</div>
+
+  <h3>Publicación y mantenimiento</h3>
+
+  <p>
+    Te ayudo a dejar tu página publicada
+    y preparada para seguir creciendo.
+  </p>
+
+  <ul>
+    <li>Publicación online</li>
+    <li>Actualización de contenido</li>
+    <li>Corrección de errores</li>
+    <li>Mejoras futuras</li>
+  </ul>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- BENEFICIOS -->
+
+<section class="sec" id="beneficios">
+
+<div class="section-head">
+
+  <h2>¿Por qué tener una web?</h2>
+
+  <p class="lead">
+    Una página profesional puede convertirse en
+    el punto central de tu negocio en internet.
+  </p>
+
+</div>
+
+
+<div class="benefits">
+
+  <div class="benefit">
+    <strong>📱 Presencia profesional</strong>
+    <span>
+      Tu negocio puede ser encontrado y consultado
+      desde cualquier dispositivo.
+    </span>
+  </div>
+
+  <div class="benefit">
+    <strong>⚡ Información rápida</strong>
+    <span>
+      Tus clientes encuentran servicios, productos
+      y formas de contacto en un solo lugar.
+    </span>
+  </div>
+
+  <div class="benefit">
+    <strong>💬 Más contacto</strong>
+    <span>
+      Integro botones para que tus clientes puedan
+      comunicarse directamente.
+    </span>
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- TRABAJOS -->
+
+<section class="sec" id="trabajos">
+
+<div class="section-head">
+
+  <h2>Trabajos realizados</h2>
+
+  <p class="lead">
+    Algunos ejemplos de páginas y soluciones web
+    desarrolladas para negocios.
+  </p>
+
+</div>
+
+
+<div class="works">
+
+  <figure>
+
+    <div class="tilt">
+
+      <img
+        src="mordisco-1.jpg"
+        alt="Página web de Mordisco Hamburguesas"
+        loading="lazy">
+
+    </div>
+
+    <figcaption>
+      Página principal — Mordisco
+    </figcaption>
+
+  </figure>
+
+
+  <figure>
+
+    <div class="tilt">
+
+      <img
+        src="mordisco-2.jpg"
+        alt="Sistema de pedidos online de Mordisco"
+        loading="lazy">
+
+    </div>
+
+    <figcaption>
+      Sistema de pedidos — Mordisco
+    </figcaption>
+
+  </figure>
+
+</div>
+
+</section>
+
+
+<!-- PROCESO -->
+
+<section class="sec" id="proceso">
+
+<div class="section-head">
+
+  <h2>Cómo trabajo</h2>
+
+  <p class="lead">
+    Un proceso sencillo para transformar tu idea
+    en una página web lista para usar.
+  </p>
+
+</div>
+
+
+<ol class="steps">
+
+  <li>
+    <b>Me contás tu idea</b>
+    <span>
+      Me explicás qué hace tu negocio y qué necesitás
+      que tenga la página.
+    </span>
+  </li>
+
+  <li>
+    <b>Diseño la solución</b>
+    <span>
+      Organizo la estructura, diseño y funciones
+      necesarias para tu proyecto.
+    </span>
+  </li>
+
+  <li>
+    <b>Publicamos tu web</b>
+    <span>
+      Realizamos los últimos ajustes y dejamos
+      tu página lista para compartir.
+    </span>
+  </li>
+
+</ol>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="contact" id="contacto">
+
+  <h2>¿Tenés una idea para tu negocio?</h2>
+
+  <p>
+    Contame qué necesitás y podemos pensar juntos
+    una solución web para tu proyecto.
+  </p>
+
+  <a
+    class="btn"
+    id="wa"
+    href="#"
+    target="_blank"
+    rel="noopener">
+    Consultar por WhatsApp
+  </a>
+
+</section>
+
+
+</main>
+
+
+<footer>
+  LM Web · Diseño y desarrollo de páginas web
+</footer>
+
+</section>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <script>
-const WA='5492614701888'; // 54 (Argentina) + 9 + 261 + número
-const $=s=>document.querySelector(s);
-$('#wa').href='https://wa.me/'+WA+'?text='+encodeURIComponent('Hola, vi tu página y quiero consultar por un servicio.');
+
+/* =========================
+   WHATSAPP
+========================= */
+
+const WA='5492614701888';
+
+document.querySelector('#wa').href=
+'https://wa.me/'+WA+
+'?text='+
+encodeURIComponent(
+'Hola, vi la página de LM Web y quiero consultar por una página web para mi negocio.'
+);
+
+
+/* =========================
+   STORAGE
+========================= */
+
 const store={
-  get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},
-  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
-  del(k){try{localStorage.removeItem(k)}catch(e){}}
-};
-let users=Object.assign(Object.create(null),store.get('fmw_users')||{});
-async function hash(s){
-  try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
-    return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return s}
-}
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));
-  scrollTo(0,0);running=(id==='auth');bgOn=(id==='site');$('#bg').style.display=bgOn?'block':'none';if(bgOn&&!binit){binit=true;try{initBg();bgLoop()}catch(e){B=null}}bsize();
-  if(running){if(!inited){inited=true;try{init();loop()}catch(e){R=null;$('#stage').style.display='none'}}size()}
-}
-function tab(reg){
-  $('#tabReg').setAttribute('aria-selected',reg);$('#tabLog').setAttribute('aria-selected',!reg);
-  $('#fReg').hidden=!reg;$('#fLog').hidden=reg;
-}
-$('#tabReg').onclick=()=>tab(true);$('#tabLog').onclick=()=>tab(false);
-function enter(email){
-  store.set('fmw_session',email);
-  $('#who').textContent=users[email].name;show('site');
-}
-$('#fReg').onsubmit=async e=>{
-  e.preventDefault();
-  const email=$('#re').value.trim().toLowerCase();
-  if(users[email]){$('#eReg').textContent='Ese correo ya tiene una sesión. Tocá "Iniciar sesión".';return}
-  users[email]={name:$('#rn').value.trim(),pass:await hash($('#rp').value)};
-  store.set('fmw_users',users);$('#eReg').textContent='';enter(email);
-};
-$('#fLog').onsubmit=async e=>{
-  e.preventDefault();
-  const email=$('#le').value.trim().toLowerCase(),u=users[email];
-  if(!u||u.pass!==await hash($('#lp').value)){$('#eLog').textContent='Correo o contraseña incorrectos.';return}
-  $('#eLog').textContent='';enter(email);
-};
-$('#out').onclick=()=>{store.del('fmw_session');show('auth')};
 
-/* Personaje 3D */
-let inited=false,running=false,R,scene,camera,P,legL,legR,armL,armR,bag,offset=0;
-const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const clock=new THREE.Clock();
-function init(){
-  const st=$('#stage');
-  scene=new THREE.Scene();scene.background=new THREE.Color(0x3d6bff);
-  camera=new THREE.PerspectiveCamera(40,1,.1,100);
-  R=new THREE.WebGLRenderer({antialias:true});
-  R.setPixelRatio(Math.min(devicePixelRatio,2));st.appendChild(R.domElement);
-  scene.add(new THREE.AmbientLight(0xffffff,.75));
-  const sun=new THREE.DirectionalLight(0xffffff,.8);sun.position.set(3,5,4);scene.add(sun);
-  const mat=c=>new THREE.MeshStandardMaterial({color:c,roughness:.7});
-  const box=(w,h,d,c,x=0,y=0,z=0)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(c));m.position.set(x,y,z);return m};
-  const ball=(r,c,x=0,y=0,z=0)=>{const m=new THREE.Mesh(new THREE.SphereGeometry(r,24,16),mat(c));m.position.set(x,y,z);return m};
-  P=new THREE.Group();scene.add(P);const SKIN=0xf0c8a0;
-  const sh=new THREE.Mesh(new THREE.CircleGeometry(1.1,32),new THREE.MeshBasicMaterial({color:0x2a52c4}));
-  sh.rotation.x=-Math.PI/2;sh.position.y=.01;scene.add(sh);
-  P.add(box(.8,1,.45,0xb8b0a8,0,1.6,0));P.add(box(.5,.12,.3,0xffffff,0,2.12,.02));P.add(ball(.32,SKIN,0,2.55,0));
-  const hair=ball(.35,0xe8a83c,0,2.66,-.04);hair.scale.set(1,.75,1);P.add(hair);
-  P.add(ball(.05,0x222222,-.11,2.55,.3));P.add(ball(.05,0x222222,.11,2.55,.3));
-  const leg=x=>{const g=new THREE.Group();g.position.set(x,1.1,0);g.add(box(.3,1,.3,0x222222,0,-.5,0));g.add(box(.32,.15,.5,0xffffff,0,-1.02,.08));P.add(g);return g};
-  legL=leg(-.2);legR=leg(.2);
-  const arm=x=>{const g=new THREE.Group();g.position.set(x,2.05,0);g.add(box(.22,.9,.22,0xb8b0a8,0,-.45,0));g.add(ball(.13,SKIN,0,-.98,0));P.add(g);return g};
-  armL=arm(-.55);armR=arm(.55);
-  bag=new THREE.Group();bag.position.set(0,-1.28,0);
-  bag.add(box(.7,.5,.18,0x8b4a22,0,0,0));bag.add(box(.2,.12,.2,0x5e2f12,0,.31,0));bag.add(box(.08,.08,.2,0xd9a441,0,.05,0));
-  armR.add(bag);P.rotation.y=.6;
-  let drag=false,lx=0;const cv=R.domElement;
-  cv.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;cv.setPointerCapture(e.pointerId)});
-  cv.addEventListener('pointermove',e=>{if(drag){offset+=(e.clientX-lx)*.01;lx=e.clientX}});
-  cv.addEventListener('pointerup',()=>drag=false);cv.addEventListener('pointercancel',()=>drag=false);
-  addEventListener('resize',size);
-}
-function size(){
-  if(!R)return;const st=$('#stage'),w=st.clientWidth,h=st.clientHeight;if(!w||!h)return;
-  R.setSize(w,h);camera.aspect=w/h;camera.position.set(0,1.6,w/h<.8?11:8);camera.lookAt(0,1.4,0);camera.updateProjectionMatrix();
-}
-function loop(){
-  requestAnimationFrame(loop);if(!running)return;
-  const t=still?0:clock.getElapsedTime(),s=Math.sin(t*4);
-  legL.rotation.x=s*.6;legR.rotation.x=-s*.6;armL.rotation.x=-s*.5;armR.rotation.x=s*.12;bag.rotation.z=s*.06;
-  P.position.y=Math.abs(Math.cos(t*4))*.06;P.rotation.y=.6+offset+Math.sin(t*.5)*.15;
-  R.render(scene,camera);
-}
+  get(k){
+    try{
+      return JSON.parse(localStorage.getItem(k));
+    }catch(e){
+      return null;
+    }
+  },
 
-/* Fondo 3D: figuras flotantes que siguen el scroll y el cursor */
-let B,bs,bc,bm=[],bgOn=false,binit=false,mx=0;
-function initBg(){
-  bs=new THREE.Scene();bc=new THREE.PerspectiveCamera(50,1,.1,100);bc.position.z=12;
-  B=new THREE.WebGLRenderer({antialias:true,alpha:true,canvas:$('#bg')});
-  B.setPixelRatio(Math.min(devicePixelRatio,2));
-  bs.add(new THREE.AmbientLight(0xffffff,.6));
-  const l=new THREE.DirectionalLight(0x9ec5ff,1);l.position.set(4,6,8);bs.add(l);
-  const g=[new THREE.IcosahedronGeometry(1),new THREE.BoxGeometry(1.4,1.4,1.4),new THREE.TorusGeometry(.9,.3,12,32),new THREE.OctahedronGeometry(1.1)];
-  for(let i=0;i<16;i++){
-    const m=new THREE.Mesh(g[i%4],new THREE.MeshStandardMaterial({color:i%3?0x2f6bff:0x5b8cff,roughness:.35,metalness:.3,transparent:true,opacity:.4}));
-    m.position.set((Math.random()-.5)*14,-Math.random()*28+3,(Math.random()-.5)*8-2);
-    m.scale.setScalar(.5+Math.random()*.9);
-    m.userData={sx:(Math.random()-.5)*.02,sy:(Math.random()-.5)*.02};
-    bs.add(m);bm.push(m);
+  set(k,v){
+    try{
+      localStorage.setItem(k,JSON.stringify(v));
+    }catch(e){}
+  },
+
+  del(k){
+    try{
+      localStorage.removeItem(k);
+    }catch(e){}
   }
-  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5},{passive:true});
-  addEventListener('resize',bsize);
-}
-function bsize(){if(!B)return;B.setSize(innerWidth,innerHeight,false);bc.aspect=innerWidth/innerHeight;bc.updateProjectionMatrix()}
-function bgLoop(){
-  requestAnimationFrame(bgLoop);if(!bgOn||!B)return;
-  if(!still)bm.forEach(m=>{m.rotation.x+=m.userData.sx;m.rotation.y+=m.userData.sy});
-  bc.position.y=-scrollY*.0084;
-  bc.position.x+=(mx*2-bc.position.x)*.05;
-  B.render(bs,bc);
+
+};
+
+
+/* =========================
+   USUARIOS
+========================= */
+
+let users=Object.assign(
+  Object.create(null),
+  store.get('lmweb_users')||{}
+);
+
+
+async function hash(s){
+
+  try{
+
+    const b=await crypto.subtle.digest(
+      'SHA-256',
+      new TextEncoder().encode(s)
+    );
+
+    return [...new Uint8Array(b)]
+      .map(x=>x.toString(16).padStart(2,'0'))
+      .join('');
+
+  }catch(e){
+
+    return s;
+
+  }
+
 }
 
-/* Imágenes y tarjetas que se inclinan al pasar el cursor o el dedo */
-if(!still)document.querySelectorAll('.tilt,.d3').forEach(el=>{
-  const k=el.classList.contains('tilt')?10:5;
-  el.addEventListener('pointermove',e=>{
-    const r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    el.style.transform='perspective(900px) rotateY('+(x*k)+'deg) rotateX('+(-y*k)+'deg) scale(1.02)';
+
+/* =========================
+   PANTALLAS
+========================= */
+
+function show(id){
+
+  document
+    .querySelectorAll('.screen')
+    .forEach(s=>{
+      s.classList.toggle('on',s.id===id);
+    });
+
+  scrollTo(0,0);
+
+  running=id==='auth';
+
+  bgOn=id==='site';
+
+  if(running){
+
+    if(!inited){
+
+      inited=true;
+
+      try{
+        init();
+        loop();
+      }catch(e){
+
+        R=null;
+        document.querySelector('#stage').style.display='none';
+
+      }
+
+    }
+
+    size();
+
+  }
+
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+function tab(reg){
+
+  document
+    .querySelector('#tabReg')
+    .setAttribute('aria-selected',reg);
+
+  document
+    .querySelector('#tabLog')
+    .setAttribute('aria-selected',!reg);
+
+  document.querySelector('#fReg').hidden=!reg;
+  document.querySelector('#fLog').hidden=reg;
+
+}
+
+document.querySelector('#tabReg').onclick=()=>tab(true);
+document.querySelector('#tabLog').onclick=()=>tab(false);
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function enter(email){
+
+  store.set('lmweb_session',email);
+
+  document.querySelector('#who').textContent=
+    users[email].name;
+
+  show('site');
+
+}
+
+
+document.querySelector('#fReg').onsubmit=async e=>{
+
+  e.preventDefault();
+
+  const email=
+    document.querySelector('#re')
+      .value
+      .trim()
+      .toLowerCase();
+
+  if(users[email]){
+
+    document.querySelector('#eReg').textContent=
+      'Ese correo ya tiene una sesión. Tocá "Iniciar sesión".';
+
+    return;
+
+  }
+
+  users[email]={
+
+    name:document.querySelector('#rn').value.trim(),
+
+    pass:await hash(
+      document.querySelector('#rp').value
+    )
+
+  };
+
+  store.set('lmweb_users',users);
+
+  document.querySelector('#eReg').textContent='';
+
+  enter(email);
+
+};
+
+
+document.querySelector('#fLog').onsubmit=async e=>{
+
+  e.preventDefault();
+
+  const email=
+    document.querySelector('#le')
+      .value
+      .trim()
+      .toLowerCase();
+
+  const u=users[email];
+
+  if(
+    !u ||
+    u.pass!==await hash(
+      document.querySelector('#lp').value
+    )
+  ){
+
+    document.querySelector('#eLog').textContent=
+      'Correo o contraseña incorrectos.';
+
+    return;
+
+  }
+
+  document.querySelector('#eLog').textContent='';
+
+  enter(email);
+
+};
+
+
+document.querySelector('#out').onclick=()=>{
+
+  store.del('lmweb_session');
+
+  show('auth');
+
+};
+
+
+/* =========================
+   PERSONAJE 3D
+========================= */
+
+let inited=false;
+let running=false;
+let R,scene,camera,P;
+let legL,legR,armL,armR,bag;
+let offset=0;
+
+const still=
+  matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const clock=new THREE.Clock();
+
+
+function init(){
+
+  const st=document.querySelector('#stage');
+
+  scene=new THREE.Scene();
+
+  scene.background=
+    new THREE.Color(0x3158d8);
+
+  camera=new THREE.PerspectiveCamera(
+    40,
+    1,
+    .1,
+    100
+  );
+
+  R=new THREE.WebGLRenderer({
+    antialias:true
   });
-  ['pointerleave','pointerup','pointercancel'].forEach(t=>el.addEventListener(t,()=>{el.style.transform=''}));
-});
-const saved=store.get('fmw_session');
-if(saved&&users[saved]){$('#who').textContent=users[saved].name;show('site')}else show('auth');
+
+  R.setPixelRatio(
+    Math.min(devicePixelRatio,2)
+  );
+
+  st.appendChild(R.domElement);
+
+  scene.add(
+    new THREE.AmbientLight(
+      0xffffff,
+      .75
+    )
+  );
+
+  const sun=
+    new THREE.DirectionalLight(
+      0xffffff,
+      .9
+    );
+
+  sun.position.set(3,5,4);
+
+  scene.add(sun);
+
+
+  const mat=c=>
+    new THREE.MeshStandardMaterial({
+      color:c,
+      roughness:.7
+    });
+
+
+  const box=(
+    w,h,d,c,
+    x=0,y=0,z=0
+  )=>{
+
+    const m=
+      new THREE.Mesh(
+        new THREE.BoxGeometry(w,h,d),
+        mat(c)
+      );
+
+    m.position.set(x,y,z);
+
+    return m;
+
+  };
+
+
+  const ball=(
+    r,c,
+    x=0,y=0,z=0
+  )=>{
+
+    const m=
+      new THREE.Mesh(
+        new THREE.SphereGeometry(r,24,16),
+        mat(c)
+      );
+
+    m.position.set(x,y,z);
+
+    return m;
+
+  };
+
+
+  P=new THREE.Group();
+
+  scene.add(P);
+
+  const SKIN=0xf0c8a0;
+
+
+  const shadow=
+    new THREE.Mesh(
+      new THREE.CircleGeometry(1.1,32),
+      new THREE.MeshBasicMaterial({
+        color:0x1a2f80
+      })
+    );
+
+  shadow.rotation.x=-Math.PI/2;
+  shadow.position.y=.01;
+
+  scene.add(shadow);
+
+
+  P.add(
+    box(.8,1,.45,0xb8b0a8,0,1.6,0)
+  );
+
+  P.add(
+    box(.5,.12,.3,0xffffff,0,2.12,.02)
+  );
+
+  P.add(
+    ball(.32,SKIN,0,2.55,0)
+  );
+
+
+  const hair=
+    ball(.35,0xe8a83c,0,2.66,-.04);
+
+  hair.scale.set(1,.75,1);
+
+  P.add(hair);
+
+
+  P.add(
+    ball(.05,0x222222,-.11,2.55,.3)
+  );
+
+  P.add(
+    ball(.05,0x222222,.11,2.55,.3)
+  );
+
+
+  const leg=x=>{
+
+    const g=new THREE.Group();
+
+    g.position.set(x,1.1,0);
+
+    g.add(
+      box(.3,1,.3,0x222222,0,-.5,0)
+    );
+
+    g.add(
+      box(.32,.15,.5,0xffffff,0,-1.02,.08)
+    );
+
+    P.add(g);
+
+    return g;
+
+  };
+
+
+  legL=leg(-.2);
+  legR=leg(.2);
+
+
+  const arm=x=>{
+
+    const g=new THREE.Group();
+
+    g.position.set(x,2.05,0);
+
+    g.add(
+      box(.22,.9,.22,0xb8b0a8,0,-.45,0)
+    );
+
+    g.add(
+      ball(.13,SKIN,0,-.98,0)
+    );
+
+    P.add(g);
+
+    return g;
+
+  };
+
+
+  armL=arm(-.55);
+  armR=arm(.55);
+
+
+  bag=new THREE.Group();
+
+  bag.position.set(0,-1.28,0);
+
+  bag.add(
+    box(.7,.5,.18,0x8b4a22)
+  );
+
+  bag.add(
+    box(.2,.12,.2,0x5e2f12,0,.31,0)
+  );
+
+  bag.add(
+    box(.08,.08,.2,0xd9a441,0,.05,0)
+  );
+
+  armR.add(bag);
+
+  P.rotation.y=.6;
+
+
+  let drag=false;
+  let lx=0;
+
+  const cv=R.domElement;
+
+  cv.addEventListener(
+    'pointerdown',
+    e=>{
+      drag=true;
+      lx=e.clientX;
+      cv.setPointerCapture(e.pointerId);
+    }
+  );
+
+  cv.addEventListener(
+    'pointermove',
+    e=>{
+      if(drag){
+
+        offset+=
+          (e.clientX-lx)*.01;
+
+        lx=e.clientX;
+
+      }
+    }
+  );
+
+  cv.addEventListener(
+    'pointerup',
+    ()=>drag=false
+  );
+
+  cv.addEventListener(
+    'pointercancel',
+    ()=>drag=false
+  );
+
+  addEventListener('resize',size);
+
+}
+
+
+function size(){
+
+  if(!R)return;
+
+  const st=
+    document.querySelector('#stage');
+
+  const w=st.clientWidth;
+  const h=st.clientHeight;
+
+  if(!w||!h)return;
+
+  R.setSize(w,h);
+
+  camera.aspect=w/h;
+
+  camera.position.set(
+    0,
+    1.6,
+    w/h<.8?11:8
+  );
+
+  camera.lookAt(
+    0,
+    1.4,
+    0
+  );
+
+  camera.updateProjectionMatrix();
+
+}
+
+
+function loop(){
+
+  requestAnimationFrame(loop);
+
+  if(!running)return;
+
+  const t=
+    still
+    ?0
+    :clock.getElapsedTime();
+
+  const s=Math.sin(t*4);
+
+  legL.rotation.x=s*.6;
+  legR.rotation.x=-s*.6;
+
+  armL.rotation.x=-s*.5;
+  armR.rotation.x=s*.12;
+
+  bag.rotation.z=s*.06;
+
+  P.position.y=
+    Math.abs(Math.cos(t*4))*.06;
+
+  P.rotation.y=
+    .6+
+    offset+
+    Math.sin(t*.5)*.15;
+
+  R.render(scene,camera);
+
+}
+
+
+/* =========================
+   EFECTOS DE TARJETAS
+========================= */
+
+if(!still){
+
+  document
+    .querySelectorAll('.tilt,.service,.benefit')
+    .forEach(el=>{
+
+      el.addEventListener(
+        'pointermove',
+        e=>{
+
+          const r=
+            el.getBoundingClientRect();
+
+          const x=
+            (e.clientX-r.left)/
+            r.width-.5;
+
+          const y=
+            (e.clientY-r.top)/
+            r.height-.5;
+
+          if(el.classList.contains('tilt')){
+
+            el.style.transform=
+              'perspective(900px) '+
+              'rotateY('+(x*8)+'deg) '+
+              'rotateX('+(-y*8)+'deg) '+
+              'scale(1.02)';
+
+          }
+
+        }
+      );
+
+      el.addEventListener(
+        'pointerleave',
+        ()=>{
+          el.style.transform='';
+        }
+      );
+
+  });
+
+}
+
+
+/* =========================
+   SESIÓN EXISTENTE
+========================= */
+
+const saved=
+  store.get('lmweb_session');
+
+if(
+  saved &&
+  users[saved]
+){
+
+  document.querySelector('#who').textContent=
+    users[saved].name;
+
+  show('site');
+
+}else{
+
+  show('auth');
+
+}
+
 </script>
+
 </body>
 </html>
