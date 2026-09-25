@@ -60,6 +60,153 @@ body::after{
   z-index:-1;
 }
 
+/* ===== RAYOS CON MOVIMIENTO LIBRE ===== */
+#rays{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+.crack{
+  position:absolute;
+  background:#000;
+  box-shadow:
+    0 0 4px 2px #ff0000,
+    0 0 14px 5px rgba(255,0,0,.75),
+    0 0 28px 10px rgba(180,0,0,.45);
+  transform-origin:center;
+  opacity:0;
+  will-change: transform, opacity;
+}
+.crack:nth-child(1){ width:4px; height:60vh; animation: move1 7s ease-in-out infinite; }
+.crack:nth-child(2){ width:3px; height:50vh; animation: move2 8s ease-in-out infinite; }
+.crack:nth-child(3){ width:5px; height:70vh; animation: move3 6.5s ease-in-out infinite; }
+.crack:nth-child(4){ width:3px; height:45vh; animation: move4 9s ease-in-out infinite; }
+.crack:nth-child(5){ width:4px; height:55vh; animation: move5 7.5s ease-in-out infinite; }
+.crack:nth-child(6){ width:3px; height:40vh; animation: move6 8.5s ease-in-out infinite; }
+.crack:nth-child(7){ width:4px; height:48vh; animation: move7 6.8s ease-in-out infinite; }
+.crack:nth-child(8){ width:2px; height:35vh; animation: move8 9.5s ease-in-out infinite; }
+.crack:nth-child(9){ width:3px; height:42vh; animation: move9 7.2s ease-in-out infinite; }
+.crack:nth-child(10){ width:2px; height:30vh; animation: move10 8.2s ease-in-out infinite; }
+.crack:nth-child(11){ width:2px; height:25vh; animation: move11 10s ease-in-out infinite; }
+.crack:nth-child(12){ width:3px; height:38vh; animation: move12 6.2s ease-in-out infinite; }
+.crack:nth-child(13){ width:2px; height:28vh; animation: move13 9.2s ease-in-out infinite; }
+.crack:nth-child(14){ width:3px; height:33vh; animation: move14 7.8s ease-in-out infinite; }
+.crack:nth-child(15){ width:2px; height:22vh; animation: move15 8.8s ease-in-out infinite; }
+
+@keyframes move1{
+  0%{ opacity:0; top:10%; left:5%; transform:rotate(-35deg) scale(0.6); }
+  20%{ opacity:0.95; top:5%; left:15%; transform:rotate(-20deg) scale(1.1); }
+  50%{ opacity:0.7; top:15%; left:25%; transform:rotate(-40deg) scale(0.9); }
+  80%{ opacity:0.9; top:8%; left:10%; transform:rotate(-15deg) scale(1.05); }
+  100%{ opacity:0; top:20%; left:0%; transform:rotate(-50deg) scale(0.5); }
+}
+@keyframes move2{
+  0%{ opacity:0; top:20%; left:80%; transform:rotate(25deg) scale(0.7); }
+  25%{ opacity:0.9; top:10%; left:70%; transform:rotate(40deg) scale(1.15); }
+  55%{ opacity:0.6; top:25%; left:85%; transform:rotate(15deg) scale(0.85); }
+  80%{ opacity:0.95; top:5%; left:75%; transform:rotate(35deg) scale(1.05); }
+  100%{ opacity:0; top:30%; left:90%; transform:rotate(10deg) scale(0.6); }
+}
+@keyframes move3{
+  0%{ opacity:0; top:0%; left:45%; transform:rotate(-5deg) scale(0.8); }
+  30%{ opacity:1; top:-5%; left:50%; transform:rotate(10deg) scale(1.2); }
+  60%{ opacity:0.65; top:10%; left:40%; transform:rotate(-15deg) scale(0.9); }
+  100%{ opacity:0; top:20%; left:55%; transform:rotate(5deg) scale(0.7); }
+}
+@keyframes move4{
+  0%{ opacity:0; top:40%; left:10%; transform:rotate(50deg) scale(0.6); }
+  20%{ opacity:0.9; top:30%; left:20%; transform:rotate(30deg) scale(1.1); }
+  50%{ opacity:0.7; top:45%; left:5%; transform:rotate(60deg) scale(0.85); }
+  100%{ opacity:0; top:50%; left:15%; transform:rotate(20deg) scale(0.5); }
+}
+@keyframes move5{
+  0%{ opacity:0; top:15%; left:90%; transform:rotate(-30deg) scale(0.7); }
+  25%{ opacity:0.95; top:5%; left:80%; transform:rotate(-45deg) scale(1.15); }
+  60%{ opacity:0.6; top:25%; left:95%; transform:rotate(-15deg) scale(0.9); }
+  100%{ opacity:0; top:35%; left:85%; transform:rotate(-55deg) scale(0.6); }
+}
+@keyframes move6{
+  0%{ opacity:0; top:50%; left:5%; transform:rotate(70deg) scale(0.5); }
+  30%{ opacity:0.9; top:40%; left:15%; transform:rotate(45deg) scale(1.1); }
+  70%{ opacity:0.7; top:55%; left:0%; transform:rotate(80deg) scale(0.8); }
+  100%{ opacity:0; top:60%; left:10%; transform:rotate(30deg) scale(0.5); }
+}
+@keyframes move7{
+  0%{ opacity:0; top:60%; left:70%; transform:rotate(-55deg) scale(0.6); }
+  25%{ opacity:0.95; top:50%; left:80%; transform:rotate(-30deg) scale(1.15); }
+  60%{ opacity:0.65; top:65%; left:65%; transform:rotate(-70deg) scale(0.85); }
+  100%{ opacity:0; top:70%; left:75%; transform:rotate(-20deg) scale(0.55); }
+}
+@keyframes move8{
+  0%{ opacity:0; top:25%; left:30%; transform:rotate(15deg) scale(0.7); }
+  35%{ opacity:0.9; top:15%; left:40%; transform:rotate(-10deg) scale(1.1); }
+  70%{ opacity:0.7; top:35%; left:25%; transform:rotate(25deg) scale(0.85); }
+  100%{ opacity:0; top:40%; left:35%; transform:rotate(0deg) scale(0.6); }
+}
+@keyframes move9{
+  0%{ opacity:0; top:45%; left:60%; transform:rotate(-25deg) scale(0.6); }
+  30%{ opacity:0.95; top:35%; left:55%; transform:rotate(-40deg) scale(1.1); }
+  65%{ opacity:0.65; top:50%; left:70%; transform:rotate(-10deg) scale(0.9); }
+  100%{ opacity:0; top:55%; left:50%; transform:rotate(-55deg) scale(0.55); }
+}
+@keyframes move10{
+  0%{ opacity:0; top:70%; left:40%; transform:rotate(5deg) scale(0.5); }
+  40%{ opacity:0.9; top:60%; left:50%; transform:rotate(20deg) scale(1.05); }
+  80%{ opacity:0.7; top:75%; left:35%; transform:rotate(-10deg) scale(0.8); }
+  100%{ opacity:0; top:80%; left:45%; transform:rotate(15deg) scale(0.5); }
+}
+@keyframes move11{
+  0%{ opacity:0; top:10%; left:60%; transform:rotate(40deg) scale(0.6); }
+  30%{ opacity:0.85; top:0%; left:65%; transform:rotate(55deg) scale(1.1); }
+  70%{ opacity:0.6; top:20%; left:55%; transform:rotate(25deg) scale(0.85); }
+  100%{ opacity:0; top:25%; left:70%; transform:rotate(60deg) scale(0.5); }
+}
+@keyframes move12{
+  0%{ opacity:0; top:55%; left:25%; transform:rotate(-60deg) scale(0.55); }
+  25%{ opacity:0.9; top:45%; left:30%; transform:rotate(-40deg) scale(1.1); }
+  60%{ opacity:0.7; top:60%; left:15%; transform:rotate(-75deg) scale(0.8); }
+  100%{ opacity:0; top:65%; left:35%; transform:rotate(-30deg) scale(0.5); }
+}
+@keyframes move13{
+  0%{ opacity:0; top:30%; left:85%; transform:rotate(35deg) scale(0.6); }
+  35%{ opacity:0.9; top:20%; left:90%; transform:rotate(15deg) scale(1.1); }
+  70%{ opacity:0.65; top:40%; left:80%; transform:rotate(50deg) scale(0.85); }
+  100%{ opacity:0; top:45%; left:95%; transform:rotate(5deg) scale(0.55); }
+}
+@keyframes move14{
+  0%{ opacity:0; top:65%; left:55%; transform:rotate(-15deg) scale(0.5); }
+  30%{ opacity:0.95; top:55%; left:60%; transform:rotate(5deg) scale(1.1); }
+  65%{ opacity:0.7; top:70%; left:45%; transform:rotate(-30deg) scale(0.85); }
+  100%{ opacity:0; top:75%; left:65%; transform:rotate(10deg) scale(0.5); }
+}
+@keyframes move15{
+  0%{ opacity:0; top:5%; left:35%; transform:rotate(20deg) scale(0.6); }
+  40%{ opacity:0.9; top:-5%; left:30%; transform:rotate(35deg) scale(1.15); }
+  75%{ opacity:0.65; top:15%; left:40%; transform:rotate(5deg) scale(0.85); }
+  100%{ opacity:0; top:20%; left:25%; transform:rotate(40deg) scale(0.55); }
+}
+
+/* destello central */
+.ray-flash{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:0;
+  height:0;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,0,0,.4) 0%, transparent 70%);
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  animation: flashBurst 7s ease-in-out infinite;
+}
+@keyframes flashBurst{
+  0%, 65%, 100%{ width:0; height:0; opacity:0; }
+  70%{ width:90vw; height:90vw; opacity:.55; }
+  80%{ width:120vw; height:120vw; opacity:0; }
+}
+
 .screen{display:none;min-height:100vh}
 .screen.on{display:block}
 
@@ -130,15 +277,45 @@ button,input{font:inherit}
   max-height:min(520px, 70vw);
   border-radius:22px;
   overflow:hidden;
-  background:radial-gradient(circle at 50% 30%,#628cff,#3158d8 55%,#182c76);
+  background:#0a0a12;
   border:1px solid rgba(255,255,255,.15);
   box-shadow:0 25px 60px rgba(0,0,0,.5), 0 0 60px rgba(47,107,255,.22);
+  position:relative;
 }
-.stage canvas{
+.stage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
   display:block;
-  width:100% !important;
-  height:100% !important;
-  touch-action:none;
+}
+
+/* ===== OJOS ROJOS QUE BRILLAN CADA 1 SEGUNDO ===== */
+.eye-glow{
+  position:absolute;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#ff0000;
+  box-shadow:
+    0 0 8px 4px #ff0000,
+    0 0 18px 8px rgba(255,0,0,.9),
+    0 0 35px 15px rgba(200,0,0,.6);
+  animation: eyePulse 1s ease-in-out infinite;
+  pointer-events:none;
+  z-index:5;
+}
+.eye-glow.left{
+  top:28%;
+  left:42%;
+}
+.eye-glow.right{
+  top:28%;
+  left:54%;
+}
+@keyframes eyePulse{
+  0%, 100%{ opacity:0.3; transform:scale(0.7); filter:brightness(0.8); }
+  50%{ opacity:1; transform:scale(1.3); filter:brightness(1.8); }
 }
 
 .box{
@@ -197,7 +374,7 @@ input{
   background:#0d1426;
   color:#fff;
   outline:none;
-  font-size:16px; /* evita zoom en iOS */
+  font-size:16px;
   transition:border-color .2s;
 }
 input:focus{border-color:var(--blue2)}
@@ -238,7 +415,6 @@ nav{
 }
 .nav-links a:hover{color:#fff}
 
-/* Botón menú móvil */
 .menu-btn{
   display:none;
   background:none;
@@ -499,7 +675,6 @@ footer{
   font-size:.88rem;
 }
 
-/* Mejoras táctiles */
 @media (hover:none){
   .service:hover,
   .btn:hover{transform:none}
@@ -508,10 +683,35 @@ footer{
 </head>
 <body>
 
+<!-- ===== RAYOS CON MOVIMIENTO LIBRE ===== -->
+<div id="rays">
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="crack"></div>
+  <div class="ray-flash"></div>
+</div>
+
 <!-- ===================== AUTH ===================== -->
 <section id="auth" class="screen">
   <div class="auth">
-    <div class="stage" id="stage" aria-label="Personaje 3D"></div>
+    <div class="stage" id="stage" aria-label="Zoro">
+      <img src="zoro.jpg" alt="Roronoa Zoro">
+      <!-- Ojos que brillan rojo cada 1 segundo -->
+      <div class="eye-glow left"></div>
+      <div class="eye-glow right"></div>
+    </div>
 
     <div class="box">
       <div class="brand">LM <b>Web</b></div>
@@ -708,7 +908,6 @@ footer{
   </footer>
 </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ========================= WHATSAPP ========================= */
 const WA = '5492614701888';
@@ -734,13 +933,9 @@ async function hash(s){
 }
 
 /* ========================= PANTALLAS ========================= */
-let running = false;
-
 function show(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
   scrollTo(0,0);
-  running = id === 'auth';
-  // cerrar menú al cambiar de pantalla
   document.getElementById('navLinks')?.classList.remove('open');
 }
 
@@ -753,7 +948,6 @@ menuBtn?.addEventListener('click', () => {
   menuBtn.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
 });
 
-// Cerrar menú al hacer click en un enlace
 navLinks?.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     navLinks.classList.remove('open');
@@ -813,215 +1007,6 @@ document.getElementById('logout').onclick = () => {
   show('auth');
 };
 
-/* ========================= 3D ========================= */
-let R, scene, camera, P;
-let legL, legR, armL, armR, bag;
-let offset = 0;
-let bagOpen = 0;
-let bagTarget = 0;
-let transformProgress = 0;
-let floatingShapes = [];
-
-const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const isMobile = matchMedia('(max-width: 768px)').matches;
-const clock = new THREE.Clock();
-
-function init(){
-  const st = document.querySelector('#stage');
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x3158d8);
-
-  camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
-  R = new THREE.WebGLRenderer({ antialias: !isMobile, powerPreference: 'high-performance' });
-  R.setPixelRatio(Math.min(devicePixelRatio, isMobile ? 1.5 : 2));
-  st.appendChild(R.domElement);
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.75));
-  const sun = new THREE.DirectionalLight(0xffffff, 0.95);
-  sun.position.set(3, 5, 4);
-  scene.add(sun);
-
-  const mat = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.65, metalness: 0.08 });
-  const box = (w,h,d,c,x=0,y=0,z=0) => {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat(c));
-    m.position.set(x,y,z); return m;
-  };
-  const ball = (r,c,x=0,y=0,z=0) => {
-    const m = new THREE.Mesh(new THREE.SphereGeometry(r, isMobile ? 16 : 24, isMobile ? 12 : 16), mat(c));
-    m.position.set(x,y,z); return m;
-  };
-
-  const SKIN=0xf0c8a0, HAIR=0xe8a83c, SHIRT=0xf5f5f5, PANTS=0x1e1e1e, SHOE=0xffffff;
-  const BAG=0x8b4a22, BAGDK=0x5e2f12, GOLD=0xd9a441, SCREEN=0x1a3a5c;
-
-  P = new THREE.Group();
-  scene.add(P);
-
-  const shadow = new THREE.Mesh(
-    new THREE.CircleGeometry(1.05, 24),
-    new THREE.MeshBasicMaterial({ color:0x1a2f80, transparent:true, opacity:0.55 })
-  );
-  shadow.rotation.x = -Math.PI/2;
-  shadow.position.y = 0.01;
-  scene.add(shadow);
-
-  P.add(box(0.78,1.05,0.42,SHIRT,0,1.55,0));
-  P.add(box(0.28,0.18,0.28,SKIN,0,2.15,0));
-  P.add(ball(0.34,SKIN,0,2.52,0));
-
-  const hair = ball(0.37,HAIR,0,2.62,-0.03);
-  hair.scale.set(1.05,0.78,1.05);
-  P.add(hair);
-
-  P.add(ball(0.055,0x222222,-0.12,2.54,0.30));
-  P.add(ball(0.055,0x222222, 0.12,2.54,0.30));
-  P.add(box(0.12,0.025,0.04,0xc48a6a,0,2.42,0.31));
-
-  const createLeg = x => {
-    const g = new THREE.Group();
-    g.position.set(x,1.05,0);
-    g.add(box(0.28,0.95,0.30,PANTS,0,-0.48,0));
-    g.add(box(0.32,0.16,0.48,SHOE,0,-1.00,0.06));
-    P.add(g); return g;
-  };
-  legL = createLeg(-0.22);
-  legR = createLeg(0.22);
-
-  const createArm = x => {
-    const g = new THREE.Group();
-    g.position.set(x,2.00,0);
-    g.add(box(0.22,0.75,0.22,SHIRT,0,-0.38,0));
-    g.add(ball(0.13,SKIN,0,-0.85,0));
-    P.add(g); return g;
-  };
-  armL = createArm(-0.52);
-  armR = createArm(0.52);
-
-  // Maletín → Laptop
-  bag = new THREE.Group();
-  bag.position.set(0.05,-0.95,0.05);
-  armR.add(bag);
-
-  const bagBase = new THREE.Group();
-  bag.add(bagBase);
-  const baseBottom = box(0.72,0.08,0.48,BAG,0,0,0);
-  bagBase.add(baseBottom);
-
-  const sideL = box(0.06,0.42,0.48,BAG,-0.33,0.25,0);
-  const sideR = box(0.06,0.42,0.48,BAG, 0.33,0.25,0);
-  const sideF = box(0.66,0.42,0.06,BAG,0,0.25,0.21);
-  const sideB = box(0.66,0.42,0.06,BAG,0,0.25,-0.21);
-  bagBase.add(sideL,sideR,sideF,sideB);
-
-  const lid = new THREE.Group();
-  lid.position.set(0,0.04,-0.24);
-  bag.add(lid);
-  const lidMesh = box(0.72,0.48,0.06,BAG,0,0.24,0);
-  lid.add(lidMesh);
-  const screen = box(0.64,0.40,0.01,SCREEN,0,0.24,0.035);
-  lid.add(screen);
-
-  const keyboard = box(0.62,0.02,0.38,0x333333,0,0.06,0.02);
-  keyboard.visible = false;
-  bagBase.add(keyboard);
-
-  const handle = box(0.22,0.06,0.06,BAGDK,0,0.48,0);
-  bagBase.add(handle);
-  const clasp = box(0.10,0.06,0.08,GOLD,0,0.22,0.25);
-  bagBase.add(clasp);
-
-  bag.userData = { baseBottom, lid, lidMesh, sideL, sideR, sideF, sideB, handle, clasp, keyboard };
-  P.rotation.y = 0.6;
-
-  // Formas flotantes (menos en móvil)
-  const shapeMat = c => new THREE.MeshStandardMaterial({ color:c, roughness:0.4, metalness:0.3, transparent:true, opacity:0.85 });
-  const shapesData = isMobile ? [
-    { geo: new THREE.BoxGeometry(0.5,0.5,0.5), color:0x6d96ff, pos:[-2.4,2.0,-1.3], speed:0.6, phase:0 },
-    { geo: new THREE.SphereGeometry(0.32,12,10), color:0x52d6ff, pos:[2.3,1.6,-1.0], speed:0.8, phase:1.2 }
-  ] : [
-    { geo: new THREE.BoxGeometry(0.55,0.55,0.55), color:0x6d96ff, pos:[-2.8,2.2,-1.5], speed:0.6, phase:0 },
-    { geo: new THREE.SphereGeometry(0.38,20,14), color:0x52d6ff, pos:[2.6,1.8,-1.2], speed:0.8, phase:1.2 },
-    { geo: new THREE.TorusGeometry(0.35,0.12,12,24), color:0x9db8ff, pos:[-2.2,0.9,-0.8], speed:0.5, phase:2.1 },
-    { geo: new THREE.OctahedronGeometry(0.4), color:0x2f6bff, pos:[2.4,0.7,-1.0], speed:0.7, phase:0.7 },
-    { geo: new THREE.ConeGeometry(0.35,0.55,4), color:0x52d6ff, pos:[0,3.3,-2.0], speed:0.4, phase:3.0 }
-  ];
-
-  shapesData.forEach((s,i) => {
-    const mesh = new THREE.Mesh(s.geo, shapeMat(s.color));
-    mesh.position.set(...s.pos);
-    if(s.geo.type === 'TorusGeometry') mesh.rotation.x = Math.PI/3;
-    scene.add(mesh);
-    floatingShapes.push({ mesh, speed:s.speed, phase:s.phase });
-  });
-
-  // Controles
-  let drag = false, lx = 0;
-  const cv = R.domElement;
-  cv.addEventListener('pointerdown', e => { drag=true; lx=e.clientX; cv.setPointerCapture(e.pointerId); });
-  cv.addEventListener('pointermove', e => { if(drag){ offset += (e.clientX-lx)*0.01; lx=e.clientX; } });
-  cv.addEventListener('pointerup', () => drag=false);
-  cv.addEventListener('pointercancel', () => drag=false);
-  cv.addEventListener('click', () => { bagTarget = bagTarget===0 ? 1 : 0; });
-
-  addEventListener('resize', size);
-}
-
-function size(){
-  if(!R) return;
-  const st = document.querySelector('#stage');
-  const w = st.clientWidth, h = st.clientHeight;
-  if(!w || !h) return;
-  R.setSize(w, h, false);
-  camera.aspect = w / h;
-  camera.position.set(0, 1.6, w/h < 0.85 ? 10.5 : 8);
-  camera.lookAt(0, 1.4, 0);
-  camera.updateProjectionMatrix();
-}
-
-function loop(){
-  requestAnimationFrame(loop);
-  if(!running) return;
-
-  const t = still ? 0 : clock.getElapsedTime();
-  const s = Math.sin(t * 4);
-
-  legL.rotation.x =  s * 0.55;
-  legR.rotation.x = -s * 0.55;
-  armL.rotation.x = -s * 0.45;
-  armR.rotation.x =  s * 0.10;
-  bag.rotation.z = s * 0.05;
-
-  P.position.y = Math.abs(Math.cos(t * 4)) * 0.05;
-  P.rotation.y = 0.6 + offset + Math.sin(t * 0.5) * 0.12;
-
-  bagOpen += (bagTarget - bagOpen) * 0.08;
-  transformProgress += (bagTarget - transformProgress) * 0.06;
-
-  const ud = bag.userData;
-  ud.lid.rotation.x = -bagOpen * (Math.PI * 0.62);
-
-  const hide = 1 - transformProgress;
-  ud.sideL.scale.y = ud.sideR.scale.y = ud.sideF.scale.y = ud.sideB.scale.y = hide;
-  ud.sideL.visible = ud.sideR.visible = ud.sideF.visible = ud.sideB.visible = hide > 0.05;
-  ud.handle.visible = ud.clasp.visible = hide > 0.3;
-
-  const color = transformProgress > 0.5 ? 0x2a2a2a : 0x8b4a22;
-  ud.baseBottom.material.color.setHex(color);
-  ud.lidMesh.material.color.setHex(color);
-
-  ud.keyboard.visible = transformProgress > 0.4;
-  ud.keyboard.scale.y = Math.max(0.01, transformProgress);
-  ud.baseBottom.scale.y = 1 - transformProgress * 0.4;
-
-  floatingShapes.forEach((obj, i) => {
-    obj.mesh.position.y += Math.sin(t * obj.speed + obj.phase) * 0.003;
-    obj.mesh.rotation.x += 0.007 + i * 0.0015;
-    obj.mesh.rotation.y += 0.009 + i * 0.001;
-  });
-
-  R.render(scene, camera);
-}
-
 /* ========================= INICIO ========================= */
 const saved = store.get('lmweb_session');
 if(saved && users[saved]){
@@ -1030,10 +1015,6 @@ if(saved && users[saved]){
 } else {
   show('auth');
 }
-
-init();
-size();
-loop();
 </script>
 </body>
 </html>
