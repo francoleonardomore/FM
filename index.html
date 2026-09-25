@@ -22,24 +22,39 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
+
 body{
   margin:0;
-  background:
-    radial-gradient(circle at 15% 10%,rgba(47,107,255,.16),transparent 30%),
-    radial-gradient(circle at 85% 25%,rgba(82,214,255,.08),transparent 25%),
-    var(--bg);
   color:var(--fg);
   font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   overflow-x:hidden;
+  background:#000;
 }
-body:before{
+
+/* ===== FONDO LUFFY ===== */
+body::before{
   content:"";
-  position:fixed;inset:0;pointer-events:none;
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.55) 0%, rgba(0,0,0,.75) 100%),
+    url('luffy-fondo.jpg') center center / cover no-repeat;
+  z-index:-2;
+  pointer-events:none;
+}
+
+/* Capa de grilla sutil encima del fondo */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
   background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
   background-size:45px 45px;
-  mask-image:linear-gradient(to bottom,black,transparent 85%);
+  mask-image:linear-gradient(to bottom,black,transparent 90%);
+  z-index:-1;
 }
 
 .screen{display:none;min-height:100vh}
@@ -62,8 +77,8 @@ button,input{font:inherit}
   transition:.2s ease;
 }
 .btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(47,107,255,.42),inset 0 1px rgba(255,255,255,.2)}
-.btn.ghost{background:rgba(255,255,255,.025);border:1px solid #4268bd;color:#dce6ff;box-shadow:none}
-.btn.ghost:hover{background:rgba(47,107,255,.12)}
+.btn.ghost{background:rgba(255,255,255,.08);border:1px solid #4268bd;color:#dce6ff;box-shadow:none}
+.btn.ghost:hover{background:rgba(47,107,255,.2)}
 .btn.large{padding:16px 27px}
 
 .auth{
@@ -84,8 +99,8 @@ button,input{font:inherit}
 
 .box{
   padding:34px;border:1px solid var(--line);border-radius:24px;
-  background:rgba(11,16,32,.88);backdrop-filter:blur(15px);
-  box-shadow:0 30px 80px rgba(0,0,0,.45);
+  background:rgba(11,16,32,.82);backdrop-filter:blur(18px);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
 }
 .box h1{font-size:clamp(2rem,6vw,3rem);margin-top:18px;letter-spacing:-1px}
 .box p.sub{color:var(--mut);margin:0 0 25px}
@@ -107,7 +122,7 @@ input:focus{border-color:var(--blue2)}
 
 nav{
   position:sticky;top:0;z-index:50;
-  background:rgba(5,7,13,.85);backdrop-filter:blur(16px);
+  background:rgba(5,7,13,.75);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--line);padding:14px 0;
 }
 .nav-inner{display:flex;justify-content:space-between;align-items:center}
@@ -126,24 +141,20 @@ nav{
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .hero h1 strong{color:var(--blue2)}
-.hero p{max-width:650px;color:var(--mut);font-size:1.12rem;margin:0 0 28px}
+.hero p{max-width:650px;color:#c8d4f0;font-size:1.12rem;margin:0 0 28px}
 .row{display:flex;flex-wrap:wrap;gap:12px}
 
 .hero-card{
   min-height:390px;border-radius:28px;border:1px solid rgba(109,150,255,.25);
-  background:radial-gradient(circle at 50% 20%,rgba(47,107,255,.35),transparent 42%),linear-gradient(145deg,#0d1630,#070a13);
-  box-shadow:0 35px 80px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.08);
+  background:rgba(13,22,48,.7);backdrop-filter:blur(12px);
+  box-shadow:0 35px 80px rgba(0,0,0,.55);
   position:relative;overflow:hidden;display:grid;place-items:center;
-}
-.hero-card:after{
-  content:"";position:absolute;width:280px;height:280px;border-radius:50%;
-  border:1px solid rgba(109,150,255,.25);
-  box-shadow:0 0 0 35px rgba(109,150,255,.04),0 0 0 70px rgba(109,150,255,.025);
 }
 
 .stats{
   display:grid;grid-template-columns:repeat(3,1fr);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:rgba(11,16,32,.6);backdrop-filter:blur(10px);
 }
 .stat{padding:24px 15px;text-align:center;border-right:1px solid var(--line)}
 .stat:last-child{border-right:0}
@@ -152,14 +163,14 @@ nav{
 
 .section{padding:80px 0}
 .section h2{font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:12px}
-.section > p{color:var(--mut);max-width:600px;margin-bottom:40px}
+.section > p{color:#c8d4f0;max-width:600px;margin-bottom:40px}
 
 .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 .service{
   padding:28px;border-radius:20px;border:1px solid var(--line);
-  background:var(--panel);transition:.25s;
+  background:rgba(11,16,32,.75);backdrop-filter:blur(12px);transition:.25s;
 }
-.service:hover{transform:translateY(-6px);border-color:rgba(109,150,255,.4)}
+.service:hover{transform:translateY(-6px);border-color:rgba(109,150,255,.45)}
 .service .icon{font-size:1.6rem;margin-bottom:12px}
 .service h3{margin-bottom:8px}
 .service ul{margin:12px 0 0;padding-left:18px;color:var(--mut);font-size:.95rem}
@@ -167,15 +178,15 @@ nav{
 .benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .benefit{
   padding:26px;border-radius:18px;border:1px solid var(--line);
-  background:var(--panel2);
+  background:rgba(16,24,43,.75);backdrop-filter:blur(12px);
 }
 
 .works{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
 .work{
   border-radius:18px;overflow:hidden;border:1px solid var(--line);
-  background:var(--panel);
+  background:rgba(11,16,32,.75);backdrop-filter:blur(12px);
 }
-.work img{width:100%;height:180px;object-fit:cover;display:block;background:#1a2744}
+.work .preview{height:180px;display:grid;place-items:center;color:#9db8ff;font-weight:600}
 .work .info{padding:18px}
 .work h3{font-size:1.1rem;margin-bottom:4px}
 .work p{color:var(--mut);font-size:.9rem;margin:0}
@@ -183,7 +194,7 @@ nav{
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;counter-reset:step}
 .step{
   padding:26px;border-radius:18px;border:1px solid var(--line);
-  background:var(--panel);position:relative;
+  background:rgba(11,16,32,.75);backdrop-filter:blur(12px);position:relative;
 }
 .step:before{
   counter-increment:step;content:counter(step);
@@ -194,11 +205,11 @@ nav{
 
 .cta{
   text-align:center;padding:70px 30px;border-radius:28px;
-  background:linear-gradient(135deg,rgba(47,107,255,.2),rgba(82,214,255,.08));
+  background:rgba(47,107,255,.18);backdrop-filter:blur(14px);
   border:1px solid rgba(109,150,255,.3);margin:40px 0 80px;
 }
 .cta h2{font-size:clamp(1.8rem,4vw,2.6rem)}
-.cta p{color:var(--mut);max-width:500px;margin:0 auto 25px}
+.cta p{color:#c8d4f0;max-width:500px;margin:0 auto 25px}
 
 footer{padding:40px 0;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:.9rem}
 
@@ -217,7 +228,7 @@ footer{padding:40px 0;border-top:1px solid var(--line);text-align:center;color:v
   <div class="auth">
     <div class="stage" id="stage" aria-label="Personaje 3D"></div>
 
-    <div class="box fade">
+    <div class="box">
       <div class="brand">LM <b>Web</b></div>
       <h1>Tu negocio merece una web profesional.</h1>
       <p class="sub">Creá tu sesión para conocer mis servicios de diseño, desarrollo y soluciones web.</p>
@@ -360,11 +371,11 @@ footer{padding:40px 0;border-top:1px solid var(--line);text-align:center;color:v
       <p>Algunos ejemplos de páginas y soluciones web desarrolladas para negocios.</p>
       <div class="works">
         <div class="work">
-          <div style="height:180px;background:linear-gradient(135deg,#1a2744,#2f6bff);display:grid;place-items:center;color:#9db8ff">Página principal</div>
+          <div class="preview" style="background:linear-gradient(135deg,#1a2744,#2f6bff)">Página principal</div>
           <div class="info"><h3>Página principal — Mordisco</h3><p>Sitio institucional moderno</p></div>
         </div>
         <div class="work">
-          <div style="height:180px;background:linear-gradient(135deg,#0d1630,#52d6ff);display:grid;place-items:center;color:#9db8ff">Sistema de pedidos</div>
+          <div class="preview" style="background:linear-gradient(135deg,#0d1630,#52d6ff)">Sistema de pedidos</div>
           <div class="info"><h3>Sistema de pedidos — Mordisco</h3><p>Formularios + WhatsApp</p></div>
         </div>
       </div>
@@ -403,26 +414,20 @@ footer{padding:40px 0;border-top:1px solid var(--line);text-align:center;color:v
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* =========================
-   WHATSAPP
-========================= */
+/* ========================= WHATSAPP ========================= */
 const WA = '5492614701888';
 const waMsg = encodeURIComponent('Hola, vi la página de LM Web y quiero consultar por una página web para mi negocio.');
 document.querySelector('#wa').href = 'https://wa.me/' + WA + '?text=' + waMsg;
 document.querySelector('#wa2').href = 'https://wa.me/' + WA + '?text=' + waMsg;
 
-/* =========================
-   STORAGE
-========================= */
+/* ========================= STORAGE ========================= */
 const store = {
   get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
   set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} },
   del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
 
-/* =========================
-   USUARIOS
-========================= */
+/* ========================= USUARIOS ========================= */
 let users = Object.assign(Object.create(null), store.get('lmweb_users') || {});
 
 async function hash(s){
@@ -432,22 +437,16 @@ async function hash(s){
   }catch(e){ return s; }
 }
 
-/* =========================
-   PANTALLAS
-========================= */
+/* ========================= PANTALLAS ========================= */
 let running = false;
-let bgOn = false;
 
 function show(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
   scrollTo(0,0);
   running = id === 'auth';
-  bgOn = id === 'site';
 }
 
-/* =========================
-   AUTH LOGIC
-========================= */
+/* ========================= AUTH ========================= */
 const tabReg = document.getElementById('tabReg');
 const tabLog = document.getElementById('tabLog');
 const fReg = document.getElementById('fReg');
@@ -473,7 +472,6 @@ fReg.onsubmit = async e => {
   const pass = rp.value;
   const err = document.getElementById('eReg');
   err.textContent = '';
-
   if(users[email]){ err.textContent = 'Ese correo ya está registrado.'; return; }
   users[email] = { name, pass: await hash(pass) };
   store.set('lmweb_users', users);
@@ -488,7 +486,6 @@ fLog.onsubmit = async e => {
   const pass = lp.value;
   const err = document.getElementById('eLog');
   err.textContent = '';
-
   const u = users[email];
   if(!u || u.pass !== await hash(pass)){ err.textContent = 'Correo o contraseña incorrectos.'; return; }
   store.set('lmweb_session', email);
@@ -501,9 +498,7 @@ document.getElementById('logout').onclick = () => {
   show('auth');
 };
 
-/* =========================
-   3D PERSONAJE + FORMAS
-========================= */
+/* ========================= 3D ========================= */
 let R, scene, camera, P;
 let legL, legR, armL, armR, bag;
 let offset = 0;
@@ -546,7 +541,6 @@ function init(){
   P = new THREE.Group();
   scene.add(P);
 
-  // Sombra
   const shadow = new THREE.Mesh(
     new THREE.CircleGeometry(1.05,32),
     new THREE.MeshBasicMaterial({ color:0x1a2f80, transparent:true, opacity:0.55 })
@@ -555,7 +549,6 @@ function init(){
   shadow.position.y = 0.01;
   scene.add(shadow);
 
-  // Cuerpo
   P.add(box(0.78,1.05,0.42,SHIRT,0,1.55,0));
   P.add(box(0.28,0.18,0.28,SKIN,0,2.15,0));
   P.add(ball(0.34,SKIN,0,2.52,0));
@@ -568,7 +561,6 @@ function init(){
   P.add(ball(0.055,0x222222, 0.12,2.54,0.30));
   P.add(box(0.12,0.025,0.04,0xc48a6a,0,2.42,0.31));
 
-  // Piernas
   const createLeg = x => {
     const g = new THREE.Group();
     g.position.set(x,1.05,0);
@@ -579,7 +571,6 @@ function init(){
   legL = createLeg(-0.22);
   legR = createLeg(0.22);
 
-  // Brazos
   const createArm = x => {
     const g = new THREE.Group();
     g.position.set(x,2.00,0);
@@ -597,7 +588,6 @@ function init(){
 
   const bagBase = new THREE.Group();
   bag.add(bagBase);
-
   const baseBottom = box(0.72,0.08,0.48,BAG,0,0,0);
   bagBase.add(baseBottom);
 
@@ -610,10 +600,8 @@ function init(){
   const lid = new THREE.Group();
   lid.position.set(0,0.04,-0.24);
   bag.add(lid);
-
   const lidMesh = box(0.72,0.48,0.06,BAG,0,0.24,0);
   lid.add(lidMesh);
-
   const screen = box(0.64,0.40,0.01,SCREEN,0,0.24,0.035);
   lid.add(screen);
 
@@ -627,60 +615,35 @@ function init(){
   bagBase.add(clasp);
 
   bag.userData = { baseBottom, lid, lidMesh, sideL, sideR, sideF, sideB, handle, clasp, keyboard };
-
   P.rotation.y = 0.6;
 
-  /* ---- FORMAS 3D FLOTANTES ---- */
-  const shapeMat = (c) => new THREE.MeshStandardMaterial({
-    color: c, roughness: 0.4, metalness: 0.3, transparent: true, opacity: 0.85
+  // Formas 3D flotantes
+  const shapeMat = c => new THREE.MeshStandardMaterial({ color:c, roughness:0.4, metalness:0.3, transparent:true, opacity:0.85 });
+
+  const shapes = [
+    { geo: new THREE.BoxGeometry(0.55,0.55,0.55), color:0x6d96ff, pos:[-2.8,2.2,-1.5], speed:0.6, phase:0 },
+    { geo: new THREE.SphereGeometry(0.38,24,16), color:0x52d6ff, pos:[2.6,1.8,-1.2], speed:0.8, phase:1.2 },
+    { geo: new THREE.TorusGeometry(0.35,0.12,16,32), color:0x9db8ff, pos:[-2.2,0.9,-0.8], speed:0.5, phase:2.1 },
+    { geo: new THREE.OctahedronGeometry(0.4), color:0x2f6bff, pos:[2.4,0.7,-1.0], speed:0.7, phase:0.7 },
+    { geo: new THREE.ConeGeometry(0.35,0.55,4), color:0x52d6ff, pos:[0,3.3,-2.0], speed:0.4, phase:3.0 }
+  ];
+
+  shapes.forEach((s,i) => {
+    const mesh = new THREE.Mesh(s.geo, shapeMat(s.color));
+    mesh.position.set(...s.pos);
+    if(i===2) mesh.rotation.x = Math.PI/3;
+    scene.add(mesh);
+    floatingShapes.push({ mesh, speed:s.speed, phase:s.phase });
   });
 
-  // Cubo
-  const cube = new THREE.Mesh(new THREE.BoxGeometry(0.55,0.55,0.55), shapeMat(0x6d96ff));
-  cube.position.set(-2.8, 2.2, -1.5);
-  scene.add(cube);
-  floatingShapes.push({ mesh: cube, speed: 0.6, amp: 0.25, phase: 0 });
-
-  // Esfera
-  const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.38,24,16), shapeMat(0x52d6ff));
-  sphere.position.set(2.6, 1.8, -1.2);
-  scene.add(sphere);
-  floatingShapes.push({ mesh: sphere, speed: 0.8, amp: 0.3, phase: 1.2 });
-
-  // Toroide (dona)
-  const torus = new THREE.Mesh(new THREE.TorusGeometry(0.35,0.12,16,32), shapeMat(0x9db8ff));
-  torus.position.set(-2.2, 0.9, -0.8);
-  torus.rotation.x = Math.PI / 3;
-  scene.add(torus);
-  floatingShapes.push({ mesh: torus, speed: 0.5, amp: 0.2, phase: 2.1 });
-
-  // Octaedro
-  const octa = new THREE.Mesh(new THREE.OctahedronGeometry(0.4), shapeMat(0x2f6bff));
-  octa.position.set(2.4, 0.7, -1.0);
-  scene.add(octa);
-  floatingShapes.push({ mesh: octa, speed: 0.7, amp: 0.28, phase: 0.7 });
-
-  // Pirámide
-  const pyramid = new THREE.Mesh(new THREE.ConeGeometry(0.35,0.55,4), shapeMat(0x52d6ff));
-  pyramid.position.set(0, 3.3, -2.0);
-  scene.add(pyramid);
-  floatingShapes.push({ mesh: pyramid, speed: 0.4, amp: 0.22, phase: 3.0 });
-
-  // Interacción
+  // Controles
   let drag = false, lx = 0;
   const cv = R.domElement;
-
-  cv.addEventListener('pointerdown', e => {
-    drag = true; lx = e.clientX;
-    cv.setPointerCapture(e.pointerId);
-  });
-  cv.addEventListener('pointermove', e => {
-    if(drag){ offset += (e.clientX - lx) * 0.01; lx = e.clientX; }
-  });
-  cv.addEventListener('pointerup', () => drag = false);
-  cv.addEventListener('pointercancel', () => drag = false);
-
-  cv.addEventListener('click', () => { bagTarget = bagTarget === 0 ? 1 : 0; });
+  cv.addEventListener('pointerdown', e => { drag=true; lx=e.clientX; cv.setPointerCapture(e.pointerId); });
+  cv.addEventListener('pointermove', e => { if(drag){ offset += (e.clientX-lx)*0.01; lx=e.clientX; } });
+  cv.addEventListener('pointerup', () => drag=false);
+  cv.addEventListener('pointercancel', () => drag=false);
+  cv.addEventListener('click', () => { bagTarget = bagTarget===0 ? 1 : 0; });
 
   addEventListener('resize', size);
 }
@@ -689,11 +652,11 @@ function size(){
   if(!R) return;
   const st = document.querySelector('#stage');
   const w = st.clientWidth, h = st.clientHeight;
-  if(!w || !h) return;
+  if(!w||!h) return;
   R.setSize(w,h);
   camera.aspect = w/h;
-  camera.position.set(0, 1.6, w/h < 0.8 ? 11 : 8);
-  camera.lookAt(0, 1.4, 0);
+  camera.position.set(0,1.6, w/h<0.8 ? 11 : 8);
+  camera.lookAt(0,1.4,0);
   camera.updateProjectionMatrix();
 }
 
@@ -702,24 +665,22 @@ function loop(){
   if(!running) return;
 
   const t = still ? 0 : clock.getElapsedTime();
-  const s = Math.sin(t * 4);
+  const s = Math.sin(t*4);
 
-  // Caminata
-  legL.rotation.x =  s * 0.55;
-  legR.rotation.x = -s * 0.55;
-  armL.rotation.x = -s * 0.45;
-  armR.rotation.x =  s * 0.10;
-  bag.rotation.z = s * 0.05;
+  legL.rotation.x =  s*0.55;
+  legR.rotation.x = -s*0.55;
+  armL.rotation.x = -s*0.45;
+  armR.rotation.x =  s*0.10;
+  bag.rotation.z = s*0.05;
 
-  P.position.y = Math.abs(Math.cos(t * 4)) * 0.05;
-  P.rotation.y = 0.6 + offset + Math.sin(t * 0.5) * 0.12;
+  P.position.y = Math.abs(Math.cos(t*4))*0.05;
+  P.rotation.y = 0.6 + offset + Math.sin(t*0.5)*0.12;
 
-  // Apertura laptop
-  bagOpen += (bagTarget - bagOpen) * 0.08;
-  transformProgress += (bagTarget - transformProgress) * 0.06;
+  bagOpen += (bagTarget - bagOpen)*0.08;
+  transformProgress += (bagTarget - transformProgress)*0.06;
 
   const ud = bag.userData;
-  ud.lid.rotation.x = -bagOpen * (Math.PI * 0.62);
+  ud.lid.rotation.x = -bagOpen * (Math.PI*0.62);
 
   const hide = 1 - transformProgress;
   ud.sideL.scale.y = ud.sideR.scale.y = ud.sideF.scale.y = ud.sideB.scale.y = hide;
@@ -732,21 +693,18 @@ function loop(){
 
   ud.keyboard.visible = transformProgress > 0.4;
   ud.keyboard.scale.y = Math.max(0.01, transformProgress);
-  ud.baseBottom.scale.y = 1 - transformProgress * 0.4;
+  ud.baseBottom.scale.y = 1 - transformProgress*0.4;
 
-  // Animación de las formas 3D flotantes
-  floatingShapes.forEach((obj, i) => {
-    obj.mesh.position.y += Math.sin(t * obj.speed + obj.phase) * 0.003;
-    obj.mesh.rotation.x += 0.008 + i * 0.002;
-    obj.mesh.rotation.y += 0.01 + i * 0.0015;
+  floatingShapes.forEach((obj,i) => {
+    obj.mesh.position.y += Math.sin(t*obj.speed + obj.phase)*0.003;
+    obj.mesh.rotation.x += 0.008 + i*0.002;
+    obj.mesh.rotation.y += 0.01 + i*0.0015;
   });
 
   R.render(scene, camera);
 }
 
-/* =========================
-   INICIO
-========================= */
+/* ========================= INICIO ========================= */
 const saved = store.get('lmweb_session');
 if(saved && users[saved]){
   document.getElementById('who').textContent = users[saved].name;
