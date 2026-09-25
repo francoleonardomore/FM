@@ -91,7 +91,6 @@ body::after{
 .wave-ray:nth-child(9){ animation: waveAppear9 6s ease-in-out infinite; }
 .wave-ray:nth-child(10){ animation: waveAppear10 5s ease-in-out infinite; }
 
-/* Cada rayo aparece, brilla y desaparece completamente */
 @keyframes waveAppear1{
   0%, 15%{ opacity:0; transform:translate(0,0) scale(0.5) rotate(-10deg); }
   25%{ opacity:1; transform:translate(20px,-30px) scale(1.15) rotate(5deg); }
@@ -153,7 +152,6 @@ body::after{
   60%, 100%{ opacity:0; transform:translate(-15px,25px) scale(0.4) rotate(0deg); }
 }
 
-/* destello */
 .ray-flash{
   position:absolute;
   top:50%;
@@ -250,7 +248,6 @@ button,input{font:inherit}
   z-index:2;
 }
 
-/* Imagen de Zoro con movimiento */
 .stage img{
   width:100%;
   height:100%;
@@ -268,7 +265,6 @@ button,input{font:inherit}
   75%{ transform:translateY(-14px) rotate(1.2deg) scale(1.025); }
 }
 
-/* Ojos rojos que brillan cada 1 segundo */
 .eye-glow{
   position:absolute;
   width:16px;
@@ -290,14 +286,15 @@ button,input{font:inherit}
   50%{ opacity:1; transform:scale(1.35); filter:brightness(2); }
 }
 
+/* ===== CAJA TRANSPARENTE ===== */
 .box{
   padding:28px 24px;
-  border:1px solid var(--line);
+  border:1px solid rgba(255,255,255,.12);
   border-radius:22px;
-  background:rgba(11,16,32,.86);
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  box-shadow:0 25px 60px rgba(0,0,0,.45);
+  background:rgba(11,16,32,.42);          /* más transparente */
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
   position:relative;
   z-index:3;
 }
@@ -314,7 +311,7 @@ button,input{font:inherit}
 
 .tabs{
   display:flex;
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid rgba(255,255,255,.1);
   margin-bottom:16px;
 }
 .tab{
@@ -344,8 +341,8 @@ input{
   width:100%;
   padding:14px 15px;
   border-radius:11px;
-  border:1px solid var(--line);
-  background:#0d1426;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(13,20,38,.55);
   color:#fff;
   outline:none;
   font-size:16px;
@@ -657,7 +654,6 @@ footer{
 </head>
 <body>
 
-<!-- ===== RAYOS ONDULADOS QUE APARECEN Y DESAPARECEN ===== -->
 <svg id="rays-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
   <defs>
     <filter id="redGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -671,7 +667,6 @@ footer{
       </feMerge>
     </filter>
   </defs>
-
   <path class="wave-ray" d="M10,20 Q25,5 40,25 T70,15 T95,30"/>
   <path class="wave-ray" d="M5,50 Q20,35 35,55 T65,40 T90,60"/>
   <path class="wave-ray" d="M15,80 Q30,65 50,85 T80,70 T100,90"/>
@@ -686,7 +681,6 @@ footer{
 
 <div class="ray-flash"></div>
 
-<!-- ===================== AUTH ===================== -->
 <section id="auth" class="screen">
   <div class="auth">
     <div class="stage" id="stage" aria-label="Zoro">
@@ -728,14 +722,11 @@ footer{
   </div>
 </section>
 
-<!-- ===================== SITE ===================== -->
 <section id="site" class="screen">
   <nav>
     <div class="wrap nav-inner">
       <div class="brand">LM <b>Web</b></div>
-
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
-
       <div class="nav-links" id="navLinks">
         <a href="#servicios">Servicios</a>
         <a href="#porque">Beneficios</a>
@@ -891,20 +882,17 @@ footer{
 </section>
 
 <script>
-/* ========================= WHATSAPP ========================= */
 const WA = '5492614701888';
 const waMsg = encodeURIComponent('Hola, vi la página de LM Web y quiero consultar por una página web para mi negocio.');
 document.querySelector('#wa').href = 'https://wa.me/' + WA + '?text=' + waMsg;
 document.querySelector('#wa2').href = 'https://wa.me/' + WA + '?text=' + waMsg;
 
-/* ========================= STORAGE ========================= */
 const store = {
   get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
   set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} },
   del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
 
-/* ========================= USUARIOS ========================= */
 let users = Object.assign(Object.create(null), store.get('lmweb_users') || {});
 
 async function hash(s){
@@ -914,14 +902,12 @@ async function hash(s){
   }catch(e){ return s; }
 }
 
-/* ========================= PANTALLAS ========================= */
 function show(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
   scrollTo(0,0);
   document.getElementById('navLinks')?.classList.remove('open');
 }
 
-/* ========================= MENÚ MÓVIL ========================= */
 const menuBtn = document.getElementById('menuBtn');
 const navLinks = document.getElementById('navLinks');
 
@@ -937,7 +923,6 @@ navLinks?.querySelectorAll('a').forEach(a => {
   });
 });
 
-/* ========================= AUTH ========================= */
 const tabReg = document.getElementById('tabReg');
 const tabLog = document.getElementById('tabLog');
 const fReg = document.getElementById('fReg');
@@ -989,7 +974,6 @@ document.getElementById('logout').onclick = () => {
   show('auth');
 };
 
-/* ========================= INICIO ========================= */
 const saved = store.get('lmweb_session');
 if(saved && users[saved]){
   document.getElementById('who').textContent = users[saved].name;
