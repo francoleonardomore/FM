@@ -3,9 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
 <title>LM Web | Diseño y desarrollo de páginas web</title>
-
 <meta name="description" content="LM Web crea páginas web profesionales, tiendas online y soluciones digitales para negocios.">
 
 <style>
@@ -22,15 +20,8 @@
   --success:#5ee6a0;
 }
 
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:80px;
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 body{
   margin:0;
   background:
@@ -41,12 +32,9 @@ body{
   font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   overflow-x:hidden;
 }
-
 body:before{
   content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
+  position:fixed;inset:0;pointer-events:none;
   background-image:
     linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
@@ -54,1942 +42,722 @@ body:before{
   mask-image:linear-gradient(to bottom,black,transparent 85%);
 }
 
-.screen{
-  display:none;
-  min-height:100vh;
-}
+.screen{display:none;min-height:100vh}
+.screen.on{display:block}
 
-.screen.on{
-  display:block;
-}
+h1,h2,h3{line-height:1.12;margin:0 0 .55em}
+a{color:inherit}
+button,input{font:inherit}
 
-h1,h2,h3{
-  line-height:1.12;
-  margin:0 0 .55em;
-}
-
-a{
-  color:inherit;
-}
-
-button,input{
-  font:inherit;
-}
-
-.wrap{
-  width:min(1120px,calc(100% - 40px));
-  margin:auto;
-}
-
-.brand{
-  font-weight:900;
-  letter-spacing:-.5px;
-  white-space:nowrap;
-}
-
-.brand b{
-  color:var(--blue2);
-}
-
-/* BOTONES */
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+.brand{font-weight:900;letter-spacing:-.5px;white-space:nowrap}
+.brand b{color:var(--blue2)}
 
 .btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  border:0;
-  border-radius:12px;
-  padding:14px 22px;
+  display:inline-flex;justify-content:center;align-items:center;gap:8px;
+  border:0;border-radius:12px;padding:14px 22px;
   background:linear-gradient(135deg,var(--blue),#1747d4);
-  color:#fff;
-  font-weight:750;
-  cursor:pointer;
-  text-decoration:none;
-  box-shadow:
-    0 8px 25px rgba(47,107,255,.3),
-    inset 0 1px rgba(255,255,255,.2);
+  color:#fff;font-weight:750;cursor:pointer;text-decoration:none;
+  box-shadow:0 8px 25px rgba(47,107,255,.3),inset 0 1px rgba(255,255,255,.2);
   transition:.2s ease;
 }
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:
-    0 12px 32px rgba(47,107,255,.42),
-    inset 0 1px rgba(255,255,255,.2);
-}
-
-.btn.ghost{
-  background:rgba(255,255,255,.025);
-  border:1px solid #4268bd;
-  color:#dce6ff;
-  box-shadow:none;
-}
-
-.btn.ghost:hover{
-  background:rgba(47,107,255,.12);
-}
-
-.btn.large{
-  padding:16px 27px;
-}
-
-/* AUTENTICACIÓN */
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(47,107,255,.42),inset 0 1px rgba(255,255,255,.2)}
+.btn.ghost{background:rgba(255,255,255,.025);border:1px solid #4268bd;color:#dce6ff;box-shadow:none}
+.btn.ghost:hover{background:rgba(47,107,255,.12)}
+.btn.large{padding:16px 27px}
 
 .auth{
   width:min(1050px,calc(100% - 40px));
-  min-height:100vh;
-  margin:auto;
-  display:grid;
-  gap:35px;
-  align-items:center;
-  padding:30px 0;
+  min-height:100vh;margin:auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  align-items:center;padding:40px 0;
 }
+@media(max-width:900px){.auth{grid-template-columns:1fr;padding:30px 0}}
 
 .stage{
-  height:480px;
-  border-radius:25px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 30%,#628cff,#3158d8 55%,#182c76);
+  aspect-ratio:1;border-radius:25px;overflow:hidden;
+  background:radial-gradient(circle at 50% 30%,#628cff,#3158d8 55%,#182c76);
   border:1px solid rgba(255,255,255,.15);
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.55),
-    0 0 80px rgba(47,107,255,.28);
+  box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 80px rgba(47,107,255,.28);
 }
-
-.stage canvas{
-  display:block;
-  width:100%;
-  height:100%;
-  touch-action:pan-y;
-}
+.stage canvas{display:block;width:100%;height:100%;touch-action:pan-y}
 
 .box{
-  padding:34px;
-  border:1px solid var(--line);
-  border-radius:24px;
-  background:rgba(11,16,32,.88);
-  backdrop-filter:blur(15px);
+  padding:34px;border:1px solid var(--line);border-radius:24px;
+  background:rgba(11,16,32,.88);backdrop-filter:blur(15px);
   box-shadow:0 30px 80px rgba(0,0,0,.45);
 }
+.box h1{font-size:clamp(2rem,6vw,3rem);margin-top:18px;letter-spacing:-1px}
+.box p.sub{color:var(--mut);margin:0 0 25px}
 
-.box h1{
-  font-size:clamp(2rem,6vw,3rem);
-  margin-top:18px;
-  letter-spacing:-1px;
-}
-
-.box p.sub{
-  color:var(--mut);
-  margin:0 0 25px;
-}
-
-.tabs{
-  display:flex;
-  border-bottom:1px solid var(--line);
-  margin-bottom:18px;
-}
-
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:18px}
 .tab{
-  flex:1;
-  background:none;
-  border:0;
-  color:var(--mut);
-  padding:12px;
-  cursor:pointer;
-  border-bottom:3px solid transparent;
+  flex:1;background:none;border:0;color:var(--mut);padding:12px;cursor:pointer;
+  font-weight:600;border-bottom:2px solid transparent;transition:.2s;
 }
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--blue2)}
 
-.tab[aria-selected="true"]{
-  color:white;
-  border-color:var(--blue);
-}
-
-label{
-  display:block;
-  font-size:.9rem;
-  color:var(--mut);
-  margin:14px 0 6px;
-}
-
+label{display:block;font-size:.9rem;color:var(--mut);margin:14px 0 6px}
 input{
-  width:100%;
-  padding:13px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:#070b15;
-  color:#fff;
-  outline:none;
+  width:100%;padding:13px 15px;border-radius:10px;border:1px solid var(--line);
+  background:#0d1426;color:#fff;outline:none;
 }
-
-input:focus{
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(47,107,255,.12);
-}
-
-.err{
-  color:#ff8a8a;
-  min-height:1.4em;
-  margin:12px 0 0;
-  font-size:.9rem;
-}
-
-form .btn{
-  width:100%;
-  margin-top:8px;
-}
-
-@media(min-width:850px){
-  .auth{
-    grid-template-columns:1.08fr .92fr;
-  }
-
-  .stage{
-    height:620px;
-  }
-}
-
-/* HEADER */
-
-header{
-  position:sticky;
-  top:0;
-  z-index:20;
-  background:rgba(5,7,13,.82);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-header .in{
-  width:min(1120px,calc(100% - 40px));
-  min-height:72px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-}
+input:focus{border-color:var(--blue2)}
+.err{color:#ff6b6b;font-size:.9rem;min-height:20px;margin:8px 0}
 
 nav{
-  display:none;
-  gap:25px;
-  color:var(--mut);
+  position:sticky;top:0;z-index:50;
+  background:rgba(5,7,13,.85);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);padding:14px 0;
 }
-
-nav a{
-  text-decoration:none;
-  font-size:.95rem;
-  transition:.2s;
-}
-
-nav a:hover{
-  color:#fff;
-}
-
-.who{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  color:var(--mut);
-  font-size:.9rem;
-}
-
-.out{
-  background:transparent;
-  border:1px solid var(--line);
-  color:#fff;
-  border-radius:9px;
-  padding:7px 11px;
-  cursor:pointer;
-}
-
-@media(min-width:850px){
-  nav{
-    display:flex;
-  }
-}
-
-/* HERO */
+.nav-inner{display:flex;justify-content:space-between;align-items:center}
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{text-decoration:none;color:var(--mut);font-weight:600;font-size:.95rem}
+.nav-links a:hover{color:#fff}
 
 .hero{
-  position:relative;
-  display:grid;
-  gap:45px;
-  align-items:center;
-  padding:90px 0 65px;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:50px;
+  align-items:center;padding:80px 0 60px;
 }
-
-.hero-copy{
-  position:relative;
-  z-index:2;
-}
-
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 12px;
-  margin-bottom:20px;
-  border:1px solid rgba(109,150,255,.35);
-  border-radius:999px;
-  background:rgba(47,107,255,.08);
-  color:#bcd0ff;
-  font-size:.85rem;
-}
-
-.badge span{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#5ee6a0;
-  box-shadow:0 0 12px #5ee6a0;
-}
-
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding:50px 0 40px}}
 .hero h1{
-  font-size:clamp(2.8rem,8vw,5.4rem);
-  letter-spacing:-3px;
-  max-width:850px;
+  font-size:clamp(2.8rem,8vw,5.4rem);letter-spacing:-3px;max-width:850px;
   background:linear-gradient(120deg,#fff 20%,#9db8ff 70%,#52d6ff);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
 }
-
-.hero h1 strong{
-  color:var(--blue2);
-}
-
-.hero p{
-  max-width:650px;
-  color:var(--mut);
-  font-size:1.12rem;
-  margin:0 0 28px;
-}
-
-.row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
+.hero h1 strong{color:var(--blue2)}
+.hero p{max-width:650px;color:var(--mut);font-size:1.12rem;margin:0 0 28px}
+.row{display:flex;flex-wrap:wrap;gap:12px}
 
 .hero-card{
-  min-height:390px;
-  border-radius:28px;
-  border:1px solid rgba(109,150,255,.25);
-  background:
-    radial-gradient(circle at 50% 20%,rgba(47,107,255,.35),transparent 42%),
-    linear-gradient(145deg,#0d1630,#070a13);
-  box-shadow:
-    0 35px 80px rgba(0,0,0,.55),
-    inset 0 1px rgba(255,255,255,.08);
-  position:relative;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
+  min-height:390px;border-radius:28px;border:1px solid rgba(109,150,255,.25);
+  background:radial-gradient(circle at 50% 20%,rgba(47,107,255,.35),transparent 42%),linear-gradient(145deg,#0d1630,#070a13);
+  box-shadow:0 35px 80px rgba(0,0,0,.55),inset 0 1px rgba(255,255,255,.08);
+  position:relative;overflow:hidden;display:grid;place-items:center;
 }
-
 .hero-card:after{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:280px;
-  border-radius:50%;
+  content:"";position:absolute;width:280px;height:280px;border-radius:50%;
   border:1px solid rgba(109,150,255,.25);
-  box-shadow:
-    0 0 0 35px rgba(109,150,255,.04),
-    0 0 0 70px rgba(109,150,255,.025);
+  box-shadow:0 0 0 35px rgba(109,150,255,.04),0 0 0 70px rgba(109,150,255,.025);
 }
-
-.browser{
-  width:78%;
-  max-width:470px;
-  border-radius:14px;
-  overflow:hidden;
-  border:1px solid #38538c;
-  background:#090e1c;
-  box-shadow:0 25px 60px rgba(0,0,0,.65);
-  transform:perspective(900px) rotateY(-8deg) rotateX(4deg);
-  position:relative;
-  z-index:2;
-}
-
-.browser-top{
-  height:35px;
-  background:#151f35;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  padding:0 12px;
-}
-
-.browser-top i{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#7180a0;
-}
-
-.browser-body{
-  padding:18px;
-}
-
-.browser-title{
-  width:70%;
-  height:18px;
-  background:#fff;
-  border-radius:5px;
-  margin-bottom:12px;
-}
-
-.browser-line{
-  width:90%;
-  height:7px;
-  background:#32476f;
-  border-radius:5px;
-  margin:8px 0;
-}
-
-.browser-button{
-  width:90px;
-  height:28px;
-  background:var(--blue);
-  border-radius:7px;
-  margin-top:18px;
-}
-
-.browser-cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px;
-  margin-top:22px;
-}
-
-.browser-cards div{
-  height:65px;
-  border-radius:7px;
-  background:#14213e;
-  border:1px solid #263d69;
-}
-
-@media(min-width:850px){
-  .hero{
-    grid-template-columns:1.05fr .95fr;
-  }
-}
-
-/* ESTADÍSTICAS */
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
 }
+.stat{padding:24px 15px;text-align:center;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat strong{display:block;font-size:1.8rem;color:var(--cyan)}
+.stat span{color:var(--mut);font-size:.9rem}
 
-.stat{
-  padding:24px 15px;
-  text-align:center;
-  border-right:1px solid var(--line);
-}
+.section{padding:80px 0}
+.section h2{font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:12px}
+.section > p{color:var(--mut);max-width:600px;margin-bottom:40px}
 
-.stat:last-child{
-  border-right:0;
-}
-
-.stat strong{
-  display:block;
-  font-size:1.05rem;
-}
-
-.stat span{
-  color:var(--mut);
-  font-size:.86rem;
-}
-
-/* SECCIONES */
-
-.sec{
-  padding:90px 0 10px;
-}
-
-.section-head{
-  max-width:700px;
-  margin-bottom:35px;
-}
-
-.section-head h2{
-  font-size:clamp(2rem,5vw,3rem);
-  letter-spacing:-1px;
-}
-
-.lead{
-  color:var(--mut);
-  max-width:650px;
-}
-
-/* SERVICIOS */
-
-.services{
-  display:grid;
-  gap:18px;
-}
-
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
 .service{
-  padding:28px;
-  border-radius:20px;
-  border:1px solid var(--line);
-  background:linear-gradient(145deg,#0d1425,#080b14);
-  transition:.25s;
-  position:relative;
-  overflow:hidden;
+  padding:28px;border-radius:20px;border:1px solid var(--line);
+  background:var(--panel);transition:.25s;
 }
+.service:hover{transform:translateY(-6px);border-color:rgba(109,150,255,.4)}
+.service .icon{font-size:1.6rem;margin-bottom:12px}
+.service h3{margin-bottom:8px}
+.service ul{margin:12px 0 0;padding-left:18px;color:var(--mut);font-size:.95rem}
 
-.service:hover{
-  transform:translateY(-5px);
-  border-color:#315fc4;
-  box-shadow:0 20px 50px rgba(0,0,0,.35);
-}
-
-.service.featured{
-  background:
-    radial-gradient(circle at 100% 0%,rgba(47,107,255,.25),transparent 40%),
-    linear-gradient(145deg,#0f1b3b,#080c17);
-  border-color:#315fc4;
-}
-
-.icon{
-  width:52px;
-  height:52px;
-  display:grid;
-  place-items:center;
-  border-radius:14px;
-  background:rgba(47,107,255,.14);
-  border:1px solid rgba(109,150,255,.25);
-  color:#8eaeff;
-  font-size:1.4rem;
-  margin-bottom:20px;
-}
-
-.service h3{
-  font-size:1.35rem;
-}
-
-.service p{
-  color:var(--mut);
-  margin:0;
-}
-
-.service ul{
-  color:var(--mut);
-  padding-left:20px;
-}
-
-.service li{
-  margin:7px 0;
-}
-
-@media(min-width:760px){
-  .services{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-/* BENEFICIOS */
-
-.benefits{
-  display:grid;
-  gap:15px;
-}
-
+.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
 .benefit{
-  padding:22px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:rgba(11,16,32,.7);
+  padding:26px;border-radius:18px;border:1px solid var(--line);
+  background:var(--panel2);
 }
 
-.benefit strong{
-  display:block;
-  margin-bottom:5px;
+.works{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.work{
+  border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  background:var(--panel);
+}
+.work img{width:100%;height:180px;object-fit:cover;display:block;background:#1a2744}
+.work .info{padding:18px}
+.work h3{font-size:1.1rem;margin-bottom:4px}
+.work p{color:var(--mut);font-size:.9rem;margin:0}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;counter-reset:step}
+.step{
+  padding:26px;border-radius:18px;border:1px solid var(--line);
+  background:var(--panel);position:relative;
+}
+.step:before{
+  counter-increment:step;content:counter(step);
+  display:inline-flex;width:32px;height:32px;border-radius:50%;
+  background:var(--blue);color:#fff;font-weight:700;
+  align-items:center;justify-content:center;margin-bottom:12px;
 }
 
-.benefit span{
-  color:var(--mut);
-  font-size:.93rem;
+.cta{
+  text-align:center;padding:70px 30px;border-radius:28px;
+  background:linear-gradient(135deg,rgba(47,107,255,.2),rgba(82,214,255,.08));
+  border:1px solid rgba(109,150,255,.3);margin:40px 0 80px;
 }
+.cta h2{font-size:clamp(1.8rem,4vw,2.6rem)}
+.cta p{color:var(--mut);max-width:500px;margin:0 auto 25px}
 
-@media(min-width:760px){
-  .benefits{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
+footer{padding:40px 0;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:.9rem}
 
-/* TRABAJOS */
-
-.works{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-  max-width:800px;
-  margin:auto;
-}
-
-.works figure{
-  margin:0;
-}
-
-.tilt{
-  border-radius:18px;
-  overflow:hidden;
-  border:1px solid #315fc4;
-  background:#080c16;
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
-}
-
-.tilt img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-
-.works figcaption{
-  margin-top:10px;
-  text-align:center;
-  color:var(--mut);
-  font-size:.9rem;
-}
-
-/* PROCESO */
-
-.steps{
-  display:grid;
-  gap:16px;
-  padding:0;
-  margin:0;
-  list-style:none;
-  counter-reset:p;
-}
-
-.steps li{
-  counter-increment:p;
-  position:relative;
-  padding:25px 25px 25px 72px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:#0b1020;
-}
-
-.steps li:before{
-  content:counter(p);
-  position:absolute;
-  left:22px;
-  top:22px;
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:var(--blue);
-  font-weight:800;
-  box-shadow:0 0 25px rgba(47,107,255,.35);
-}
-
-.steps b{
-  display:block;
-  font-size:1.05rem;
-}
-
-.steps span{
-  color:var(--mut);
-}
-
-@media(min-width:760px){
-  .steps{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .steps li{
-    padding:25px;
-  }
-
-  .steps li:before{
-    position:relative;
-    left:auto;
-    top:auto;
-    margin-bottom:20px;
-  }
-}
-
-/* CTA */
-
-.contact{
-  margin:90px 0 70px;
-  padding:65px 25px;
-  text-align:center;
-  border-radius:25px;
-  border:1px solid rgba(109,150,255,.35);
-  background:
-    radial-gradient(circle at 50% 0%,rgba(82,214,255,.18),transparent 35%),
-    linear-gradient(135deg,#132d76,#173fae 55%,#0c246c);
-  box-shadow:0 30px 70px rgba(0,0,0,.45);
-}
-
-.contact h2{
-  font-size:clamp(2rem,5vw,3rem);
-}
-
-.contact p{
-  color:#dbe5ff;
-  margin:0 auto 25px;
-  max-width:550px;
-}
-
-.contact .btn{
-  background:#fff;
-  color:#0c2d89;
-  box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-/* FOOTER */
-
-footer{
-  border-top:1px solid var(--line);
-  padding:30px 20px;
-  text-align:center;
-  color:var(--mut);
-  font-size:.85rem;
-}
-
-/* ANIMACIONES */
-
-.fade{
-  animation:fade .7s ease both;
-}
-
-@keyframes fade{
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-@media(max-width:600px){
-  .wrap{
-    width:min(100% - 28px,1120px);
-  }
-
-  header .in{
-    width:calc(100% - 28px);
-  }
-
-  .who span{
-    display:none;
-  }
-
-  .hero{
-    padding-top:55px;
-  }
-
-  .hero h1{
-    letter-spacing:-2px;
-  }
-
-  .hero-card{
-    min-height:300px;
-  }
-
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  .stat{
-    border-right:0;
-    border-bottom:1px solid var(--line);
-  }
-
-  .stat:last-child{
-    border-bottom:0;
-  }
-
-  .works{
-    grid-template-columns:1fr;
-  }
-
-  .box{
-    padding:25px;
-  }
+@media(max-width:850px){
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:0;border-bottom:1px solid var(--line)}
+  .stat:last-child{border-bottom:0}
+  .hero-card{min-height:300px}
 }
 </style>
 </head>
-
 <body>
 
+<!-- ===================== AUTH ===================== -->
 <section id="auth" class="screen">
+  <div class="auth">
+    <div class="stage" id="stage" aria-label="Personaje 3D"></div>
 
-<div class="auth">
+    <div class="box fade">
+      <div class="brand">LM <b>Web</b></div>
+      <h1>Tu negocio merece una web profesional.</h1>
+      <p class="sub">Creá tu sesión para conocer mis servicios de diseño, desarrollo y soluciones web.</p>
 
-  <div class="stage" id="stage" aria-label="Personaje 3D"></div>
-
-  <div class="box fade">
-
-    <div class="brand">LM <b>Web</b></div>
-
-    <h1>Tu negocio merece una web profesional.</h1>
-
-    <p class="sub">
-      Creá tu sesión para conocer mis servicios de diseño,
-      desarrollo y soluciones web.
-    </p>
-
-    <div class="tabs" role="tablist">
-
-      <button
-        class="tab"
-        role="tab"
-        id="tabReg"
-        aria-selected="true">
-        Crear sesión
-      </button>
-
-      <button
-        class="tab"
-        role="tab"
-        id="tabLog"
-        aria-selected="false">
-        Iniciar sesión
-      </button>
-
-    </div>
-
-    <form id="fReg">
-
-      <label for="rn">Nombre</label>
-      <input id="rn" required autocomplete="name">
-
-      <label for="re">Correo</label>
-      <input id="re" type="email" required autocomplete="email">
-
-      <label for="rp">
-        Contraseña (mínimo 6 caracteres)
-      </label>
-
-      <input
-        id="rp"
-        type="password"
-        minlength="6"
-        required
-        autocomplete="new-password">
-
-      <p class="err" id="eReg"></p>
-
-      <button class="btn" type="submit">
-        Crear sesión
-      </button>
-
-    </form>
-
-    <form id="fLog" hidden>
-
-      <label for="le">Correo</label>
-      <input id="le" type="email" required>
-
-      <label for="lp">Contraseña</label>
-      <input id="lp" type="password" required>
-
-      <p class="err" id="eLog"></p>
-
-      <button class="btn" type="submit">
-        Entrar
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
-
-</section>
-
-
-<section id="site" class="screen">
-
-<header>
-
-<div class="in">
-
-  <div class="brand">
-    LM <b>Web</b>
-  </div>
-
-  <nav>
-    <a href="#servicios">Servicios</a>
-    <a href="#beneficios">Beneficios</a>
-    <a href="#trabajos">Trabajos</a>
-    <a href="#proceso">Proceso</a>
-    <a href="#contacto">Contacto</a>
-  </nav>
-
-  <div class="who">
-
-    <span id="who"></span>
-
-    <button class="out" id="out">
-      Cerrar sesión
-    </button>
-
-  </div>
-
-</div>
-
-</header>
-
-
-<main class="wrap">
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-<div class="hero-copy fade">
-
-  <div class="badge">
-    <span></span>
-    Desarrollo web para negocios
-  </div>
-
-  <h1>
-    Tu negocio,
-    <strong>online.</strong>
-  </h1>
-
-  <p>
-    Diseño y desarrollo páginas web modernas,
-    rápidas y adaptadas a celulares y computadoras
-    para que tu negocio tenga presencia profesional
-    en internet.
-  </p>
-
-  <div class="row">
-
-    <a class="btn large" href="#contacto">
-      Solicitar presupuesto
-    </a>
-
-    <a class="btn ghost" href="#servicios">
-      Ver servicios
-    </a>
-
-  </div>
-
-</div>
-
-
-<div class="hero-card">
-
-  <div class="browser">
-
-    <div class="browser-top">
-      <i></i>
-      <i></i>
-      <i></i>
-    </div>
-
-    <div class="browser-body">
-
-      <div class="browser-title"></div>
-
-      <div class="browser-line"></div>
-      <div class="browser-line"></div>
-
-      <div class="browser-button"></div>
-
-      <div class="browser-cards">
-        <div></div>
-        <div></div>
-        <div></div>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tabReg" aria-selected="true">Crear sesión</button>
+        <button class="tab" role="tab" id="tabLog" aria-selected="false">Iniciar sesión</button>
       </div>
 
+      <form id="fReg">
+        <label for="rn">Nombre</label>
+        <input id="rn" required autocomplete="name">
+        <label for="re">Correo</label>
+        <input id="re" type="email" required autocomplete="email">
+        <label for="rp">Contraseña (mínimo 6 caracteres)</label>
+        <input id="rp" type="password" minlength="6" required autocomplete="new-password">
+        <p class="err" id="eReg"></p>
+        <button class="btn" type="submit">Crear sesión</button>
+      </form>
+
+      <form id="fLog" hidden>
+        <label for="le">Correo</label>
+        <input id="le" type="email" required>
+        <label for="lp">Contraseña</label>
+        <input id="lp" type="password" required>
+        <p class="err" id="eLog"></p>
+        <button class="btn" type="submit">Iniciar sesión</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SITE ===================== -->
+<section id="site" class="screen">
+  <nav>
+    <div class="wrap nav-inner">
+      <div class="brand">LM <b>Web</b></div>
+      <div class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#porque">Beneficios</a>
+        <a href="#trabajos">Trabajos</a>
+        <span id="who" style="color:var(--cyan);font-weight:600"></span>
+        <button class="btn ghost" id="logout" style="padding:8px 16px">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Tu negocio,<br><strong>online.</strong></h1>
+        <p>Diseño y desarrollo páginas web modernas, rápidas y adaptadas a celulares y computadoras para que tu negocio tenga presencia profesional en internet.</p>
+        <div class="row">
+          <a class="btn large" href="#servicios">Ver servicios</a>
+          <a class="btn ghost large" id="wa" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div style="text-align:center;color:#9db8ff;font-size:.95rem;padding:20px">
+          <div style="font-size:3rem;margin-bottom:10px">◈</div>
+          Diseño personalizado<br>100% responsive<br>Listo para publicar
+        </div>
+      </div>
     </div>
 
-  </div>
-
-</div>
-
-</section>
-
-
-<!-- ESTADÍSTICAS -->
-
-<div class="stats">
-
-  <div class="stat">
-    <strong>Diseño personalizado</strong>
-    <span>Adaptado a tu negocio</span>
-  </div>
-
-  <div class="stat">
-    <strong>100% responsive</strong>
-    <span>Celular, tablet y PC</span>
-  </div>
-
-  <div class="stat">
-    <strong>Listo para publicar</strong>
-    <span>Tu web disponible online</span>
-  </div>
-
-</div>
-
-
-<!-- SERVICIOS -->
-
-<section class="sec" id="servicios">
-
-<div class="section-head">
-
-  <h2>Soluciones web</h2>
-
-  <p class="lead">
-    Creo herramientas digitales pensadas para que
-    tu negocio pueda mostrarse, recibir consultas
-    y vender por internet.
-  </p>
-
-</div>
-
-
-<div class="services">
-
-
-<div class="service featured">
-
-  <div class="icon">◈</div>
-
-  <h3>Diseño de páginas web</h3>
-
-  <p>
-    Páginas modernas y profesionales creadas
-    específicamente para tu negocio.
-  </p>
-
-  <ul>
-    <li>Diseño personalizado</li>
-    <li>Adaptación para celular</li>
-    <li>Secciones informativas</li>
-    <li>Botones de contacto</li>
-  </ul>
-
-</div>
-
-
-<div class="service">
-
-  <div class="icon">▣</div>
-
-  <h3>Tiendas online</h3>
-
-  <p>
-    Sitios preparados para mostrar productos
-    y facilitar las ventas por internet.
-  </p>
-
-  <ul>
-    <li>Catálogo de productos</li>
-    <li>Carrito de compras</li>
-    <li>Pedidos online</li>
-    <li>Opciones de contacto</li>
-  </ul>
-
-</div>
-
-
-<div class="service">
-
-  <div class="icon">⌁</div>
-
-  <h3>Pedidos y formularios online</h3>
-
-  <p>
-    Soluciones para que tus clientes puedan
-    enviar pedidos, consultas o reservas.
-  </p>
-
-  <ul>
-    <li>Formularios personalizados</li>
-    <li>Pedidos por WhatsApp</li>
-    <li>Datos del cliente</li>
-    <li>Experiencia simple</li>
-  </ul>
-
-</div>
-
-
-<div class="service">
-
-  <div class="icon">↗</div>
-
-  <h3>Publicación y mantenimiento</h3>
-
-  <p>
-    Te ayudo a dejar tu página publicada
-    y preparada para seguir creciendo.
-  </p>
-
-  <ul>
-    <li>Publicación online</li>
-    <li>Actualización de contenido</li>
-    <li>Corrección de errores</li>
-    <li>Mejoras futuras</li>
-  </ul>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- BENEFICIOS -->
-
-<section class="sec" id="beneficios">
-
-<div class="section-head">
-
-  <h2>¿Por qué tener una web?</h2>
-
-  <p class="lead">
-    Una página profesional puede convertirse en
-    el punto central de tu negocio en internet.
-  </p>
-
-</div>
-
-
-<div class="benefits">
-
-  <div class="benefit">
-    <strong>📱 Presencia profesional</strong>
-    <span>
-      Tu negocio puede ser encontrado y consultado
-      desde cualquier dispositivo.
-    </span>
-  </div>
-
-  <div class="benefit">
-    <strong>⚡ Información rápida</strong>
-    <span>
-      Tus clientes encuentran servicios, productos
-      y formas de contacto en un solo lugar.
-    </span>
-  </div>
-
-  <div class="benefit">
-    <strong>💬 Más contacto</strong>
-    <span>
-      Integro botones para que tus clientes puedan
-      comunicarse directamente.
-    </span>
-  </div>
-
-</div>
-
-</section>
-
-
-<!-- TRABAJOS -->
-
-<section class="sec" id="trabajos">
-
-<div class="section-head">
-
-  <h2>Trabajos realizados</h2>
-
-  <p class="lead">
-    Algunos ejemplos de páginas y soluciones web
-    desarrolladas para negocios.
-  </p>
-
-</div>
-
-
-<div class="works">
-
-  <figure>
-
-    <div class="tilt">
-
-      <img
-        src="mordisco-1.jpg"
-        alt="Página web de Mordisco Hamburguesas"
-        loading="lazy">
-
+    <div class="stats">
+      <div class="stat"><strong>100%</strong><span>Responsive</span></div>
+      <div class="stat"><strong>+20</strong><span>Proyectos</span></div>
+      <div class="stat"><strong>24hs</strong><span>Respuesta</span></div>
     </div>
 
-    <figcaption>
-      Página principal — Mordisco
-    </figcaption>
-
-  </figure>
-
-
-  <figure>
-
-    <div class="tilt">
-
-      <img
-        src="mordisco-2.jpg"
-        alt="Sistema de pedidos online de Mordisco"
-        loading="lazy">
-
+    <div class="section" id="servicios">
+      <h2>Soluciones web</h2>
+      <p>Creo herramientas digitales pensadas para que tu negocio pueda mostrarse, recibir consultas y vender por internet.</p>
+      <div class="services">
+        <div class="service">
+          <div class="icon">◈</div>
+          <h3>Diseño de páginas web</h3>
+          <ul>
+            <li>Diseño personalizado</li>
+            <li>Adaptación para celular</li>
+            <li>Secciones informativas</li>
+            <li>Botones de contacto</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="icon">▣</div>
+          <h3>Tiendas online</h3>
+          <ul>
+            <li>Catálogo de productos</li>
+            <li>Carrito de compras</li>
+            <li>Pedidos online</li>
+            <li>Opciones de contacto</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="icon">⌁</div>
+          <h3>Pedidos y formularios</h3>
+          <ul>
+            <li>Formularios personalizados</li>
+            <li>Pedidos por WhatsApp</li>
+            <li>Datos del cliente</li>
+            <li>Experiencia simple</li>
+          </ul>
+        </div>
+        <div class="service">
+          <div class="icon">↗</div>
+          <h3>Publicación y mantenimiento</h3>
+          <ul>
+            <li>Publicación online</li>
+            <li>Actualización de contenido</li>
+            <li>Corrección de errores</li>
+            <li>Mejoras futuras</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <figcaption>
-      Sistema de pedidos — Mordisco
-    </figcaption>
+    <div class="section" id="porque">
+      <h2>¿Por qué tener una web?</h2>
+      <p>Una página profesional puede convertirse en el punto central de tu negocio en internet.</p>
+      <div class="benefits">
+        <div class="benefit">
+          <h3>📱 Presencia profesional</h3>
+          <p>Tu negocio puede ser encontrado y consultado desde cualquier dispositivo.</p>
+        </div>
+        <div class="benefit">
+          <h3>⚡ Información rápida</h3>
+          <p>Tus clientes encuentran servicios, productos y formas de contacto en un solo lugar.</p>
+        </div>
+        <div class="benefit">
+          <h3>💬 Más contacto</h3>
+          <p>Integro botones para que tus clientes puedan comunicarse directamente.</p>
+        </div>
+      </div>
+    </div>
 
-  </figure>
+    <div class="section" id="trabajos">
+      <h2>Trabajos realizados</h2>
+      <p>Algunos ejemplos de páginas y soluciones web desarrolladas para negocios.</p>
+      <div class="works">
+        <div class="work">
+          <div style="height:180px;background:linear-gradient(135deg,#1a2744,#2f6bff);display:grid;place-items:center;color:#9db8ff">Página principal</div>
+          <div class="info"><h3>Página principal — Mordisco</h3><p>Sitio institucional moderno</p></div>
+        </div>
+        <div class="work">
+          <div style="height:180px;background:linear-gradient(135deg,#0d1630,#52d6ff);display:grid;place-items:center;color:#9db8ff">Sistema de pedidos</div>
+          <div class="info"><h3>Sistema de pedidos — Mordisco</h3><p>Formularios + WhatsApp</p></div>
+        </div>
+      </div>
+    </div>
 
-</div>
+    <div class="section">
+      <h2>Cómo trabajo</h2>
+      <p>Un proceso sencillo para transformar tu idea en una página web lista para usar.</p>
+      <div class="steps">
+        <div class="step">
+          <h3>Me contás tu idea</h3>
+          <p>Me explicás qué hace tu negocio y qué necesitás que tenga la página.</p>
+        </div>
+        <div class="step">
+          <h3>Diseño la solución</h3>
+          <p>Organizo la estructura, diseño y funciones necesarias para tu proyecto.</p>
+        </div>
+        <div class="step">
+          <h3>Publicamos tu web</h3>
+          <p>Realizamos los últimos ajustes y dejamos tu página lista para compartir.</p>
+        </div>
+      </div>
+    </div>
 
+    <div class="cta">
+      <h2>¿Tenés una idea para tu negocio?</h2>
+      <p>Contame qué necesitás y podemos pensar juntos una solución web para tu proyecto.</p>
+      <a class="btn large" id="wa2" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">LM Web — Diseño y desarrollo de páginas web</div>
+  </footer>
 </section>
-
-
-<!-- PROCESO -->
-
-<section class="sec" id="proceso">
-
-<div class="section-head">
-
-  <h2>Cómo trabajo</h2>
-
-  <p class="lead">
-    Un proceso sencillo para transformar tu idea
-    en una página web lista para usar.
-  </p>
-
-</div>
-
-
-<ol class="steps">
-
-  <li>
-    <b>Me contás tu idea</b>
-    <span>
-      Me explicás qué hace tu negocio y qué necesitás
-      que tenga la página.
-    </span>
-  </li>
-
-  <li>
-    <b>Diseño la solución</b>
-    <span>
-      Organizo la estructura, diseño y funciones
-      necesarias para tu proyecto.
-    </span>
-  </li>
-
-  <li>
-    <b>Publicamos tu web</b>
-    <span>
-      Realizamos los últimos ajustes y dejamos
-      tu página lista para compartir.
-    </span>
-  </li>
-
-</ol>
-
-</section>
-
-
-<!-- CTA -->
-
-<section class="contact" id="contacto">
-
-  <h2>¿Tenés una idea para tu negocio?</h2>
-
-  <p>
-    Contame qué necesitás y podemos pensar juntos
-    una solución web para tu proyecto.
-  </p>
-
-  <a
-    class="btn"
-    id="wa"
-    href="#"
-    target="_blank"
-    rel="noopener">
-    Consultar por WhatsApp
-  </a>
-
-</section>
-
-
-</main>
-
-
-<footer>
-  LM Web · Diseño y desarrollo de páginas web
-</footer>
-
-</section>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
 <script>
-
 /* =========================
    WHATSAPP
 ========================= */
-
-const WA='5492614701888';
-
-document.querySelector('#wa').href=
-'https://wa.me/'+WA+
-'?text='+
-encodeURIComponent(
-'Hola, vi la página de LM Web y quiero consultar por una página web para mi negocio.'
-);
-
+const WA = '5492614701888';
+const waMsg = encodeURIComponent('Hola, vi la página de LM Web y quiero consultar por una página web para mi negocio.');
+document.querySelector('#wa').href = 'https://wa.me/' + WA + '?text=' + waMsg;
+document.querySelector('#wa2').href = 'https://wa.me/' + WA + '?text=' + waMsg;
 
 /* =========================
    STORAGE
 ========================= */
-
-const store={
-
-  get(k){
-    try{
-      return JSON.parse(localStorage.getItem(k));
-    }catch(e){
-      return null;
-    }
-  },
-
-  set(k,v){
-    try{
-      localStorage.setItem(k,JSON.stringify(v));
-    }catch(e){}
-  },
-
-  del(k){
-    try{
-      localStorage.removeItem(k);
-    }catch(e){}
-  }
-
+const store = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
 };
-
 
 /* =========================
    USUARIOS
 ========================= */
-
-let users=Object.assign(
-  Object.create(null),
-  store.get('lmweb_users')||{}
-);
-
+let users = Object.assign(Object.create(null), store.get('lmweb_users') || {});
 
 async function hash(s){
-
   try{
-
-    const b=await crypto.subtle.digest(
-      'SHA-256',
-      new TextEncoder().encode(s)
-    );
-
-    return [...new Uint8Array(b)]
-      .map(x=>x.toString(16).padStart(2,'0'))
-      .join('');
-
-  }catch(e){
-
-    return s;
-
-  }
-
+    const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('');
+  }catch(e){ return s; }
 }
-
 
 /* =========================
    PANTALLAS
 ========================= */
+let running = false;
+let bgOn = false;
 
 function show(id){
-
-  document
-    .querySelectorAll('.screen')
-    .forEach(s=>{
-      s.classList.toggle('on',s.id===id);
-    });
-
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
   scrollTo(0,0);
-
-  running=id==='auth';
-
-  bgOn=id==='site';
-
-  if(running){
-
-    if(!inited){
-
-      inited=true;
-
-      try{
-        init();
-        loop();
-      }catch(e){
-
-        R=null;
-        document.querySelector('#stage').style.display='none';
-
-      }
-
-    }
-
-    size();
-
-  }
-
+  running = id === 'auth';
+  bgOn = id === 'site';
 }
 
-
 /* =========================
-   TABS
+   AUTH LOGIC
 ========================= */
+const tabReg = document.getElementById('tabReg');
+const tabLog = document.getElementById('tabLog');
+const fReg = document.getElementById('fReg');
+const fLog = document.getElementById('fLog');
 
-function tab(reg){
+tabReg.onclick = () => {
+  tabReg.setAttribute('aria-selected','true');
+  tabLog.setAttribute('aria-selected','false');
+  fReg.hidden = false;
+  fLog.hidden = true;
+};
+tabLog.onclick = () => {
+  tabLog.setAttribute('aria-selected','true');
+  tabReg.setAttribute('aria-selected','false');
+  fLog.hidden = false;
+  fReg.hidden = true;
+};
 
-  document
-    .querySelector('#tabReg')
-    .setAttribute('aria-selected',reg);
+fReg.onsubmit = async e => {
+  e.preventDefault();
+  const name = rn.value.trim();
+  const email = re.value.trim().toLowerCase();
+  const pass = rp.value;
+  const err = document.getElementById('eReg');
+  err.textContent = '';
 
-  document
-    .querySelector('#tabLog')
-    .setAttribute('aria-selected',!reg);
-
-  document.querySelector('#fReg').hidden=!reg;
-  document.querySelector('#fLog').hidden=reg;
-
-}
-
-document.querySelector('#tabReg').onclick=()=>tab(true);
-document.querySelector('#tabLog').onclick=()=>tab(false);
-
-
-/* =========================
-   LOGIN
-========================= */
-
-function enter(email){
-
-  store.set('lmweb_session',email);
-
-  document.querySelector('#who').textContent=
-    users[email].name;
-
+  if(users[email]){ err.textContent = 'Ese correo ya está registrado.'; return; }
+  users[email] = { name, pass: await hash(pass) };
+  store.set('lmweb_users', users);
+  store.set('lmweb_session', email);
+  document.getElementById('who').textContent = name;
   show('site');
-
-}
-
-
-document.querySelector('#fReg').onsubmit=async e=>{
-
-  e.preventDefault();
-
-  const email=
-    document.querySelector('#re')
-      .value
-      .trim()
-      .toLowerCase();
-
-  if(users[email]){
-
-    document.querySelector('#eReg').textContent=
-      'Ese correo ya tiene una sesión. Tocá "Iniciar sesión".';
-
-    return;
-
-  }
-
-  users[email]={
-
-    name:document.querySelector('#rn').value.trim(),
-
-    pass:await hash(
-      document.querySelector('#rp').value
-    )
-
-  };
-
-  store.set('lmweb_users',users);
-
-  document.querySelector('#eReg').textContent='';
-
-  enter(email);
-
 };
 
-
-document.querySelector('#fLog').onsubmit=async e=>{
-
+fLog.onsubmit = async e => {
   e.preventDefault();
+  const email = le.value.trim().toLowerCase();
+  const pass = lp.value;
+  const err = document.getElementById('eLog');
+  err.textContent = '';
 
-  const email=
-    document.querySelector('#le')
-      .value
-      .trim()
-      .toLowerCase();
-
-  const u=users[email];
-
-  if(
-    !u ||
-    u.pass!==await hash(
-      document.querySelector('#lp').value
-    )
-  ){
-
-    document.querySelector('#eLog').textContent=
-      'Correo o contraseña incorrectos.';
-
-    return;
-
-  }
-
-  document.querySelector('#eLog').textContent='';
-
-  enter(email);
-
+  const u = users[email];
+  if(!u || u.pass !== await hash(pass)){ err.textContent = 'Correo o contraseña incorrectos.'; return; }
+  store.set('lmweb_session', email);
+  document.getElementById('who').textContent = u.name;
+  show('site');
 };
 
-
-document.querySelector('#out').onclick=()=>{
-
+document.getElementById('logout').onclick = () => {
   store.del('lmweb_session');
-
   show('auth');
-
 };
-
 
 /* =========================
-   PERSONAJE 3D
+   3D PERSONAJE + FORMAS
 ========================= */
+let R, scene, camera, P;
+let legL, legR, armL, armR, bag;
+let offset = 0;
+let bagOpen = 0;
+let bagTarget = 0;
+let transformProgress = 0;
+let floatingShapes = [];
 
-let inited=false;
-let running=false;
-let R,scene,camera,P;
-let legL,legR,armL,armR,bag;
-let offset=0;
-
-const still=
-  matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-const clock=new THREE.Clock();
-
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const clock = new THREE.Clock();
 
 function init(){
+  const st = document.querySelector('#stage');
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x3158d8);
 
-  const st=document.querySelector('#stage');
-
-  scene=new THREE.Scene();
-
-  scene.background=
-    new THREE.Color(0x3158d8);
-
-  camera=new THREE.PerspectiveCamera(
-    40,
-    1,
-    .1,
-    100
-  );
-
-  R=new THREE.WebGLRenderer({
-    antialias:true
-  });
-
-  R.setPixelRatio(
-    Math.min(devicePixelRatio,2)
-  );
-
+  camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+  R = new THREE.WebGLRenderer({ antialias: true });
+  R.setPixelRatio(Math.min(devicePixelRatio, 2));
   st.appendChild(R.domElement);
 
-  scene.add(
-    new THREE.AmbientLight(
-      0xffffff,
-      .75
-    )
-  );
-
-  const sun=
-    new THREE.DirectionalLight(
-      0xffffff,
-      .9
-    );
-
-  sun.position.set(3,5,4);
-
+  scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.95);
+  sun.position.set(3, 5, 4);
   scene.add(sun);
 
-
-  const mat=c=>
-    new THREE.MeshStandardMaterial({
-      color:c,
-      roughness:.7
-    });
-
-
-  const box=(
-    w,h,d,c,
-    x=0,y=0,z=0
-  )=>{
-
-    const m=
-      new THREE.Mesh(
-        new THREE.BoxGeometry(w,h,d),
-        mat(c)
-      );
-
-    m.position.set(x,y,z);
-
-    return m;
-
+  const mat = c => new THREE.MeshStandardMaterial({ color: c, roughness: 0.65, metalness: 0.08 });
+  const box = (w,h,d,c,x=0,y=0,z=0) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat(c));
+    m.position.set(x,y,z); return m;
+  };
+  const ball = (r,c,x=0,y=0,z=0) => {
+    const m = new THREE.Mesh(new THREE.SphereGeometry(r,24,16), mat(c));
+    m.position.set(x,y,z); return m;
   };
 
+  const SKIN=0xf0c8a0, HAIR=0xe8a83c, SHIRT=0xf5f5f5, PANTS=0x1e1e1e, SHOE=0xffffff;
+  const BAG=0x8b4a22, BAGDK=0x5e2f12, GOLD=0xd9a441, DARK=0x2a2a2a, SCREEN=0x1a3a5c;
 
-  const ball=(
-    r,c,
-    x=0,y=0,z=0
-  )=>{
-
-    const m=
-      new THREE.Mesh(
-        new THREE.SphereGeometry(r,24,16),
-        mat(c)
-      );
-
-    m.position.set(x,y,z);
-
-    return m;
-
-  };
-
-
-  P=new THREE.Group();
-
+  P = new THREE.Group();
   scene.add(P);
 
-  const SKIN=0xf0c8a0;
-
-
-  const shadow=
-    new THREE.Mesh(
-      new THREE.CircleGeometry(1.1,32),
-      new THREE.MeshBasicMaterial({
-        color:0x1a2f80
-      })
-    );
-
-  shadow.rotation.x=-Math.PI/2;
-  shadow.position.y=.01;
-
+  // Sombra
+  const shadow = new THREE.Mesh(
+    new THREE.CircleGeometry(1.05,32),
+    new THREE.MeshBasicMaterial({ color:0x1a2f80, transparent:true, opacity:0.55 })
+  );
+  shadow.rotation.x = -Math.PI/2;
+  shadow.position.y = 0.01;
   scene.add(shadow);
 
+  // Cuerpo
+  P.add(box(0.78,1.05,0.42,SHIRT,0,1.55,0));
+  P.add(box(0.28,0.18,0.28,SKIN,0,2.15,0));
+  P.add(ball(0.34,SKIN,0,2.52,0));
 
-  P.add(
-    box(.8,1,.45,0xb8b0a8,0,1.6,0)
-  );
-
-  P.add(
-    box(.5,.12,.3,0xffffff,0,2.12,.02)
-  );
-
-  P.add(
-    ball(.32,SKIN,0,2.55,0)
-  );
-
-
-  const hair=
-    ball(.35,0xe8a83c,0,2.66,-.04);
-
-  hair.scale.set(1,.75,1);
-
+  const hair = ball(0.37,HAIR,0,2.62,-0.03);
+  hair.scale.set(1.05,0.78,1.05);
   P.add(hair);
 
+  P.add(ball(0.055,0x222222,-0.12,2.54,0.30));
+  P.add(ball(0.055,0x222222, 0.12,2.54,0.30));
+  P.add(box(0.12,0.025,0.04,0xc48a6a,0,2.42,0.31));
 
-  P.add(
-    ball(.05,0x222222,-.11,2.55,.3)
-  );
-
-  P.add(
-    ball(.05,0x222222,.11,2.55,.3)
-  );
-
-
-  const leg=x=>{
-
-    const g=new THREE.Group();
-
-    g.position.set(x,1.1,0);
-
-    g.add(
-      box(.3,1,.3,0x222222,0,-.5,0)
-    );
-
-    g.add(
-      box(.32,.15,.5,0xffffff,0,-1.02,.08)
-    );
-
-    P.add(g);
-
-    return g;
-
+  // Piernas
+  const createLeg = x => {
+    const g = new THREE.Group();
+    g.position.set(x,1.05,0);
+    g.add(box(0.28,0.95,0.30,PANTS,0,-0.48,0));
+    g.add(box(0.32,0.16,0.48,SHOE,0,-1.00,0.06));
+    P.add(g); return g;
   };
+  legL = createLeg(-0.22);
+  legR = createLeg(0.22);
 
-
-  legL=leg(-.2);
-  legR=leg(.2);
-
-
-  const arm=x=>{
-
-    const g=new THREE.Group();
-
-    g.position.set(x,2.05,0);
-
-    g.add(
-      box(.22,.9,.22,0xb8b0a8,0,-.45,0)
-    );
-
-    g.add(
-      ball(.13,SKIN,0,-.98,0)
-    );
-
-    P.add(g);
-
-    return g;
-
+  // Brazos
+  const createArm = x => {
+    const g = new THREE.Group();
+    g.position.set(x,2.00,0);
+    g.add(box(0.22,0.75,0.22,SHIRT,0,-0.38,0));
+    g.add(ball(0.13,SKIN,0,-0.85,0));
+    P.add(g); return g;
   };
+  armL = createArm(-0.52);
+  armR = createArm(0.52);
 
-
-  armL=arm(-.55);
-  armR=arm(.55);
-
-
-  bag=new THREE.Group();
-
-  bag.position.set(0,-1.28,0);
-
-  bag.add(
-    box(.7,.5,.18,0x8b4a22)
-  );
-
-  bag.add(
-    box(.2,.12,.2,0x5e2f12,0,.31,0)
-  );
-
-  bag.add(
-    box(.08,.08,.2,0xd9a441,0,.05,0)
-  );
-
+  // Maletín → Laptop
+  bag = new THREE.Group();
+  bag.position.set(0.05,-0.95,0.05);
   armR.add(bag);
 
-  P.rotation.y=.6;
+  const bagBase = new THREE.Group();
+  bag.add(bagBase);
 
+  const baseBottom = box(0.72,0.08,0.48,BAG,0,0,0);
+  bagBase.add(baseBottom);
 
-  let drag=false;
-  let lx=0;
+  const sideL = box(0.06,0.42,0.48,BAG,-0.33,0.25,0);
+  const sideR = box(0.06,0.42,0.48,BAG, 0.33,0.25,0);
+  const sideF = box(0.66,0.42,0.06,BAG,0,0.25,0.21);
+  const sideB = box(0.66,0.42,0.06,BAG,0,0.25,-0.21);
+  bagBase.add(sideL,sideR,sideF,sideB);
 
-  const cv=R.domElement;
+  const lid = new THREE.Group();
+  lid.position.set(0,0.04,-0.24);
+  bag.add(lid);
 
-  cv.addEventListener(
-    'pointerdown',
-    e=>{
-      drag=true;
-      lx=e.clientX;
-      cv.setPointerCapture(e.pointerId);
-    }
-  );
+  const lidMesh = box(0.72,0.48,0.06,BAG,0,0.24,0);
+  lid.add(lidMesh);
 
-  cv.addEventListener(
-    'pointermove',
-    e=>{
-      if(drag){
+  const screen = box(0.64,0.40,0.01,SCREEN,0,0.24,0.035);
+  lid.add(screen);
 
-        offset+=
-          (e.clientX-lx)*.01;
+  const keyboard = box(0.62,0.02,0.38,0x333333,0,0.06,0.02);
+  keyboard.visible = false;
+  bagBase.add(keyboard);
 
-        lx=e.clientX;
+  const handle = box(0.22,0.06,0.06,BAGDK,0,0.48,0);
+  bagBase.add(handle);
+  const clasp = box(0.10,0.06,0.08,GOLD,0,0.22,0.25);
+  bagBase.add(clasp);
 
-      }
-    }
-  );
+  bag.userData = { baseBottom, lid, lidMesh, sideL, sideR, sideF, sideB, handle, clasp, keyboard };
 
-  cv.addEventListener(
-    'pointerup',
-    ()=>drag=false
-  );
+  P.rotation.y = 0.6;
 
-  cv.addEventListener(
-    'pointercancel',
-    ()=>drag=false
-  );
-
-  addEventListener('resize',size);
-
-}
-
-
-function size(){
-
-  if(!R)return;
-
-  const st=
-    document.querySelector('#stage');
-
-  const w=st.clientWidth;
-  const h=st.clientHeight;
-
-  if(!w||!h)return;
-
-  R.setSize(w,h);
-
-  camera.aspect=w/h;
-
-  camera.position.set(
-    0,
-    1.6,
-    w/h<.8?11:8
-  );
-
-  camera.lookAt(
-    0,
-    1.4,
-    0
-  );
-
-  camera.updateProjectionMatrix();
-
-}
-
-
-function loop(){
-
-  requestAnimationFrame(loop);
-
-  if(!running)return;
-
-  const t=
-    still
-    ?0
-    :clock.getElapsedTime();
-
-  const s=Math.sin(t*4);
-
-  legL.rotation.x=s*.6;
-  legR.rotation.x=-s*.6;
-
-  armL.rotation.x=-s*.5;
-  armR.rotation.x=s*.12;
-
-  bag.rotation.z=s*.06;
-
-  P.position.y=
-    Math.abs(Math.cos(t*4))*.06;
-
-  P.rotation.y=
-    .6+
-    offset+
-    Math.sin(t*.5)*.15;
-
-  R.render(scene,camera);
-
-}
-
-
-/* =========================
-   EFECTOS DE TARJETAS
-========================= */
-
-if(!still){
-
-  document
-    .querySelectorAll('.tilt,.service,.benefit')
-    .forEach(el=>{
-
-      el.addEventListener(
-        'pointermove',
-        e=>{
-
-          const r=
-            el.getBoundingClientRect();
-
-          const x=
-            (e.clientX-r.left)/
-            r.width-.5;
-
-          const y=
-            (e.clientY-r.top)/
-            r.height-.5;
-
-          if(el.classList.contains('tilt')){
-
-            el.style.transform=
-              'perspective(900px) '+
-              'rotateY('+(x*8)+'deg) '+
-              'rotateX('+(-y*8)+'deg) '+
-              'scale(1.02)';
-
-          }
-
-        }
-      );
-
-      el.addEventListener(
-        'pointerleave',
-        ()=>{
-          el.style.transform='';
-        }
-      );
-
+  /* ---- FORMAS 3D FLOTANTES ---- */
+  const shapeMat = (c) => new THREE.MeshStandardMaterial({
+    color: c, roughness: 0.4, metalness: 0.3, transparent: true, opacity: 0.85
   });
 
+  // Cubo
+  const cube = new THREE.Mesh(new THREE.BoxGeometry(0.55,0.55,0.55), shapeMat(0x6d96ff));
+  cube.position.set(-2.8, 2.2, -1.5);
+  scene.add(cube);
+  floatingShapes.push({ mesh: cube, speed: 0.6, amp: 0.25, phase: 0 });
+
+  // Esfera
+  const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.38,24,16), shapeMat(0x52d6ff));
+  sphere.position.set(2.6, 1.8, -1.2);
+  scene.add(sphere);
+  floatingShapes.push({ mesh: sphere, speed: 0.8, amp: 0.3, phase: 1.2 });
+
+  // Toroide (dona)
+  const torus = new THREE.Mesh(new THREE.TorusGeometry(0.35,0.12,16,32), shapeMat(0x9db8ff));
+  torus.position.set(-2.2, 0.9, -0.8);
+  torus.rotation.x = Math.PI / 3;
+  scene.add(torus);
+  floatingShapes.push({ mesh: torus, speed: 0.5, amp: 0.2, phase: 2.1 });
+
+  // Octaedro
+  const octa = new THREE.Mesh(new THREE.OctahedronGeometry(0.4), shapeMat(0x2f6bff));
+  octa.position.set(2.4, 0.7, -1.0);
+  scene.add(octa);
+  floatingShapes.push({ mesh: octa, speed: 0.7, amp: 0.28, phase: 0.7 });
+
+  // Pirámide
+  const pyramid = new THREE.Mesh(new THREE.ConeGeometry(0.35,0.55,4), shapeMat(0x52d6ff));
+  pyramid.position.set(0, 3.3, -2.0);
+  scene.add(pyramid);
+  floatingShapes.push({ mesh: pyramid, speed: 0.4, amp: 0.22, phase: 3.0 });
+
+  // Interacción
+  let drag = false, lx = 0;
+  const cv = R.domElement;
+
+  cv.addEventListener('pointerdown', e => {
+    drag = true; lx = e.clientX;
+    cv.setPointerCapture(e.pointerId);
+  });
+  cv.addEventListener('pointermove', e => {
+    if(drag){ offset += (e.clientX - lx) * 0.01; lx = e.clientX; }
+  });
+  cv.addEventListener('pointerup', () => drag = false);
+  cv.addEventListener('pointercancel', () => drag = false);
+
+  cv.addEventListener('click', () => { bagTarget = bagTarget === 0 ? 1 : 0; });
+
+  addEventListener('resize', size);
 }
 
+function size(){
+  if(!R) return;
+  const st = document.querySelector('#stage');
+  const w = st.clientWidth, h = st.clientHeight;
+  if(!w || !h) return;
+  R.setSize(w,h);
+  camera.aspect = w/h;
+  camera.position.set(0, 1.6, w/h < 0.8 ? 11 : 8);
+  camera.lookAt(0, 1.4, 0);
+  camera.updateProjectionMatrix();
+}
+
+function loop(){
+  requestAnimationFrame(loop);
+  if(!running) return;
+
+  const t = still ? 0 : clock.getElapsedTime();
+  const s = Math.sin(t * 4);
+
+  // Caminata
+  legL.rotation.x =  s * 0.55;
+  legR.rotation.x = -s * 0.55;
+  armL.rotation.x = -s * 0.45;
+  armR.rotation.x =  s * 0.10;
+  bag.rotation.z = s * 0.05;
+
+  P.position.y = Math.abs(Math.cos(t * 4)) * 0.05;
+  P.rotation.y = 0.6 + offset + Math.sin(t * 0.5) * 0.12;
+
+  // Apertura laptop
+  bagOpen += (bagTarget - bagOpen) * 0.08;
+  transformProgress += (bagTarget - transformProgress) * 0.06;
+
+  const ud = bag.userData;
+  ud.lid.rotation.x = -bagOpen * (Math.PI * 0.62);
+
+  const hide = 1 - transformProgress;
+  ud.sideL.scale.y = ud.sideR.scale.y = ud.sideF.scale.y = ud.sideB.scale.y = hide;
+  ud.sideL.visible = ud.sideR.visible = ud.sideF.visible = ud.sideB.visible = hide > 0.05;
+  ud.handle.visible = ud.clasp.visible = hide > 0.3;
+
+  const color = transformProgress > 0.5 ? 0x2a2a2a : 0x8b4a22;
+  ud.baseBottom.material.color.setHex(color);
+  ud.lidMesh.material.color.setHex(color);
+
+  ud.keyboard.visible = transformProgress > 0.4;
+  ud.keyboard.scale.y = Math.max(0.01, transformProgress);
+  ud.baseBottom.scale.y = 1 - transformProgress * 0.4;
+
+  // Animación de las formas 3D flotantes
+  floatingShapes.forEach((obj, i) => {
+    obj.mesh.position.y += Math.sin(t * obj.speed + obj.phase) * 0.003;
+    obj.mesh.rotation.x += 0.008 + i * 0.002;
+    obj.mesh.rotation.y += 0.01 + i * 0.0015;
+  });
+
+  R.render(scene, camera);
+}
 
 /* =========================
-   SESIÓN EXISTENTE
+   INICIO
 ========================= */
-
-const saved=
-  store.get('lmweb_session');
-
-if(
-  saved &&
-  users[saved]
-){
-
-  document.querySelector('#who').textContent=
-    users[saved].name;
-
+const saved = store.get('lmweb_session');
+if(saved && users[saved]){
+  document.getElementById('who').textContent = users[saved].name;
   show('site');
-
-}else{
-
+} else {
   show('auth');
-
 }
 
+init();
+size();
+loop();
 </script>
-
 </body>
 </html>
