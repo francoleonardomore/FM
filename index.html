@@ -1,1761 +1,358 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
-<title>Mystogan Web | Diseño y desarrollo de páginas web</title>
-<meta name="description" content="Mystogan Web crea páginas web profesionales, tiendas online y soluciones digitales para negocios.">
-<meta name="theme-color" content="#05070d">
-
-<style>
-:root{
-  --bg:#05070d;
-  --panel:#0b1020;
-  --panel2:#10182b;
-  --blue:#2f6bff;
-  --blue2:#6d96ff;
-  --cyan:#52d6ff;
-  --fg:#fff;
-  --mut:#aab5cf;
-  --line:#1b2948;
-  --success:#5ee6a0;
-  --radius:18px;
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-  scroll-padding-top:70px;
-  -webkit-text-size-adjust:100%;
-}
-
-body{
-  color:var(--fg);
-  font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  overflow-x:hidden;
-  background:#0a0e17;
-  min-height:100vh;
-}
-
-/* ===== FONDO OFICINA MODERNA ===== */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    linear-gradient(135deg, rgba(10,14,23,.92) 0%, rgba(15,22,40,.88) 50%, rgba(8,12,22,.94) 100%),
-    linear-gradient(to bottom, #0c1220 0%, #151d30 40%, #0a101c 100%);
-  z-index:-2;
-  pointer-events:none;
-}
-
-/* Ventanas / luces de oficina */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  background-image:
-    /* grilla de ventanas */
-    linear-gradient(rgba(80,120,200,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(80,120,200,.04) 1px, transparent 1px),
-    /* luces suaves */
-    radial-gradient(ellipse at 20% 30%, rgba(47,107,255,.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(109,150,255,.08) 0%, transparent 45%);
-  background-size: 60px 80px, 60px 80px, 100% 100%, 100% 100%;
-  z-index:-1;
-}
-
-/* ===== LOGO Mystogan Web ===== */
-.logo-container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-family:'Arial Black','Impact',sans-serif;
-  font-weight:900;
-  font-size:2.6rem;
-  user-select:none;
-  margin-bottom:8px;
-  color:var(--blue2);
-}
-
-.logo-container.brand-nav{
-  font-size:1.9rem;
-  margin-bottom:0;
-}
-
-.logo-text{
-  font-weight:900;
-  letter-spacing:-.5px;
-  color:var(--blue2);
-}
-
-.logo-text b{
-  color:var(--blue2);
-}
-
-.screen{
-  display:none;
-  min-height:100vh;
-}
-
-.screen.on{
-  display:block;
-}
-
-h1,h2,h3{
-  line-height:1.15;
-  font-weight:800;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-button,input{
-  font:inherit;
-}
-
-.wrap{
-  width:min(1120px,calc(100% - 32px));
-  margin:0 auto;
-}
-
-/* ===== BOTONES ===== */
-.btn{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  border:0;
-  border-radius:12px;
-  padding:14px 22px;
-  background:linear-gradient(135deg,var(--blue),#1747d4);
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 8px 22px rgba(47,107,255,.28);
-  transition:transform .2s,box-shadow .2s;
-  -webkit-tap-highlight-color:transparent;
-  touch-action:manipulation;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 12px 28px rgba(47,107,255,.4);
-}
-
-.btn:active{
-  transform:translateY(0);
-}
-
-.btn.ghost{
-  background:rgba(255,255,255,.08);
-  border:1px solid #4268bd;
-  color:#dce6ff;
-  box-shadow:none;
-}
-
-.btn.ghost:hover{
-  background:rgba(47,107,255,.22);
-}
-
-.btn.large{
-  padding:16px 26px;
-  font-size:1.05rem;
-}
-
-.btn.full{
-  width:100%;
-}
-
-/* ===== AUTH ===== */
-.auth{
-  width:min(1050px,calc(100% - 28px));
-  min-height:100vh;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:36px;
-  align-items:center;
-  padding:32px 0;
-}
-
-@media (max-width:900px){
-  .auth{
-    grid-template-columns:1fr;
-    gap:24px;
-    padding:20px 0 40px;
-  }
-}
-
-.stage{
-  width:100%;
-  aspect-ratio:1;
-  max-height:min(520px,70vw);
-  border-radius:22px;
-  overflow:hidden;
-  background:rgba(10,14,28,.7);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:
-    0 25px 60px rgba(0,0,0,.5),
-    0 0 40px rgba(47,107,255,.15);
-  position:relative;
-  z-index:2;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* ===== MUÑECO 3D CAMINANDO ===== */
-.walker{
-  width:85%;
-  height:90%;
-  position:relative;
-}
-
-.walker img{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  opacity:0;
-  animation:walk 0.9s steps(1) infinite;
-}
-
-.walker img:nth-child(1){ animation-delay:0s; }
-.walker img:nth-child(2){ animation-delay:0.225s; }
-.walker img:nth-child(3){ animation-delay:0.45s; }
-.walker img:nth-child(4){ animation-delay:0.675s; }
-
-@keyframes walk{
-  0%, 25%   { opacity:1; }
-  25.01%, 100% { opacity:0; }
-}
-
-/* ===== CAJA TRANSPARENTE ===== */
-.box{
-  padding:28px 24px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:22px;
-  background:rgba(11,16,32,.55);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  box-shadow:0 25px 60px rgba(0,0,0,.35);
-  position:relative;
-  z-index:3;
-  text-align:center;
-}
-
-.box h1{
-  font-size:clamp(1.7rem,5.5vw,2.7rem);
-  margin:14px 0 10px;
-  letter-spacing:-1px;
-}
-
-.box p.sub{
-  color:var(--mut);
-  margin:0 0 22px;
-  font-size:.98rem;
-}
-
-.tabs{
-  display:flex;
-  border-bottom:1px solid rgba(255,255,255,.1);
-  margin-bottom:16px;
-}
-
-.tab{
-  flex:1;
-  background:none;
-  border:0;
-  color:var(--mut);
-  padding:13px 8px;
-  cursor:pointer;
-  font-weight:600;
-  border-bottom:2px solid transparent;
-  transition:.2s;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.tab[aria-selected="true"]{
-  color:#fff;
-  border-bottom-color:var(--blue2);
-}
-
-label{
-  display:block;
-  font-size:.88rem;
-  color:var(--mut);
-  margin:14px 0 6px;
-  text-align:left;
-}
-
-input{
-  width:100%;
-  padding:14px 15px;
-  border-radius:11px;
-  border:1px solid rgba(255,255,255,.12);
-  background:rgba(13,20,38,.55);
-  color:#fff;
-  outline:none;
-  font-size:16px;
-  transition:border-color .2s;
-}
-
-input:focus{
-  border-color:var(--blue2);
-}
-
-.err{
-  color:#ff6b6b;
-  font-size:.88rem;
-  min-height:20px;
-  margin:10px 0 4px;
-  text-align:left;
-}
-
-/* ===== NAV ===== */
-nav{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(5,7,13,.82);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
-  padding:12px 0;
-}
-
-.nav-inner{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.nav-links{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-
-.nav-links a{
-  color:var(--mut);
-  font-weight:600;
-  font-size:.95rem;
-  padding:6px 0;
-}
-
-.nav-links a:hover{
-  color:#fff;
-}
-
-.menu-btn{
-  display:none;
-  background:none;
-  border:0;
-  color:#fff;
-  font-size:1.6rem;
-  cursor:pointer;
-  padding:6px 10px;
-  line-height:1;
-  -webkit-tap-highlight-color:transparent;
-}
-
-@media (max-width:760px){
-  .menu-btn{
-    display:block;
-  }
-
-  .nav-links{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    right:0;
-    background:rgba(8,11,22,.96);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    flex-direction:column;
-    gap:0;
-    padding:12px 0 18px;
-    border-bottom:1px solid var(--line);
-  }
-
-  .nav-links.open{
-    display:flex;
-  }
-
-  .nav-links a,
-  .nav-links span,
-  .nav-links .btn{
-    width:100%;
-    text-align:center;
-    padding:14px 20px;
-  }
-
-  .nav-links .btn{
-    margin:8px 20px 0;
-    width:calc(100% - 40px);
-  }
-}
-
-/* ===== HERO ===== */
-.hero{
-  display:grid;
-  grid-template-columns:1.05fr .95fr;
-  gap:40px;
-  align-items:center;
-  padding:70px 0 50px;
-}
-
-@media (max-width:850px){
-  .hero{
-    grid-template-columns:1fr;
-    gap:28px;
-    padding:40px 0 30px;
-  }
-}
-
-.hero h1{
-  font-size:clamp(2.3rem,7.5vw,4.8rem);
-  letter-spacing:-2.5px;
-  max-width:850px;
-  background:linear-gradient(
-    120deg,
-    #fff 20%,
-    #9db8ff 70%,
-    #52d6ff
-  );
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  margin-bottom:16px;
-}
-
-.hero h1 strong{
-  color:var(--blue2);
-}
-
-.hero p{
-  max-width:560px;
-  color:#c8d4f0;
-  font-size:clamp(1rem,2.8vw,1.12rem);
-  margin:0 0 24px;
-}
-
-.row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
-
-.hero-card{
-  min-height:340px;
-  border-radius:24px;
-  border:1px solid rgba(109,150,255,.25);
-  background:rgba(13,22,48,.72);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  box-shadow:0 30px 70px rgba(0,0,0,.5);
-  display:grid;
-  place-items:center;
-  padding:24px;
-  text-align:center;
-  color:#9db8ff;
-}
-
-@media (max-width:850px){
-  .hero-card{
-    min-height:220px;
-  }
-}
-
-/* ===== STATS ===== */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  background:rgba(11,16,32,.65);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border-radius:16px;
-  overflow:hidden;
-}
-
-.stat{
-  padding:22px 12px;
-  text-align:center;
-  border-right:1px solid var(--line);
-}
-
-.stat:last-child{
-  border-right:0;
-}
-
-.stat strong{
-  display:block;
-  font-size:clamp(1.5rem,4vw,1.9rem);
-  color:var(--cyan);
-}
-
-.stat span{
-  color:var(--mut);
-  font-size:.88rem;
-}
-
-@media (max-width:600px){
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  .stat{
-    border-right:0;
-    border-bottom:1px solid var(--line);
-  }
-
-  .stat:last-child{
-    border-bottom:0;
-  }
-}
-
-/* ===== SECTIONS ===== */
-.section{
-  padding:60px 0;
-}
-
-@media (max-width:600px){
-  .section{
-    padding:48px 0;
-  }
-}
-
-.section h2{
-  font-size:clamp(1.7rem,4.5vw,2.6rem);
-  margin-bottom:10px;
-}
-
-.section > p{
-  color:#c8d4f0;
-  max-width:580px;
-  margin-bottom:32px;
-  font-size:.98rem;
-}
-
-/* ===== SERVICES ===== */
-.services{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:16px;
-}
-
-.service{
-  padding:24px;
-  border-radius:var(--radius);
-  border:1px solid var(--line);
-  background:rgba(11,16,32,.78);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  transition:transform .25s,border-color .25s;
-}
-
-.service:hover{
-  transform:translateY(-5px);
-  border-color:rgba(109,150,255,.45);
-}
-
-.service .icon{
-  font-size:1.5rem;
-  margin-bottom:10px;
-}
-
-.service h3{
-  margin-bottom:8px;
-  font-size:1.15rem;
-}
-
-.service ul{
-  margin:10px 0 0;
-  padding-left:18px;
-  color:var(--mut);
-  font-size:.93rem;
-}
-
-.service li{
-  margin-bottom:4px;
-}
-
-/* ===== BENEFITS ===== */
-.benefits{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;
-}
-
-.benefit{
-  padding:22px;
-  border-radius:var(--radius);
-  border:1px solid var(--line);
-  background:rgba(16,24,43,.78);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-}
-
-.benefit h3{
-  margin-bottom:8px;
-  font-size:1.1rem;
-}
-
-.benefit p{
-  color:var(--mut);
-  font-size:.95rem;
-}
-
-/* ===== WORKS ===== */
-.works{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:18px;
-}
-
-.work{
-  border-radius:var(--radius);
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:rgba(11,16,32,.78);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-}
-
-.work .preview{
-  height:160px;
-  display:grid;
-  place-items:center;
-  color:#9db8ff;
-  font-weight:600;
-}
-
-.work .info{
-  padding:16px;
-}
-
-.work h3{
-  font-size:1.05rem;
-  margin-bottom:4px;
-}
-
-.work p{
-  color:var(--mut);
-  font-size:.9rem;
-}
-
-/* ===== STEPS ===== */
-.steps{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:16px;
-  counter-reset:step;
-}
-
-.step{
-  padding:22px;
-  border-radius:var(--radius);
-  border:1px solid var(--line);
-  background:rgba(11,16,32,.78);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-}
-
-.step:before{
-  counter-increment:step;
-  content:counter(step);
-  display:inline-flex;
-  width:30px;
-  height:30px;
-  border-radius:50%;
-  background:var(--blue);
-  color:#fff;
-  font-weight:700;
-  font-size:.95rem;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:12px;
-}
-
-.step h3{
-  margin-bottom:6px;
-  font-size:1.1rem;
-}
-
-.step p{
-  color:var(--mut);
-  font-size:.93rem;
-}
-
-/* ===== CTA ===== */
-.cta{
-  text-align:center;
-  padding:50px 24px;
-  border-radius:24px;
-  background:rgba(47,107,255,.18);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border:1px solid rgba(109,150,255,.3);
-  margin:30px 0 60px;
-}
-
-.cta h2{
-  font-size:clamp(1.6rem,4vw,2.4rem);
-  margin-bottom:10px;
-}
-
-.cta p{
-  color:#c8d4f0;
-  max-width:480px;
-  margin:0 auto 22px;
-  font-size:.98rem;
-}
-
-/* ===== FOOTER ===== */
-footer{
-  padding:32px 0;
-  border-top:1px solid var(--line);
-  text-align:center;
-  color:var(--mut);
-  font-size:.88rem;
-}
-
-@media (hover:none){
-  .service:hover,
-  .btn:hover{
-    transform:none;
-  }
-}
-
-@media (prefers-reduced-motion:reduce){
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diseño & Desarrollo Web Profesional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #090a0f;
+      --card-bg: rgba(18, 20, 29, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.2);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Background Canvas 3D */
+    #canvas-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Layout */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 5% 8rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 8rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px -5px var(--accent-glow);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px -5px var(--accent-glow);
+    }
+
+    /* Services Section - 3D Cards */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      perspective: 1000px; /* Habilita el entorno 3D */
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      backdrop-filter: blur(12px);
+      transform-style: preserve-3d;
+      transition: transform 0.1s ease-out, border-color 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-content {
+      transform: translateZ(30px); /* Separa el contenido hacia afuera en 3D */
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* CTA Section 3D Banner */
+    .cta-banner {
+      margin-top: 8rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-banner p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- ===== AUTENTICACIÓN ===== -->
-<section id="auth" class="screen">
-  <div class="auth">
+  <!-- Background Canvas para efecto 3D sutil -->
+  <canvas id="canvas-bg"></canvas>
 
-    <!-- AQUÍ VA EL MUÑECO 3D CAMINANDO (reemplaza a Roronoa Zoro) -->
-    <div class="stage" id="stage" aria-label="Muñeco 3D caminando">
-      <div class="walker">
-        <img src="frame1.png" alt="Frame 1">
-        <img src="frame2.png" alt="Frame 2">
-        <img src="frame3.png" alt="Frame 3">
-        <img src="frame4.png" alt="Frame 4">
-      </div>
-    </div>
+  <header>
+    <div class="logo">estudio<span>.web</span></div>
+    <nav>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
 
-    <div class="box">
+  <main>
+    <section class="hero">
+      <div class="tag">Diseño & Desarrollo Web</div>
+      <h1>Creamos experiencias digitales con arquitectura sólida.</h1>
+      <p>Diseño de alto impacto visual y sitios desarrollados a medida para impulsar la presencia digital de tu negocio.</p>
+      <a href="#contacto" class="btn">Iniciar Proyecto &rarr;</a>
+    </section>
 
-      <!-- LOGO Mystogan Web -->
-      <div class="logo-container">
-        <span class="logo-text"><b>Mystogan</b> Web</span>
-      </div>
-
-      <h1>Tu negocio merece una web profesional.</h1>
-
-      <p class="sub">
-        Creá tu sesión para conocer mis servicios de diseño,
-        desarrollo y soluciones web.
-      </p>
-
-      <div class="tabs" role="tablist">
-        <button
-          class="tab"
-          role="tab"
-          id="tabReg"
-          aria-selected="true">
-          Crear sesión
-        </button>
-
-        <button
-          class="tab"
-          role="tab"
-          id="tabLog"
-          aria-selected="false">
-          Iniciar sesión
-        </button>
-      </div>
-
-      <!-- REGISTRO -->
-      <form id="fReg">
-
-        <label for="rn">Nombre</label>
-        <input
-          id="rn"
-          required
-          autocomplete="name"
-          inputmode="text">
-
-        <label for="re">Correo</label>
-        <input
-          id="re"
-          type="email"
-          required
-          autocomplete="email"
-          inputmode="email">
-
-        <label for="rp">
-          Contraseña (mínimo 6 caracteres)
-        </label>
-
-        <input
-          id="rp"
-          type="password"
-          minlength="6"
-          required
-          autocomplete="new-password">
-
-        <p class="err" id="eReg"></p>
-
-        <button
-          class="btn full"
-          type="submit">
-          Crear sesión
-        </button>
-
-      </form>
-
-      <!-- LOGIN -->
-      <form id="fLog" hidden>
-
-        <label for="le">Correo</label>
-        <input
-          id="le"
-          type="email"
-          required
-          autocomplete="email"
-          inputmode="email">
-
-        <label for="lp">Contraseña</label>
-
-        <input
-          id="lp"
-          type="password"
-          required
-          autocomplete="current-password">
-
-        <p class="err" id="eLog"></p>
-
-        <button
-          class="btn full"
-          type="submit">
-          Iniciar sesión
-        </button>
-
-      </form>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===== SITIO PRINCIPAL ===== -->
-<section id="site" class="screen">
-
-  <nav>
-
-    <div class="wrap nav-inner">
-
-      <!-- LOGO Mystogan Web -->
-      <div class="logo-container brand-nav">
-        <span class="logo-text"><b>Mystogan</b> Web</span>
-      </div>
-
-      <button
-        class="menu-btn"
-        id="menuBtn"
-        aria-label="Abrir menú"
-        aria-expanded="false">
-        ☰
-      </button>
-
-      <div class="nav-links" id="navLinks">
-
-        <a href="#servicios">Servicios</a>
-
-        <a href="#porque">Beneficios</a>
-
-        <a href="#trabajos">Trabajos</a>
-
-        <span
-          id="who"
-          style="color:var(--cyan);font-weight:600">
-        </span>
-
-        <button
-          class="btn ghost"
-          id="logout"
-          style="padding:10px 16px">
-          Cerrar sesión
-        </button>
-
-      </div>
-
-    </div>
-
-  </nav>
-
-  <div class="wrap">
-
-    <!-- HERO -->
-    <div class="hero">
-
-      <div>
-
-        <h1>
-          Tu negocio,<br>
-          <strong>online.</strong>
-        </h1>
-
-        <p>
-          Diseño y desarrollo páginas web modernas,
-          rápidas y adaptadas a celulares y computadoras
-          para que tu negocio tenga presencia profesional
-          en internet.
-        </p>
-
-        <div class="row">
-
-          <a
-            class="btn large"
-            href="#servicios">
-            Ver servicios
-          </a>
-
-          <a
-            class="btn ghost large"
-            id="wa"
-            target="_blank"
-            rel="noopener">
-            Consultar por WhatsApp
-          </a>
-
-        </div>
-
-      </div>
-
-      <div class="hero-card">
-
-        <div>
-
-          <div style="font-size:2.6rem;margin-bottom:10px">
-            ◈
+    <section id="servicios">
+      <h2 class="section-title">Soluciones a medida</h2>
+      <div class="grid">
+        
+        <!-- Tarjeta 1 -->
+        <div class="card" data-tilt>
+          <div class="card-content">
+            <div class="card-icon">⚡</div>
+            <h3>Páginas Web Corporativas</h3>
+            <p>Estructuras limpias, de alta velocidad y preparadas para transmitir autoridad y captar clientes potenciales.</p>
           </div>
-
-          Diseño personalizado<br>
-          100% responsive<br>
-          Listo para publicar
-
         </div>
 
-      </div>
-
-    </div>
-
-    <!-- ESTADÍSTICAS -->
-    <div class="stats">
-
-      <div class="stat">
-        <strong>100%</strong>
-        <span>Responsive</span>
-      </div>
-
-      <div class="stat">
-        <strong>+20</strong>
-        <span>Proyectos</span>
-      </div>
-
-      <div class="stat">
-        <strong>24hs</strong>
-        <span>Respuesta</span>
-      </div>
-
-    </div>
-
-    <!-- SERVICIOS -->
-    <div class="section" id="servicios">
-
-      <h2>Soluciones web</h2>
-
-      <p>
-        Creo herramientas digitales pensadas para que
-        tu negocio pueda mostrarse, recibir consultas
-        y vender por internet.
-      </p>
-
-      <div class="services">
-
-        <div class="service">
-
-          <div class="icon">◈</div>
-
-          <h3>Diseño de páginas web</h3>
-
-          <ul>
-            <li>Diseño personalizado</li>
-            <li>Adaptación para celular</li>
-            <li>Secciones informativas</li>
-            <li>Botones de contacto</li>
-          </ul>
-
-        </div>
-
-        <div class="service">
-
-          <div class="icon">▣</div>
-
-          <h3>Tiendas online</h3>
-
-          <ul>
-            <li>Catálogo de productos</li>
-            <li>Carrito de compras</li>
-            <li>Pedidos online</li>
-            <li>Opciones de contacto</li>
-          </ul>
-
-        </div>
-
-        <div class="service">
-
-          <div class="icon">⌁</div>
-
-          <h3>Pedidos y formularios</h3>
-
-          <ul>
-            <li>Formularios personalizados</li>
-            <li>Pedidos por WhatsApp</li>
-            <li>Datos del cliente</li>
-            <li>Experiencia simple</li>
-          </ul>
-
-        </div>
-
-        <div class="service">
-
-          <div class="icon">↗</div>
-
-          <h3>Publicación y mantenimiento</h3>
-
-          <ul>
-            <li>Publicación online</li>
-            <li>Actualización de contenido</li>
-            <li>Corrección de errores</li>
-            <li>Mejoras futuras</li>
-          </ul>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- BENEFICIOS -->
-    <div class="section" id="porque">
-
-      <h2>¿Por qué tener una web?</h2>
-
-      <p>
-        Una página profesional puede convertirse en el
-        punto central de tu negocio en internet.
-      </p>
-
-      <div class="benefits">
-
-        <div class="benefit">
-
-          <h3>📱 Presencia profesional</h3>
-
-          <p>
-            Tu negocio puede ser encontrado y consultado
-            desde cualquier dispositivo.
-          </p>
-
-        </div>
-
-        <div class="benefit">
-
-          <h3>⚡ Información rápida</h3>
-
-          <p>
-            Tus clientes encuentran servicios, productos
-            y formas de contacto en un solo lugar.
-          </p>
-
-        </div>
-
-        <div class="benefit">
-
-          <h3>💬 Más contacto</h3>
-
-          <p>
-            Integro botones para que tus clientes puedan
-            comunicarse directamente.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- TRABAJOS -->
-    <div class="section" id="trabajos">
-
-      <h2>Trabajos realizados</h2>
-
-      <p>
-        Algunos ejemplos de páginas y soluciones web
-        desarrolladas para negocios.
-      </p>
-
-      <div class="works">
-
-        <div class="work">
-
-          <div
-            class="preview"
-            style="background:linear-gradient(135deg,#1a2744,#2f6bff)">
-            Página principal
+        <!-- Tarjeta 2 -->
+        <div class="card" data-tilt>
+          <div class="card-content">
+            <div class="card-icon">🛍️</div>
+            <h3>Tiendas E-Commerce</h3>
+            <p>Plataformas de venta intuitivas, con pasarelas de pago seguras y optimizadas para máxima conversión.</p>
           </div>
-
-          <div class="info">
-
-            <h3>Página principal — Mordisco</h3>
-
-            <p>
-              Sitio institucional moderno
-            </p>
-
-          </div>
-
         </div>
 
-        <div class="work">
-
-          <div
-            class="preview"
-            style="background:linear-gradient(135deg,#0d1630,#52d6ff)">
-            Sistema de pedidos
+        <!-- Tarjeta 3 -->
+        <div class="card" data-tilt>
+          <div class="card-content">
+            <div class="card-icon">🎯</div>
+            <h3>Landing Pages</h3>
+            <p>Páginas de aterrizaje diseñadas estratégicamente para lanzamientos y campañas publicitarias efectivas.</p>
           </div>
-
-          <div class="info">
-
-            <h3>Sistema de pedidos — Mordisco</h3>
-
-            <p>
-              Formularios + WhatsApp
-            </p>
-
-          </div>
-
         </div>
 
       </div>
-
-    </div>
-
-    <!-- PROCESO -->
-    <div class="section">
-
-      <h2>Cómo trabajo</h2>
-
-      <p>
-        Un proceso sencillo para transformar tu idea
-        en una página web lista para usar.
-      </p>
-
-      <div class="steps">
-
-        <div class="step">
-
-          <h3>Me contás tu idea</h3>
-
-          <p>
-            Me explicás qué hace tu negocio y qué
-            necesitás que tenga la página.
-          </p>
-
-        </div>
-
-        <div class="step">
-
-          <h3>Diseño la solución</h3>
-
-          <p>
-            Organizo la estructura, diseño y funciones
-            necesarias para tu proyecto.
-          </p>
-
-        </div>
-
-        <div class="step">
-
-          <h3>Publicamos tu web</h3>
-
-          <p>
-            Realizamos los últimos ajustes y dejamos
-            tu página lista para compartir.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- CTA -->
-    <div class="cta">
-
-      <h2>
-        ¿Tenés una idea para tu negocio?
-      </h2>
-
-      <p>
-        Contame qué necesitás y podemos pensar juntos
-        una solución web para tu proyecto.
-      </p>
-
-      <a
-        class="btn large"
-        id="wa2"
-        target="_blank"
-        rel="noopener">
-        Consultar por WhatsApp
-      </a>
-
-    </div>
-
-  </div>
-
-  <footer>
-
-    <div class="wrap">
-      Mystogan Web — Diseño y desarrollo de páginas web
-    </div>
-
-  </footer>
-
-</section>
-
-<script>
-/* =========================================================
-   CONFIGURACIÓN WHATSAPP
-========================================================= */
-
-const WA = '5492614701888';
-
-const waMsg = encodeURIComponent(
-  'Hola, vi la página de Mystogan Web y quiero consultar por una página web para mi negocio.'
-);
-
-const waButton = document.getElementById('wa');
-const waButton2 = document.getElementById('wa2');
-
-if(waButton){
-  waButton.href =
-    'https://wa.me/' + WA + '?text=' + waMsg;
-}
-
-if(waButton2){
-  waButton2.href =
-    'https://wa.me/' + WA + '?text=' + waMsg;
-}
-
-
-/* =========================================================
-   ALMACENAMIENTO LOCAL
-========================================================= */
-
-const store = {
-
-  get(k){
-    try{
-      return JSON.parse(
-        localStorage.getItem(k)
-      );
-    }catch(e){
-      return null;
-    }
-  },
-
-  set(k,v){
-    try{
-      localStorage.setItem(
-        k,
-        JSON.stringify(v)
-      );
-    }catch(e){}
-  },
-
-  del(k){
-    try{
-      localStorage.removeItem(k);
-    }catch(e){}
-  }
-
-};
-
-
-/* =========================================================
-   USUARIOS
-========================================================= */
-
-let users = Object.assign(
-  Object.create(null),
-  store.get('lmweb_users') || {}
-);
-
-
-/* =========================================================
-   HASH DE CONTRASEÑA
-========================================================= */
-
-async function hash(s){
-
-  try{
-
-    if(
-      window.crypto &&
-      crypto.subtle
-    ){
-
-      const b =
-        await crypto.subtle.digest(
-          'SHA-256',
-          new TextEncoder().encode(s)
-        );
-
-      return [...new Uint8Array(b)]
-        .map(
-          x =>
-            x.toString(16).padStart(2,'0')
-        )
-        .join('');
-
-    }
-
-  }catch(e){}
-
-  return s;
-}
-
-
-/* =========================================================
-   CAMBIO DE PANTALLA
-========================================================= */
-
-function show(id){
-
-  document
-    .querySelectorAll('.screen')
-    .forEach(
-      s =>
-        s.classList.toggle(
-          'on',
-          s.id === id
-        )
-    );
-
-  window.scrollTo(0,0);
-
-  const links =
-    document.getElementById('navLinks');
-
-  const menu =
-    document.getElementById('menuBtn');
-
-  if(links){
-    links.classList.remove('open');
-  }
-
-  if(menu){
-    menu.textContent = '☰';
-    menu.setAttribute(
-      'aria-expanded',
-      'false'
-    );
-  }
-}
-
-
-/* =========================================================
-   MENÚ MOBILE
-========================================================= */
-
-const menuBtn =
-  document.getElementById('menuBtn');
-
-const navLinks =
-  document.getElementById('navLinks');
-
-if(menuBtn && navLinks){
-
-  menuBtn.addEventListener(
-    'click',
-    () => {
-
-      const opened =
-        navLinks.classList.toggle('open');
-
-      menuBtn.textContent =
-        opened ? '✕' : '☰';
-
-      menuBtn.setAttribute(
-        'aria-expanded',
-        String(opened)
-      );
-
-    }
-  );
-
-}
-
-
-/* Cerrar menú al tocar enlaces */
-
-if(navLinks){
-
-  navLinks
-    .querySelectorAll('a')
-    .forEach(a => {
-
-      a.addEventListener(
-        'click',
-        () => {
-
-          navLinks.classList.remove('open');
-
-          if(menuBtn){
-
-            menuBtn.textContent = '☰';
-
-            menuBtn.setAttribute(
-              'aria-expanded',
-              'false'
-            );
-
-          }
-
-        }
-      );
-
+    </section>
+
+    <section id="contacto" class="cta-banner">
+      <h2>¿Tienes un proyecto en mente?</h2>
+      <p>Trabajemos juntos para llevar la presencia de tu marca al siguiente nivel.</p>
+      <a href="mailto:tuemail@dominio.com" class="btn">Solicitar Presupuesto</a>
+    </section>
+  </main>
+
+  <script>
+    /* --- 1. EFECTO TILT 3D EN TARJETAS (JS Nativo) --- */
+    const cards = document.querySelectorAll('[data-tilt]');
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        // CÁLCULO DE ROTACIÓN EN GRADOS
+        const rotateX = ((y - centerY) / centerY) * -12; 
+        const rotateY = ((x - centerX) / centerX) * 12;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)`;
+      });
     });
 
-}
+    /* --- 2. FONDO CANVAS 3D INTERACTIVO --- */
+    const canvas = document.getElementById('canvas-bg');
+    const ctx = canvas.getContext('2d');
 
+    let width, height;
+    let particles = [];
 
-/* =========================================================
-   ELEMENTOS DE AUTENTICACIÓN
-========================================================= */
-
-const tabReg =
-  document.getElementById('tabReg');
-
-const tabLog =
-  document.getElementById('tabLog');
-
-const fReg =
-  document.getElementById('fReg');
-
-const fLog =
-  document.getElementById('fLog');
-
-const rn =
-  document.getElementById('rn');
-
-const re =
-  document.getElementById('re');
-
-const rp =
-  document.getElementById('rp');
-
-const le =
-  document.getElementById('le');
-
-const lp =
-  document.getElementById('lp');
-
-const eReg =
-  document.getElementById('eReg');
-
-const eLog =
-  document.getElementById('eLog');
-
-const who =
-  document.getElementById('who');
-
-const logout =
-  document.getElementById('logout');
-
-
-/* =========================================================
-   TABS
-========================================================= */
-
-if(tabReg){
-
-  tabReg.onclick = () => {
-
-    tabReg.setAttribute(
-      'aria-selected',
-      'true'
-    );
-
-    tabLog?.setAttribute(
-      'aria-selected',
-      'false'
-    );
-
-    if(fReg) fReg.hidden = false;
-    if(fLog) fLog.hidden = true;
-
-    if(eReg) eReg.textContent = '';
-    if(eLog) eLog.textContent = '';
-
-  };
-
-}
-
-
-if(tabLog){
-
-  tabLog.onclick = () => {
-
-    tabLog.setAttribute(
-      'aria-selected',
-      'true'
-    );
-
-    tabReg?.setAttribute(
-      'aria-selected',
-      'false'
-    );
-
-    if(fLog) fLog.hidden = false;
-    if(fReg) fReg.hidden = true;
-
-    if(eReg) eReg.textContent = '';
-    if(eLog) eLog.textContent = '';
-
-  };
-
-}
-
-
-/* =========================================================
-   REGISTRO
-========================================================= */
-
-if(fReg){
-
-  fReg.onsubmit = async e => {
-
-    e.preventDefault();
-
-    const name =
-      rn ? rn.value.trim() : '';
-
-    const email =
-      re ? re.value.trim().toLowerCase() : '';
-
-    const pass =
-      rp ? rp.value : '';
-
-    if(eReg){
-      eReg.textContent = '';
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     }
 
-    if(!name){
+    window.addEventListener('resize', resize);
+    resize();
 
-      if(eReg){
-        eReg.textContent =
-          'Ingresá tu nombre.';
-      }
-
-      return;
+    // Crear puntos con profundidad (Z)
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        z: Math.random() * 2 + 0.5, // Simula profundidad
+        radius: Math.random() * 1.5 + 0.5
+      });
     }
 
-    if(!email){
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener('mousemove', e => {
+      mouseX = (e.clientX - width / 2) * 0.05;
+      mouseY = (e.clientY - height / 2) * 0.05;
+    });
 
-      if(eReg){
-        eReg.textContent =
-          'Ingresá un correo válido.';
-      }
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+      
+      particles.forEach(p => {
+        // Desplazamiento sutil simulando cámara 3D según el ratón
+        let px = p.x + mouseX * p.z;
+        let py = p.y + mouseY * p.z;
 
-      return;
+        ctx.beginPath();
+        ctx.arc(px, py, p.radius * p.z, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.1 * p.z})`;
+        ctx.fill();
+      });
+
+      requestAnimationFrame(render);
     }
 
-    if(pass.length < 6){
-
-      if(eReg){
-        eReg.textContent =
-          'La contraseña debe tener al menos 6 caracteres.';
-      }
-
-      return;
-    }
-
-    if(users[email]){
-
-      if(eReg){
-        eReg.textContent =
-          'Ese correo ya está registrado.';
-      }
-
-      return;
-    }
-
-    users[email] = {
-      name:name,
-      pass:await hash(pass)
-    };
-
-    store.set(
-      'lmweb_users',
-      users
-    );
-
-    store.set(
-      'lmweb_session',
-      email
-    );
-
-    if(who){
-      who.textContent = name;
-    }
-
-    show('site');
-
-  };
-
-}
-
-
-/* =========================================================
-   INICIO DE SESIÓN
-========================================================= */
-
-if(fLog){
-
-  fLog.onsubmit = async e => {
-
-    e.preventDefault();
-
-    const email =
-      le ? le.value.trim().toLowerCase() : '';
-
-    const pass =
-      lp ? lp.value : '';
-
-    if(eLog){
-      eLog.textContent = '';
-    }
-
-    const u =
-      users[email];
-
-    if(
-      !u ||
-      u.pass !== await hash(pass)
-    ){
-
-      if(eLog){
-        eLog.textContent =
-          'Correo o contraseña incorrectos.';
-      }
-
-      return;
-    }
-
-    store.set(
-      'lmweb_session',
-      email
-    );
-
-    if(who){
-      who.textContent = u.name;
-    }
-
-    show('site');
-
-  };
-
-}
-
-
-/* =========================================================
-   CERRAR SESIÓN
-========================================================= */
-
-if(logout){
-
-  logout.onclick = () => {
-
-    store.del(
-      'lmweb_session'
-    );
-
-    if(who){
-      who.textContent = '';
-    }
-
-    show('auth');
-
-  };
-
-}
-
-
-/* =========================================================
-   COMPROBAR SESIÓN GUARDADA
-========================================================= */
-
-const saved =
-  store.get('lmweb_session');
-
-if(
-  saved &&
-  users[saved]
-){
-
-  if(who){
-    who.textContent =
-      users[saved].name;
-  }
-
-  show('site');
-
-}else{
-
-  show('auth');
-
-}
-</script>
-
+    render();
+  </script>
 </body>
 </html>
