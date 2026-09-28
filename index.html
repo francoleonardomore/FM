@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diseño & Desarrollo Web Profesional</title>
+  <title>Creavix — Diseño & Desarrollo Web</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
 
     .logo {
       font-weight: 700;
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       letter-spacing: -0.02em;
     }
 
@@ -146,7 +146,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      perspective: 1000px; /* Habilita el entorno 3D */
+      perspective: 1000px;
     }
 
     .card {
@@ -166,7 +166,7 @@
     }
 
     .card-content {
-      transform: translateZ(30px); /* Separa el contenido hacia afuera en 3D */
+      transform: translateZ(30px);
     }
 
     .card-icon {
@@ -223,7 +223,7 @@
   <canvas id="canvas-bg"></canvas>
 
   <header>
-    <div class="logo">estudio<span>.web</span></div>
+    <div class="logo">Creavix<span>.</span></div>
     <nav>
       <a href="#servicios">Servicios</a>
       <a href="#contacto">Contacto</a>
@@ -232,22 +232,22 @@
 
   <main>
     <section class="hero">
-      <div class="tag">Diseño & Desarrollo Web</div>
-      <h1>Creamos experiencias digitales con arquitectura sólida.</h1>
-      <p>Diseño de alto impacto visual y sitios desarrollados a medida para impulsar la presencia digital de tu negocio.</p>
-      <a href="#contacto" class="btn">Iniciar Proyecto &rarr;</a>
+      <div class="tag">Estudio de Diseño & Desarrollo Web</div>
+      <h1>En Creavix construimos la presencia digital de tu negocio.</h1>
+      <p>Sitios web modernos, veloces y optimizados para destacar frente a tu competencia y generar conversiones reales.</p>
+      <a href="#contacto" class="btn">Iniciar Proyecto con Creavix &rarr;</a>
     </section>
 
     <section id="servicios">
-      <h2 class="section-title">Soluciones a medida</h2>
+      <h2 class="section-title">Soluciones digitales</h2>
       <div class="grid">
         
         <!-- Tarjeta 1 -->
         <div class="card" data-tilt>
           <div class="card-content">
             <div class="card-icon">⚡</div>
-            <h3>Páginas Web Corporativas</h3>
-            <p>Estructuras limpias, de alta velocidad y preparadas para transmitir autoridad y captar clientes potenciales.</p>
+            <h3>Páginas Corporativas</h3>
+            <p>Estructuras sólidas, velocidad extrema y diseño optimizado para transmitir autoridad en tu sector.</p>
           </div>
         </div>
 
@@ -255,8 +255,8 @@
         <div class="card" data-tilt>
           <div class="card-content">
             <div class="card-icon">🛍️</div>
-            <h3>Tiendas E-Commerce</h3>
-            <p>Plataformas de venta intuitivas, con pasarelas de pago seguras y optimizadas para máxima conversión.</p>
+            <h3>Tiendas Online</h3>
+            <p>E-commerce seguro e intuitivo, pensado para facilitar el proceso de compra de tus clientes.</p>
           </div>
         </div>
 
@@ -265,7 +265,7 @@
           <div class="card-content">
             <div class="card-icon">🎯</div>
             <h3>Landing Pages</h3>
-            <p>Páginas de aterrizaje diseñadas estratégicamente para lanzamientos y campañas publicitarias efectivas.</p>
+            <p>Diseños orientados 100% a la conversión para campañas publicitarias o el lanzamiento de un nuevo producto.</p>
           </div>
         </div>
 
@@ -273,14 +273,14 @@
     </section>
 
     <section id="contacto" class="cta-banner">
-      <h2>¿Tienes un proyecto en mente?</h2>
-      <p>Trabajemos juntos para llevar la presencia de tu marca al siguiente nivel.</p>
-      <a href="mailto:tuemail@dominio.com" class="btn">Solicitar Presupuesto</a>
+      <h2>¿Listo para impulsar tu marca?</h2>
+      <p>Cuéntanos sobre tu idea y en Creavix te ayudaremos a hacerla realidad.</p>
+      <a href="mailto:hola@creavix.com" class="btn">Solicitar Presupuesto</a>
     </section>
   </main>
 
   <script>
-    /* --- 1. EFECTO TILT 3D EN TARJETAS (JS Nativo) --- */
+    /* EFECTO TILT 3D EN TARJETAS */
     const cards = document.querySelectorAll('[data-tilt]');
 
     cards.forEach(card => {
@@ -292,7 +292,6 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        // CÁLCULO DE ROTACIÓN EN GRADOS
         const rotateX = ((y - centerY) / centerY) * -12; 
         const rotateY = ((x - centerX) / centerX) * 12;
 
@@ -304,7 +303,7 @@
       });
     });
 
-    /* --- 2. FONDO CANVAS 3D INTERACTIVO --- */
+    /* FONDO CANVAS 3D INTERACTIVO */
     const canvas = document.getElementById('canvas-bg');
     const ctx = canvas.getContext('2d');
 
@@ -319,12 +318,11 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Crear puntos con profundidad (Z)
     for (let i = 0; i < 60; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        z: Math.random() * 2 + 0.5, // Simula profundidad
+        z: Math.random() * 2 + 0.5,
         radius: Math.random() * 1.5 + 0.5
       });
     }
@@ -339,7 +337,6 @@
       ctx.clearRect(0, 0, width, height);
       
       particles.forEach(p => {
-        // Desplazamiento sutil simulando cámara 3D según el ratón
         let px = p.x + mouseX * p.z;
         let py = p.y + mouseY * p.z;
 
