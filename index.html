@@ -120,17 +120,36 @@ h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.035em;line-
 .work.miss:before{content:"Falta " attr(data-file);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;padding:1rem;text-align:center}
 
 /* Planes */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:1.6rem}
+.opt{padding:1rem 1.1rem;border:1px solid var(--border);border-radius:18px;background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.opt>b{display:block;font-size:.92rem;margin-bottom:.6rem}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;padding:.3rem;border-radius:14px;background:rgba(8,12,22,.6);border:1px solid var(--border)}
+.seg button{border:0;font:inherit;font-size:.85rem;font-weight:600;color:var(--muted);background:transparent;padding:.6rem .4rem;border-radius:10px;cursor:pointer;transition:background .25s,color .25s,transform .15s;line-height:1.25}
+.seg button:active{transform:scale(.95)}
+.seg button.on{background:linear-gradient(135deg,var(--accent),#3b82f6);color:#fff;box-shadow:0 6px 18px -6px var(--glow)}
+.seg button small{display:block;font-size:.72rem;font-weight:500;opacity:.85}
 .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.6rem;align-items:stretch;padding-top:.8rem}
 .plan{position:relative;display:flex;flex-direction:column;padding:2.2rem 1.8rem 1.8rem;border-radius:22px;border:1px solid var(--border);background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .35s,border-color .35s,box-shadow .35s}
 .plan:hover{transform:translateY(-6px);border-color:var(--border-hover);box-shadow:0 24px 50px -18px rgba(0,0,0,.7),0 0 40px -12px var(--glow)}
 .plan.pop{border-color:var(--border-hover);box-shadow:0 0 50px -15px var(--glow)}
 .badge{position:absolute;top:-13px;left:1.8rem;background:linear-gradient(135deg,var(--warm),#ff9d66);color:#3a1a05;font-size:.78rem;font-weight:800;padding:.25rem .85rem;border-radius:100px}
 .plan h3{font-size:1.3rem}
-.price{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;margin:.5rem 0 1.2rem}
-.price small{font-size:.85rem;font-weight:500;color:var(--muted);letter-spacing:0}
+.price{display:flex;align-items:baseline;gap:.5rem;margin:.5rem 0 .2rem}
+.price small{font-size:.9rem;font-weight:500;color:var(--muted)}
+.amt{font-size:2rem;font-weight:800;letter-spacing:-.03em;display:inline-block}
+.amt.bump{animation:bump .4s ease}
+@keyframes bump{40%{transform:scale(1.12);color:var(--accent2)}}
+.inc{font-size:.85rem;color:var(--accent2);min-height:1.3em}
+.mant-line{font-size:.85rem;color:var(--warm);min-height:1.3em;margin-bottom:.9rem}
 .plan ul{list-style:none;display:grid;gap:.6rem;margin-bottom:1.8rem;flex:1}
 .plan li{position:relative;padding-left:1.6rem;color:var(--muted);font-size:.95rem}
 .plan li:before{content:"";position:absolute;left:0;top:.55rem;width:9px;height:9px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--glow)}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:1.6rem}
+.note{display:flex;gap:.9rem;align-items:flex-start;padding:1.2rem 1.3rem;border:1px solid var(--border);border-radius:18px;background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.note svg{width:26px;height:26px;color:var(--warm);flex:none;margin-top:2px}
+.note b{display:block;margin-bottom:.15rem}
+.note span{font-size:.9rem;color:var(--muted)}
+.fine{margin-top:1.2rem;font-size:.82rem;color:var(--muted)}
 
 /* Sobre mí */
 .about{display:grid;grid-template-columns:auto 1fr;gap:2.2rem;align-items:center;padding:2.2rem;border-radius:26px;border:1px solid var(--border);background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
@@ -245,31 +264,59 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 5% calc(2
     </div>
   </section>
 
-  <!-- Planes: cambia "Consultar" por tu precio, por ejemplo "$150.000" -->
+  <!-- Planes: los precios base y extras se cambian en la sección CONFIGURACIÓN del script -->
   <section id="planes">
-    <h2>Planes</h2>
-    <p class="lead">Elige el punto de partida. Todos se adaptan a tu marca.</p>
+    <h2>Planes y precios</h2>
+    <p class="lead">Elige si quieres dominio, hosting y mantenimiento. El precio se actualiza solo.</p>
+
+    <div class="opts">
+      <div class="opt"><b>Dominio (tu-negocio.com)</b>
+        <div class="seg" data-opt="dom">
+          <button type="button" class="on" data-v="0" aria-pressed="true">Sin dominio<small>Precio más bajo</small></button>
+          <button type="button" data-v="1" aria-pressed="false">Con dominio<small data-ex="dom"></small></button>
+        </div></div>
+      <div class="opt"><b>Hosting (donde vive tu web)</b>
+        <div class="seg" data-opt="host">
+          <button type="button" class="on" data-v="0" aria-pressed="true">Sin hosting<small>Precio más bajo</small></button>
+          <button type="button" data-v="1" aria-pressed="false">Con hosting<small data-ex="host"></small></button>
+        </div></div>
+      <div class="opt"><b>Mantenimiento mensual</b>
+        <div class="seg" data-opt="mant">
+          <button type="button" class="on" data-v="0" aria-pressed="true">Sin mantenimiento<small>Opcional</small></button>
+          <button type="button" data-v="1" aria-pressed="false">Con mantenimiento<small data-ex="mant"></small></button>
+        </div></div>
+    </div>
+
     <div class="plans">
-      <div class="plan">
+      <div class="plan" data-key="landing" data-name="Landing page">
         <h3>Landing page</h3>
-        <div class="price">Consultar <small>precio</small></div>
-        <ul><li>Una página enfocada en convertir</li><li>Diseño adaptado a celular</li><li>Botón directo a WhatsApp</li><li>Publicación incluida</li></ul>
-        <a href="#" class="btn ghost full" data-wa data-msg="Hola, me interesa el plan Landing page.">Consultar este plan</a>
+        <div class="price"><small>Desde</small><span class="amt"></span></div>
+        <div class="inc"></div><div class="mant-line"></div>
+        <ul><li>Una página enfocada en convertir</li><li>Diseño adaptado a celular</li><li>Botón directo a WhatsApp</li><li>Seña del 50% para comenzar</li></ul>
+        <a href="#" class="btn ghost full" data-wa>Consultar este plan</a>
       </div>
-      <div class="plan pop">
+      <div class="plan pop" data-key="corporativa" data-name="Página corporativa">
         <span class="badge">Recomendado</span>
         <h3>Página corporativa</h3>
-        <div class="price">Consultar <small>precio</small></div>
-        <ul><li>Varias secciones a medida</li><li>Galería de trabajos o productos</li><li>Formulario y botón de WhatsApp</li><li>Vista previa al compartir el link</li><li>Soporte después de la entrega</li></ul>
-        <a href="#" class="btn wa full" data-wa data-msg="Hola, me interesa el plan Página corporativa.">Consultar este plan</a>
+        <div class="price"><small>Desde</small><span class="amt"></span></div>
+        <div class="inc"></div><div class="mant-line"></div>
+        <ul><li>Varias secciones a medida</li><li>Galería de trabajos o productos</li><li>Formulario y botón de WhatsApp</li><li>Vista previa al compartir el link</li><li>Seña del 50% para comenzar</li></ul>
+        <a href="#" class="btn wa full" data-wa>Consultar este plan</a>
       </div>
-      <div class="plan">
+      <div class="plan" data-key="tienda" data-name="Tienda online">
         <h3>Tienda online</h3>
-        <div class="price">Consultar <small>precio</small></div>
-        <ul><li>Catálogo de productos</li><li>Carrito y pedidos por WhatsApp</li><li>Medios de pago</li><li>Fácil de administrar</li></ul>
-        <a href="#" class="btn ghost full" data-wa data-msg="Hola, me interesa el plan Tienda online.">Consultar este plan</a>
+        <div class="price"><small>Desde</small><span class="amt"></span></div>
+        <div class="inc"></div><div class="mant-line"></div>
+        <ul><li>Catálogo de productos</li><li>Carrito y pedidos por WhatsApp</li><li>Medios de pago</li><li>Fácil de administrar</li><li>Seña del 50% para comenzar</li></ul>
+        <a href="#" class="btn ghost full" data-wa>Consultar este plan</a>
       </div>
     </div>
+
+    <div class="info">
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg><div><b>Seña del 50% para empezar</b><span>Pagas la mitad al iniciar tu página y el resto cuando te la entrego.</span></div></div>
+      <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.2-.5-.5-2.2z"/></svg><div><b>Mantenimiento mensual</b><span>Cambios de textos y fotos, revisión del sitio y soporte por WhatsApp.</span></div></div>
+    </div>
+    <p class="fine">Los precios son "desde": el valor final depende de lo que necesite tu proyecto. Sin dominio ni hosting, el precio es más bajo.</p>
   </section>
 
   <!-- Sobre mí: la foto es foto.jpg (junto a index.html); si no está, se muestran tus iniciales -->
@@ -299,8 +346,9 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 5% calc(2
     <p class="lead">Lo que más nos consultan antes de empezar.</p>
     <div class="faq">
       <details><summary>¿Cuánto tarda mi página?</summary><p>Depende del tipo de sitio. Antes de empezar acordamos una fecha de entrega para que sepas cuándo la vas a tener.</p></details>
-      <details><summary>¿Cómo se paga?</summary><p>Definimos el precio y la forma de pago antes de comenzar. Escríbeme por WhatsApp y te paso las opciones.</p></details>
-      <details><summary>¿Me ayudas a publicarla?</summary><p>Sí. Te ayudo a publicar el sitio y, si quieres, a conectar un dominio propio.</p></details>
+      <details><summary>¿Cómo se paga?</summary><p>Pagas la mitad como seña al iniciar y el resto cuando te entrego la página. Escríbeme por WhatsApp y te paso las formas de pago.</p></details>
+      <details><summary>¿Qué es el dominio y el hosting?</summary><p>El dominio es tu dirección (por ejemplo, tunegocio.com) y el hosting es el lugar donde vive tu página en internet. Puedes contratarlos conmigo o, si ya los tienes, ahorrar ese costo.</p></details>
+      <details><summary>¿Qué incluye el mantenimiento?</summary><p>Es un servicio mensual opcional: cambios de textos y fotos, revisión del sitio y soporte por WhatsApp.</p></details>
       <details><summary>¿Puedo pedir cambios después?</summary><p>Sí. Puedes pedir ajustes después de la entrega y también te explico cómo hacer cambios simples por tu cuenta.</p></details>
     </div>
   </section>
@@ -340,16 +388,50 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 5% calc(2
 </div>
 
 <script>
-/* ====== CONFIGURACIÓN ====== */
+/* ====== CONFIGURACIÓN (cambia aquí tus números) ====== */
 const WA_NUMBER='5492614701888'; // formato internacional sin "+" ni espacios
 const WA_TEXT='Hola Creavix, quiero consultar por una página web.';
-document.querySelectorAll('[data-wa]').forEach(a=>{
-  a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(a.dataset.msg||WA_TEXT);
-  a.target='_blank';a.rel='noopener';
+const PRECIOS={landing:150000,corporativa:350000,tienda:500000}; // precio base: sin dominio y sin hosting
+const DOMINIO_EXTRA=30000;      // suma si el cliente quiere dominio
+const HOSTING_EXTRA=60000;      // suma si el cliente quiere hosting
+const MANTENIMIENTO_MES=25000;  // por mes, opcional
+
+/* ====== WHATSAPP + PRECIOS ====== */
+const $=id=>document.getElementById(id);
+const fmt=n=>'$'+n.toLocaleString('es-AR');
+function setWA(){
+  document.querySelectorAll('[data-wa]').forEach(a=>{
+    a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(a.dataset.msg||WA_TEXT);
+    a.target='_blank';a.rel='noopener';
+  });
+}
+const opt={dom:0,host:0,mant:0};
+function renderPlans(animate){
+  document.querySelectorAll('.plan').forEach(p=>{
+    const total=PRECIOS[p.dataset.key]+(opt.dom?DOMINIO_EXTRA:0)+(opt.host?HOSTING_EXTRA:0);
+    const amt=p.querySelector('.amt');
+    amt.textContent=fmt(total);
+    if(animate){amt.classList.remove('bump');void amt.offsetWidth;amt.classList.add('bump')}
+    const inc=(opt.dom?'Con dominio':'Sin dominio')+', '+(opt.host?'con hosting':'sin hosting');
+    p.querySelector('.inc').textContent=inc;
+    p.querySelector('.mant-line').textContent=opt.mant?'+ '+fmt(MANTENIMIENTO_MES)+' por mes de mantenimiento':'';
+    p.querySelector('[data-wa]').dataset.msg='Hola, me interesa el plan '+p.dataset.name+'. '+inc+(opt.mant?', con mantenimiento mensual':'')+'. Precio desde '+fmt(total)+'.';
+  });
+  setWA();
+}
+const ex={dom:'+'+fmt(DOMINIO_EXTRA),host:'+'+fmt(HOSTING_EXTRA),mant:fmt(MANTENIMIENTO_MES)+'/mes'};
+document.querySelectorAll('[data-ex]').forEach(s=>{s.textContent=ex[s.dataset.ex]});
+document.querySelectorAll('.seg').forEach(seg=>{
+  seg.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    opt[seg.dataset.opt]=+b.dataset.v;
+    seg.querySelectorAll('button').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+    renderPlans(true);
+  }));
 });
+renderPlans(false);
 
 /* ====== MENÚ ====== */
-const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+const burger=$('burger'),menu=$('menu');
 function setMenu(o){menu.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);document.body.classList.toggle('lock',o)}
 burger.onclick=()=>setMenu(!menu.classList.contains('open'));
 menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
@@ -359,7 +441,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.
 document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
 
 /* ====== INTERACCIÓN AL TOCAR ====== */
-const glow=document.getElementById('glow'),bar=document.getElementById('bar');
+const glow=$('glow'),bar=$('bar');
 let boost=0;
 addEventListener('pointerdown',e=>{
   const r=document.createElement('span');r.className='ripple';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';
@@ -397,7 +479,7 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
 }
 
 /* ====== VISOR + EDITOR DE IMAGEN ====== */
-const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),$=id=>document.getElementById(id);
+const lb=$('lb'),lbImg=$('lbImg');
 const S={b:100,c:100,s:100,x:0,g:0,p:0,rot:0,flip:1};
 const ids={fb:'b',fc:'c',fs:'s',fx:'x',fg:'g',fp:'p'};
 let curSrc='',curTitle='';
