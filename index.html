@@ -204,6 +204,9 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 5% calc(2
 .fab:hover{transform:scale(1.1)}.fab svg{width:30px;height:30px}
 @keyframes bob{50%{transform:translateY(-5px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+/* Parallax 3D al scroll (agregado) */
+main>section{perspective:1200px}
 </style>
 </head>
 <body>
@@ -516,6 +519,36 @@ $('save').onclick=()=>{
     a.download=curSrc.replace(/\.\w+$/,'')+'-editada.jpg';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000)},'image/jpeg',.92)}
   catch(err){alert('No se pudo exportar. Abre la página desde tu sitio publicado (no como archivo local).')}
 };
+
+/* ====== PARALLAX 3D AL SCROLL (agregado) ====== */
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const CAPAS=[['.hero .tag',.16],['.hero h1',.12],['.hero p',.08],['.hero .actions',.05],
+    ['#servicios h2,#trabajos h2,#planes h2,#proceso h2,#faq h2',.06],['.lead',.04],
+    ['.gar',.05],['.card',.07],['.work',.08],['.plan',.06],['.about',.05],['.step',.04],['.cta-box',.05]];
+  let items=[],raf=0;
+  function pintar(){
+    raf=0;
+    const vh=innerHeight,f=innerWidth<860?.6:1,mid=scrollY+vh/2;
+    for(const i of items){
+      const n=Math.max(-1,Math.min(1,(i.c-mid)/vh));
+      i.el.style.translate=`0 ${(n*vh*i.k*f).toFixed(1)}px ${(-Math.abs(n)*60*f).toFixed(1)}px`;
+      i.el.style.rotate=`1 0 0 ${(n*6*f).toFixed(2)}deg`;
+    }
+  }
+  function medir(){
+    items.forEach(i=>{i.el.style.translate='';i.el.style.rotate=''});
+    items=[];
+    CAPAS.forEach(([sel,k])=>document.querySelectorAll(sel).forEach(el=>{
+      const r=el.getBoundingClientRect();
+      items.push({el,k,c:r.top+scrollY+r.height/2});
+    }));
+    pintar();
+  }
+  addEventListener('scroll',()=>{if(!raf)raf=requestAnimationFrame(pintar)},{passive:true});
+  addEventListener('resize',medir);
+  addEventListener('load',()=>setTimeout(medir,1600));
+  document.querySelectorAll('details').forEach(d=>d.addEventListener('toggle',medir));
+}
 
 /* ====== ESCENA 3D ====== */
 const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x080c16,0.018);
