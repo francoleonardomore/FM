@@ -576,6 +576,36 @@ const clock=new THREE.Clock();
   camera.lookAt(tx*2,4-sp*6,camera.position.z-30);
   mesh.position.z=camera.position.z-40;mesh.rotation.z=sp*1.2;pts.rotation.z=t*.008+sp*.4;
   renderer.render(scene,camera)})();
+
+/* ====== PARALLAX DE FONDO (agregado) ====== */
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  scene.add(camera); // las formas viajan pegadas a la cámara
+  const G=[new THREE.IcosahedronGeometry(1,0),new THREE.TorusGeometry(1,.3,10,28),new THREE.OctahedronGeometry(1,0)];
+  const C=[0x4f9dff,0x7cc7ff,0xffb98a];
+  const T=Math.tan(THREE.MathUtils.degToRad(30));
+  const N=innerWidth<860?16:28,L=[];
+  for(let i=0;i<N;i++){
+    const k=.25+Math.random()*.75;      // 1 = cerca (más rápido), .25 = lejos (más lento)
+    const d=14+(1-k)*46;                 // distancia a la cámara
+    const m=new THREE.Mesh(G[i%3],new THREE.MeshBasicMaterial({color:C[i%3],wireframe:true,transparent:true,opacity:.22+k*.4,depthWrite:false}));
+    m.scale.setScalar(d*(.05+Math.random()*.05));
+    m.userData={k,d,bx:Math.random(),by:Math.random(),rx:(Math.random()-.5)*.01,ry:(Math.random()-.5)*.01};
+    camera.add(m);L.push(m);
+  }
+  (function tick(){
+    requestAnimationFrame(tick);
+    const sy=scrollY,asp=innerWidth/innerHeight;
+    for(const m of L){
+      const u=m.userData,hh=u.d*T*1.25,hw=hh*asp;
+      const kk=.15+u.k*.6,mov=sy*kk*(2*u.d*T/innerHeight);
+      const y=((u.by*2*hh+mov)%(2*hh))-hh;
+      const x=(u.bx*2-1)*hw-mx*u.k*2.5;
+      m.position.set(x,y,-u.d);
+      m.rotation.x+=u.rx;m.rotation.y+=u.ry;m.rotation.z=sy*.0015*u.k;
+    }
+  })();
+})();
 </script>
 </body>
 </html>
