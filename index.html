@@ -550,20 +550,42 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
   document.querySelectorAll('details').forEach(d=>d.addEventListener('toggle',medir));
 }
 
-/* ====== ESCENA 3D ====== */
-const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x080c16,0.018);
-const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,.1,300);camera.position.set(0,-10,20);
+/* ====== ESCENA 3D INMERSIVA ====== */
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const MOB=innerWidth<860;
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x080c16,0.014);
+const camera=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,.1,400);camera.position.set(0,-10,20);
 const renderer=new THREE.WebGLRenderer({canvas:$('bg'),alpha:true,antialias:true});
 renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+
+/* Piso y techo en ondas (corredor) */
 const geo=new THREE.PlaneGeometry(120,120,70,70),n=geo.attributes.position.count;
 const mesh=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0x4f9dff,wireframe:true,transparent:true,opacity:.3}));
 mesh.rotation.x=-Math.PI/2.6;mesh.position.y=-6;scene.add(mesh);
-const P=1100,pos=new Float32Array(P*3),col=new Float32Array(P*3),cA=new THREE.Color(0x7cc7ff),cB=new THREE.Color(0xffb98a);
-for(let i=0;i<P;i++){pos[i*3]=(Math.random()-.5)*90;pos[i*3+1]=(Math.random()-.5)*70;pos[i*3+2]=-Math.random()*140+20;
-  const c=Math.random()<.14?cB:cA;col.set([c.r,c.g,c.b],i*3)}
+const mesh2=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0x7cc7ff,wireframe:true,transparent:true,opacity:.13}));
+mesh2.rotation.x=Math.PI/2.6;mesh2.position.y=22;scene.add(mesh2);
+
+/* Túnel de partículas */
+const P=MOB?1800:3600,pos=new Float32Array(P*3),col=new Float32Array(P*3),cA=new THREE.Color(0x7cc7ff),cB=new THREE.Color(0xffb98a);
+for(let i=0;i<P;i++){
+  const a=Math.random()*Math.PI*2,r=4+Math.pow(Math.random(),.7)*46;
+  pos[i*3]=Math.cos(a)*r*1.4;pos[i*3+1]=Math.sin(a)*r*.7-4;pos[i*3+2]=-Math.random()*300+40;
+  const c=Math.random()<.14?cB:cA;col.set([c.r,c.g,c.b],i*3);
+}
 const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('color',new THREE.BufferAttribute(col,3));
-const pts=new THREE.Points(pg,new THREE.PointsMaterial({size:.24,vertexColors:true,transparent:true,opacity:.85,depthWrite:false}));scene.add(pts);
-let mx=0,my=0,tx=0,sp=0,scrollP=0;
+const pts=new THREE.Points(pg,new THREE.PointsMaterial({size:.28,vertexColors:true,transparent:true,opacity:.85,depthWrite:false}));pts.frustumCulled=false;scene.add(pts);
+
+/* Líneas de velocidad (aparecen al scrollear) */
+const SN=MOB?300:700,sBase=new Float32Array(SN*3),sPos=new Float32Array(SN*6);
+for(let i=0;i<SN;i++){
+  const a=Math.random()*Math.PI*2,r=3+Math.random()*40;
+  sBase[i*3]=Math.cos(a)*r*1.3;sBase[i*3+1]=Math.sin(a)*r*.7-4;sBase[i*3+2]=-Math.random()*300+40;
+}
+const sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.BufferAttribute(sPos,3));
+const sm=new THREE.LineBasicMaterial({color:0x9fd4ff,transparent:true,opacity:0,depthWrite:false});
+const streaks=new THREE.LineSegments(sg,sm);streaks.frustumCulled=false;scene.add(streaks);
+
+let mx=0,my=0,tx=0,ty=0,sp=0,scrollP=0,lastY=0,vs=0;
 addEventListener('mousemove',e=>{mx=(e.clientX/innerWidth-.5)*2;my=(e.clientY/innerHeight-.5)*2;glow.style.transform=`translate(${e.clientX}px,${e.clientY}px)`});
 addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-innerHeight;scrollP=h>0?scrollY/h:0;bar.style.width=scrollP*100+'%'},{passive:true});
 addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
@@ -571,41 +593,30 @@ const clock=new THREE.Clock();
 (function loop(){requestAnimationFrame(loop);
   const t=clock.getElapsedTime(),p=geo.attributes.position;boost*=.94;
   for(let i=0;i<n;i++){const x=p.getX(i),y=p.getY(i);p.setZ(i,Math.sin(x*.18+t*1.3)*(1.6+boost*2)+Math.cos(y*.22+t)*1.6)}
-  p.needsUpdate=true;tx+=(mx-tx)*.05;sp+=(scrollP-sp)*.06;
-  camera.position.set(tx*3,-10+sp*12,20-sp*70);camera.rotation.z=tx*.03+sp*.25;
-  camera.lookAt(tx*2,4-sp*6,camera.position.z-30);
-  mesh.position.z=camera.position.z-40;mesh.rotation.z=sp*1.2;pts.rotation.z=t*.008+sp*.4;
-  renderer.render(scene,camera)})();
+  p.needsUpdate=true;
+  tx+=(mx-tx)*.05;ty+=(my-ty)*.05;sp+=(scrollP-sp)*.06;
 
-/* ====== PARALLAX DE FONDO (agregado) ====== */
-(function(){
-  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  scene.add(camera); // las formas viajan pegadas a la cámara
-  const G=[new THREE.IcosahedronGeometry(1,0),new THREE.TorusGeometry(1,.3,10,28),new THREE.OctahedronGeometry(1,0)];
-  const C=[0x4f9dff,0x7cc7ff,0xffb98a];
-  const T=Math.tan(THREE.MathUtils.degToRad(30));
-  const N=innerWidth<860?16:28,L=[];
-  for(let i=0;i<N;i++){
-    const k=.25+Math.random()*.75;      // 1 = cerca (más rápido), .25 = lejos (más lento)
-    const d=14+(1-k)*46;                 // distancia a la cámara
-    const m=new THREE.Mesh(G[i%3],new THREE.MeshBasicMaterial({color:C[i%3],wireframe:true,transparent:true,opacity:.22+k*.4,depthWrite:false}));
-    m.scale.setScalar(d*(.05+Math.random()*.05));
-    m.userData={k,d,bx:Math.random(),by:Math.random(),rx:(Math.random()-.5)*.01,ry:(Math.random()-.5)*.01};
-    camera.add(m);L.push(m);
+  /* velocidad de scroll -> líneas y campo de visión */
+  const dy=Math.abs(scrollY-lastY)/innerHeight;lastY=scrollY;
+  vs+=((RM?0:dy)-vs)*.12;
+  const len=.4+vs*140;
+  for(let i=0;i<SN;i++){
+    const x=sBase[i*3],y=sBase[i*3+1],z=sBase[i*3+2],o=i*6;
+    sPos[o]=x;sPos[o+1]=y;sPos[o+2]=z;sPos[o+3]=x;sPos[o+4]=y;sPos[o+5]=z+len;
   }
-  (function tick(){
-    requestAnimationFrame(tick);
-    const sy=scrollY,asp=innerWidth/innerHeight;
-    for(const m of L){
-      const u=m.userData,hh=u.d*T*1.25,hw=hh*asp;
-      const kk=.15+u.k*.6,mov=sy*kk*(2*u.d*T/innerHeight);
-      const y=((u.by*2*hh+mov)%(2*hh))-hh;
-      const x=(u.bx*2-1)*hw-mx*u.k*2.5;
-      m.position.set(x,y,-u.d);
-      m.rotation.x+=u.rx;m.rotation.y+=u.ry;m.rotation.z=sy*.0015*u.k;
-    }
-  })();
-})();
+  sg.attributes.position.needsUpdate=true;
+  sm.opacity=Math.min(.65,vs*16);
+  camera.fov=62+Math.min(vs*90,16);camera.updateProjectionMatrix();
+
+  /* cámara: viaja por el túnel, sigue al mouse y se inclina */
+  camera.position.set(tx*4,-10+sp*12-ty*1.5,20-sp*130);
+  camera.lookAt(tx*3,4-sp*6-ty*3,camera.position.z-30);
+  camera.rotateZ(tx*.05+sp*.3);
+
+  mesh.position.z=camera.position.z-40;mesh.rotation.z=sp*1.2;
+  mesh2.position.z=camera.position.z-40;mesh2.rotation.z=-sp*1.2;
+  pts.rotation.z=t*.008+sp*.4;streaks.rotation.z=pts.rotation.z;
+  renderer.render(scene,camera)})();
 </script>
 </body>
 </html>
