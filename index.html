@@ -208,14 +208,8 @@ footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 5% calc(2
 /* Parallax 3D al scroll (agregado) */
 main>section{perspective:1200px}
 
-/* Secciones apiladas: cada una se superpone a la anterior (agregado) */
-main>section[id]{position:sticky;top:0;--dim:0;will-change:scale}
-main>section[id]::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;pointer-events:none;
-  background:rgba(8,12,22,.74);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-top:1px solid var(--border);border-radius:30px 30px 0 0;box-shadow:0 -30px 60px -24px rgba(0,0,0,.7)}
-main>section[id]::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);z-index:5;pointer-events:none;
-  background:#080c16;opacity:var(--dim);border-radius:30px 30px 0 0}
-main>section.hero::before{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border-top:0;box-shadow:none}
+/* Secciones apiladas con fondo transparente: se ve el fondo 3D todo el tiempo */
+main>section[id]{position:sticky;top:0;will-change:scale,opacity}
 </style>
 </head>
 <body>
@@ -575,7 +569,7 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
     const vh=innerHeight;
     secs.forEach(s=>{s.style.top=Math.min(80,vh-s.offsetHeight)+'px'});
   }
-  /* La sección anterior se achica y se oscurece mientras la tapa la siguiente */
+  /* La sección anterior se achica y se desvanece mientras la tapa la siguiente */
   function apilar(){
     raf=0;
     const vh=innerHeight;let act=0;
@@ -583,7 +577,7 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       if(s.getBoundingClientRect().top<=vh*.5)act=i;
       const nx=secs[i+1];if(!nx)return;
       const p=Math.max(0,Math.min(1,(vh-nx.getBoundingClientRect().top)/vh));
-      s.style.setProperty('--dim',(p*.85).toFixed(3));
+      s.style.opacity=(1-p).toFixed(3);
       if(!RMo)s.style.scale=(1-p*.05).toFixed(4);
     });
     const id=secs[act].id;
