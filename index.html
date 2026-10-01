@@ -577,7 +577,9 @@ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
       if(s.getBoundingClientRect().top<=vh*.5)act=i;
       const nx=secs[i+1];if(!nx)return;
       const p=Math.max(0,Math.min(1,(vh-nx.getBoundingClientRect().top)/vh));
-      s.style.opacity=(1-p).toFixed(3);
+      const o=Math.max(0,1-p*2.4);          // desaparece a mitad del cruce (2.4 -> 3.2 más rápido, 1.6 más suave)
+      s.style.opacity=o.toFixed(3);
+      s.style.visibility=o===0?'hidden':'visible';
       if(!RMo)s.style.scale=(1-p*.05).toFixed(4);
     });
     const id=secs[act].id;
