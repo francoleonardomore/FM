@@ -712,6 +712,61 @@ h2{
 }
 
 /* =========================
+   TESTIMONIOS
+========================= */
+
+.quotes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.4rem
+}
+
+.quote{
+  margin:0;
+  padding:1.8rem 1.6rem;
+  border-radius:22px;
+  border:1px solid var(--border);
+  background:var(--card);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  transition:border-color .35s,box-shadow .35s,transform .35s
+}
+
+.quote:hover{
+  border-color:var(--border-hover);
+  box-shadow:
+    0 20px 40px -16px rgba(0,0,0,.6),
+    0 0 30px -12px var(--glow);
+  transform:translateY(-4px)
+}
+
+.quote p{
+  color:var(--text);
+  font-size:1.02rem;
+  line-height:1.55;
+  font-weight:500
+}
+
+.quote footer{
+  display:flex;
+  flex-direction:column;
+  gap:.15rem;
+  margin-top:auto
+}
+
+.quote footer b{
+  font-size:.95rem
+}
+
+.quote footer span{
+  font-size:.82rem;
+  color:var(--muted)
+}
+
+/* =========================
    PLANES
 ========================= */
 
@@ -1280,6 +1335,7 @@ main > section{
   <nav id="menu">
     <a href="#servicios">Servicios</a>
     <a href="#trabajos">Trabajos</a>
+    <a href="#testimonios">Clientes</a>
     <a href="#planes">Planes</a>
     <a href="#sobre">Sobre mí</a>
     <a href="#contacto">Contacto</a>
@@ -1536,6 +1592,57 @@ main > section{
   </section>
 
   <!-- =========================
+       TESTIMONIOS
+  ========================== -->
+
+  <section id="testimonios" class="auto">
+
+    <h2>Lo que dicen mis clientes</h2>
+
+    <p class="lead">
+      Opiniones reales de quienes ya tienen su web conmigo.
+    </p>
+
+    <div class="quotes">
+
+      <blockquote class="quote">
+        <p>
+          “Necesitaba una página clara y rápida para mi negocio.
+          Franco entendió lo que quería y me la entregó en el plazo que acordamos.”
+        </p>
+        <footer>
+          <b>Valentina R.</b>
+          <span>Comercio local · Landing page</span>
+        </footer>
+      </blockquote>
+
+      <blockquote class="quote">
+        <p>
+          “La web quedó profesional y se ve perfecta en el celular.
+          El soporte después de la entrega me dio mucha tranquilidad.”
+        </p>
+        <footer>
+          <b>Martín G.</b>
+          <span>Estudio contable · Página corporativa</span>
+        </footer>
+      </blockquote>
+
+      <blockquote class="quote">
+        <p>
+          “Pasamos de no tener presencia online a recibir consultas por WhatsApp
+          todos los días. Recomendado.”
+        </p>
+        <footer>
+          <b>Lucía M.</b>
+          <span>Tienda de ropa · Tienda online</span>
+        </footer>
+      </blockquote>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
        PLANES
   ========================== -->
 
@@ -1544,8 +1651,8 @@ main > section{
     <h2>Planes y precios</h2>
 
     <p class="lead">
-      Elegí si querés dominio, hosting y mantenimiento.
-      El precio se actualiza solo.
+      Los precios base no incluyen dominio ni hosting.
+      Sumalos si los necesitás: el total se actualiza solo.
     </p>
 
     <div class="opts">
@@ -1558,19 +1665,19 @@ main > section{
 
           <button
             type="button"
+            class="on"
             data-v="0"
-            aria-pressed="false">
+            aria-pressed="true">
 
             Sin dominio
-            <small>Precio más bajo</small>
+            <small>Precio base</small>
 
           </button>
 
           <button
             type="button"
-            class="on"
             data-v="1"
-            aria-pressed="true">
+            aria-pressed="false">
 
             Con dominio
             <small data-ex="dom"></small>
@@ -1589,19 +1696,19 @@ main > section{
 
           <button
             type="button"
+            class="on"
             data-v="0"
-            aria-pressed="false">
+            aria-pressed="true">
 
             Sin hosting
-            <small>Precio más bajo</small>
+            <small>Precio base</small>
 
           </button>
 
           <button
             type="button"
-            class="on"
             data-v="1"
-            aria-pressed="true">
+            aria-pressed="false">
 
             Con hosting
             <small data-ex="host"></small>
@@ -1787,7 +1894,7 @@ main > section{
 
     <p class="fine">
       Precios en pesos argentinos, actualizados a octubre 2026. Pueden variar según el proyecto.
-      Landing y Corporativa ya incluyen dominio y hosting.
+      El precio base de cada plan no incluye dominio ni hosting; podés sumarlos con los selectores de arriba.
     </p>
 
   </section>
@@ -2070,9 +2177,9 @@ const WA_TEXT=
   'Hola Creavix, quiero consultar por una página web.';
 
 const PRECIOS={
-  landing:240000,      // base CON dominio + hosting → sin ambos = 120.000
-  corporativa:570000,  // base CON dominio + hosting → sin ambos = 450.000
-  tienda:500000        // base sin dominio/hosting
+  landing:120000,      // base SIN dominio ni hosting
+  corporativa:450000,  // base SIN dominio ni hosting
+  tienda:500000        // base SIN dominio ni hosting
 };
 
 const DOMINIO_EXTRA=30000;
@@ -2118,8 +2225,8 @@ function setWA(){
 ========================================================= */
 
 const opt={
-  dom:1,   // por defecto CON dominio
-  host:1,  // por defecto CON hosting
+  dom:0,   // por defecto SIN dominio (precio base visible)
+  host:0,  // por defecto SIN hosting
   mant:0
 };
 
@@ -2130,15 +2237,9 @@ function renderPlans(animate){
     const key = p.dataset.key;
     let total = PRECIOS[key];
 
-    // Landing y Corporativa: el precio base YA incluye dominio + hosting
-    if(key === 'landing' || key === 'corporativa'){
-      if(!opt.dom) total -= DOMINIO_EXTRA;
-      if(!opt.host) total -= HOSTING_EXTRA;
-    }else{
-      // Tienda: el precio base NO incluye, se suman si se eligen
-      if(opt.dom) total += DOMINIO_EXTRA;
-      if(opt.host) total += HOSTING_EXTRA;
-    }
+    // Todos los planes: precio base SIN dominio/hosting; se suman si se eligen
+    if(opt.dom) total += DOMINIO_EXTRA;
+    if(opt.host) total += HOSTING_EXTRA;
 
     const amt=p.querySelector('.amt');
 
@@ -2154,10 +2255,13 @@ function renderPlans(animate){
 
     }
 
-    const inc=
-      (opt.dom?'Con dominio':'Sin dominio')+
-      ', '+
-      (opt.host?'con hosting':'sin hosting');
+    const extras=[];
+    if(opt.dom) extras.push('dominio');
+    if(opt.host) extras.push('hosting');
+
+    const inc = extras.length
+      ? 'Incluye: ' + extras.join(' + ')
+      : 'Sin dominio ni hosting';
 
     p.querySelector('.inc').textContent=inc;
 
@@ -2555,6 +2659,25 @@ if(!REDUCED){
       y:50,
       duration:1,
       stagger:.2,
+      ease:'power3.out',
+      clearProps:'opacity,y'
+    }
+  );
+
+
+  /* TESTIMONIOS */
+
+  gsap.from(
+    '.quote',
+    {
+      scrollTrigger:{
+        trigger:'.quotes',
+        start:'top 85%'
+      },
+      opacity:0,
+      y:40,
+      duration:.9,
+      stagger:.15,
       ease:'power3.out',
       clearProps:'opacity,y'
     }
