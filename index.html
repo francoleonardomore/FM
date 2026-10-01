@@ -150,7 +150,7 @@ header{
 }
 
 header::before{
-  content:"";
+  content:
   position:absolute;
   inset:0;
   z-index:-1;
@@ -339,8 +339,6 @@ section{
   padding:7rem 6%;
   max-width:1200px;
   margin:0 auto;
-
-  /* Scroll normal, sin superposición */
   position:relative;
   perspective:1200px;
   isolation:isolate;
@@ -351,7 +349,6 @@ section.auto{
   padding:4.5rem 6%
 }
 
-/* Separación visual entre secciones */
 main > section + section{
   margin-top:1rem
 }
@@ -1053,64 +1050,6 @@ h2{
 }
 
 /* =========================
-   FAQ
-========================= */
-
-.faq{
-  display:grid;
-  gap:.8rem;
-  max-width:820px
-}
-
-details{
-  border:1px solid var(--border);
-  border-radius:16px;
-  background:var(--card);
-  padding:0 1.3rem;
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  transition:border-color .3s
-}
-
-details[open]{
-  border-color:var(--border-hover)
-}
-
-summary{
-  cursor:pointer;
-  list-style:none;
-  padding:1.1rem 0;
-  font-weight:700;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:1rem
-}
-
-summary::-webkit-details-marker{
-  display:none
-}
-
-summary:after{
-  content:"+";
-  font-size:1.6rem;
-  line-height:1;
-  color:var(--accent2);
-  transition:transform .3s;
-  flex:none
-}
-
-details[open] summary:after{
-  transform:rotate(45deg)
-}
-
-details p{
-  color:var(--muted);
-  padding-bottom:1.2rem;
-  max-width:62ch
-}
-
-/* =========================
    CONTACTO
 ========================= */
 
@@ -1288,7 +1227,6 @@ footer{
 
 /* =========================
    REVEAL SUAVE DE SECCIONES
-   NUEVO SCROLL
 ========================= */
 
 main > section{
@@ -1296,7 +1234,6 @@ main > section{
   backface-visibility:hidden;
 }
 
-/* En celulares reducimos el movimiento */
 @media(max-width:860px){
   section{
     padding-left:5%;
@@ -1621,9 +1558,8 @@ main > section{
 
           <button
             type="button"
-            class="on"
             data-v="0"
-            aria-pressed="true">
+            aria-pressed="false">
 
             Sin dominio
             <small>Precio más bajo</small>
@@ -1632,8 +1568,9 @@ main > section{
 
           <button
             type="button"
+            class="on"
             data-v="1"
-            aria-pressed="false">
+            aria-pressed="true">
 
             Con dominio
             <small data-ex="dom"></small>
@@ -1652,9 +1589,8 @@ main > section{
 
           <button
             type="button"
-            class="on"
             data-v="0"
-            aria-pressed="true">
+            aria-pressed="false">
 
             Sin hosting
             <small>Precio más bajo</small>
@@ -1663,8 +1599,9 @@ main > section{
 
           <button
             type="button"
+            class="on"
             data-v="1"
-            aria-pressed="false">
+            aria-pressed="true">
 
             Con hosting
             <small data-ex="host"></small>
@@ -1850,7 +1787,7 @@ main > section{
 
     <p class="fine">
       Precios en pesos argentinos, actualizados a octubre 2026. Pueden variar según el proyecto.
-      Sin dominio ni hosting, el precio es más bajo.
+      Landing y Corporativa ya incluyen dominio y hosting.
     </p>
 
   </section>
@@ -1933,79 +1870,6 @@ main > section{
           Lanzo tu sitio, optimizado para celular y buscadores.
         </p>
       </div>
-
-    </div>
-
-  </section>
-
-  <!-- =========================
-       FAQ
-  ========================== -->
-
-  <section class="auto" id="faq">
-
-    <h2>Preguntas frecuentes</h2>
-
-    <p class="lead">
-      Lo que más me consultan antes de empezar.
-    </p>
-
-    <div class="faq">
-
-      **Summary:**
-
-          ¿Cuánto tarda mi página?
-        
-
-        <p>
-          Depende del tipo de sitio. Antes de empezar
-          acordamos una fecha de entrega para que sepas
-          cuándo la vas a tener.
-        </p>
-
-      **Summary:**
-
-          ¿Cómo se paga?
-        
-
-        <p>
-          Pagás la mitad como seña al iniciar y el resto
-          cuando te entrego la página. Escribime por WhatsApp
-          y te paso las formas de pago.
-        </p>
-
-      **Summary:**
-
-          ¿Qué es el dominio y el hosting?
-        
-
-        <p>
-          El dominio es tu dirección (por ejemplo, tunegocio.com)
-          y el hosting es el lugar donde vive tu página en internet.
-          Podés contratarlos conmigo o, si ya los tenés,
-          ahorrarte ese costo.
-        </p>
-
-      **Summary:**
-
-          ¿Qué incluye el mantenimiento?
-        
-
-        <p>
-          Es un servicio mensual opcional: cambios de textos
-          y fotos, revisión del sitio y soporte por WhatsApp.
-        </p>
-
-      **Summary:**
-
-          ¿Puedo pedir cambios después?
-        
-
-        <p>
-          Sí. Podés pedir ajustes después de la entrega
-          y también te explico cómo hacer cambios simples
-          por tu cuenta.
-        </p>
 
     </div>
 
@@ -2206,9 +2070,9 @@ const WA_TEXT=
   'Hola Creavix, quiero consultar por una página web.';
 
 const PRECIOS={
-  landing:150000,
-  corporativa:350000,
-  tienda:500000
+  landing:150000,      // ya incluye dominio + hosting
+  corporativa:350000,  // ya incluye dominio + hosting
+  tienda:500000        // base sin dominio/hosting
 };
 
 const DOMINIO_EXTRA=30000;
@@ -2254,8 +2118,8 @@ function setWA(){
 ========================================================= */
 
 const opt={
-  dom:0,
-  host:0,
+  dom:1,   // por defecto CON dominio
+  host:1,  // por defecto CON hosting
   mant:0
 };
 
@@ -2263,10 +2127,18 @@ function renderPlans(animate){
 
   document.querySelectorAll('.plan').forEach(p=>{
 
-    const total=
-      PRECIOS[p.dataset.key]+
-      (opt.dom?DOMINIO_EXTRA:0)+
-      (opt.host?HOSTING_EXTRA:0);
+    const key = p.dataset.key;
+    let total = PRECIOS[key];
+
+    // Landing y Corporativa: el precio base YA incluye dominio + hosting
+    if(key === 'landing' || key === 'corporativa'){
+      if(!opt.dom) total -= DOMINIO_EXTRA;
+      if(!opt.host) total -= HOSTING_EXTRA;
+    }else{
+      // Tienda: el precio base NO incluye, se suman si se eligen
+      if(opt.dom) total += DOMINIO_EXTRA;
+      if(opt.host) total += HOSTING_EXTRA;
+    }
 
     const amt=p.querySelector('.amt');
 
@@ -2745,25 +2617,6 @@ if(!REDUCED){
   );
 
 
-  /* FAQ */
-
-  gsap.from(
-    'details',
-    {
-      scrollTrigger:{
-        trigger:'.faq',
-        start:'top 88%'
-      },
-      opacity:0,
-      y:24,
-      duration:.7,
-      stagger:.1,
-      ease:'power3.out',
-      clearProps:'opacity,y'
-    }
-  );
-
-
   /* CONTACTO */
 
   gsap.from(
@@ -3066,7 +2919,7 @@ if(!REDUCED){
     ['.hero .actions',.05],
 
     [
-      '#servicios h2,#trabajos h2,#planes h2,#proceso h2,#faq h2',
+      '#servicios h2,#trabajos h2,#planes h2,#proceso h2',
       .06
     ],
 
@@ -3218,18 +3071,6 @@ if(!REDUCED){
       );
     }
   );
-
-
-  document
-    .querySelectorAll('details')
-    .forEach(d=>{
-
-      d.addEventListener(
-        'toggle',
-        medir
-      );
-
-    });
 
 }
 
